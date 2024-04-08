@@ -10,10 +10,17 @@
 
 	<!-- 상품 정보(목록) 출력 -->
 	<select id="productout" resultType="com.ezen.haha.product.ProductDTO">		
-		select * from (
-		select row_number() over (partition by sname order by snum) as rn, A.* from (
-        select distinct sname, snum, image, price, best, ssize from product) A) 
-		where rn = 1 and rn between #{start} and #{end}
+		
+		SELECT * FROM (
+        SELECT 
+            ROW_NUMBER() OVER (ORDER BY sname, snum) AS rn, 
+            A.* 
+        FROM (
+            SELECT *
+            FROM product
+        ) A
+    ) 
+    WHERE rn BETWEEN #{start} AND #{end}
 	</select>
 	
 	<!-- 상품 내용 출력 -->

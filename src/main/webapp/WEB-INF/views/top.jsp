@@ -194,9 +194,9 @@ p{
 			</div>
 		</div>
 		
-		<div class="gnb_category">
+		<div class="gnb_category" >
 			<a href="">입력</a>
-			<div class="depth2">
+			<div class="depth2" ">
 				<a href="productinput" class="depth2_list" >입력</a>
 				<a href="productout" class="depth2_list">관리자상품리스트출력</a>
 				<a href="detailview" class="depth2_list">상품디테일출력</a>

@@ -92,7 +92,6 @@ public class ProductController {
         Service ss = sqlSession.getMapper(Service.class);
         
         int total=ss.total();
-    
         if(nowPage==null && cntPerPage == null) {
            nowPage="1";
            cntPerPage="5";
@@ -108,8 +107,9 @@ public class ProductController {
 		
 		mo.addAttribute("paging",dto);
 		mo.addAttribute("list", ss.productout(dto));
-		System.out.println(ss.productout(dto).get(0).ssize);
 		
+		System.out.println(ss.productout(dto).get(0).getStype());
+		System.out.println(ss.productout(dto).get(0).getSu());
 		return "productout";
 	}
 	
