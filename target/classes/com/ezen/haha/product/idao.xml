@@ -12,7 +12,7 @@
 	<select id="productout" resultType="com.ezen.haha.product.ProductDTO">		
 		select * from (
 		select row_number() over (partition by sname order by snum) as rn, A.* from (
-        select distinct sname, snum, image, price, best, sideimage1, sideimage2, sideimage3 from product) A) 
+        select distinct sname, snum, image, price, best, ssize from product) A) 
 		where rn = 1 and rn between #{start} and #{end}
 	</select>
 	

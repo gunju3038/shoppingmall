@@ -151,7 +151,7 @@ p{
 		<div class="gnb_category">
 			<a href="" class="gnb_categorylist">상의</a>
 			<div class="depth2">
-				<a href="" class="depth2_list">맨투맨</a>
+				<a href="productout" class="depth2_list">맨투맨</a>
 				<a href="" class="depth2_list">후드티</a>
 				<a href="" class="depth2_list">반소매 티셔츠</a>
 				<a href="" class="depth2_list">셔츠/블라우스</a>
@@ -198,9 +198,9 @@ p{
 			<a href="">입력</a>
 			<div class="depth2">
 				<a href="productinput" class="depth2_list" >입력</a>
-				<a href="" class="depth2_list">비니</a>
-				<a href="" class="depth2_list">헌팅캡/베레모</a>
-				<a href="" class="depth2_list">페도라</a>
+				<a href="productout" class="depth2_list">관리자상품리스트출력</a>
+				<a href="detailview" class="depth2_list">상품디테일출력</a>
+				
 			</div>
 		</div>
 	</div>

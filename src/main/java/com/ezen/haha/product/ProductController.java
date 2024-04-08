@@ -35,18 +35,19 @@ public class ProductController {
 	@Autowired
 	SqlSession sqlSession;
 	
-	String imagepath = "C:\\이젠디지탈12\\spring\\shoppingmall-master.zip_expanded\\shoppingmall-master\\src\\main\\webapp\\image";
+	String imagepath = "C:\\이젠디지털12\\git\\shoppingmall\\src\\main\\webapp\\resources\\image\\";
 	
 	private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 	
-	// 상품 입력 화면으로
+	// ���� ���� ��硫댁�쇰�
 	@RequestMapping(value = "/productinput")
 	public String productinput() {
 		
 		return "productinput";
 	}
 	
-	// 상품 입력 후 DB에 저장
+	// ���� ���� �� DB�� ����
+	// 4.8수정
 	@RequestMapping(value = "/productsave", method = RequestMethod.POST)
 	public String productsave(MultipartHttpServletRequest mul) throws IllegalStateException, IOException {
 		int snum = Integer.parseInt(mul.getParameter("snum"));
@@ -59,30 +60,31 @@ public class ProductController {
 		String intro = mul.getParameter("intro");
 		int best = Integer.parseInt(mul.getParameter("best"));
 		String fname = "";
-		
-		 List<MultipartFile> fileList = mul.getFiles("image");
 
-         for (MultipartFile mf : fileList) {
-             String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-             fname = fname + ", " +originFileName;
-
-             System.out.println("originFileName : " + originFileName);
-         
-             String safeFile = imagepath + originFileName;
+		List<MultipartFile> fileList = mul.getFiles("image");
+		boolean firstfile = true;
+        for (MultipartFile mf : fileList) {
+             String originFileName = mf.getOriginalFilename(); // ��蹂� ���� 紐�
              
+             if(firstfile) {
+            	 fname = originFileName;
+            	 firstfile = false;
+             }
+             else {
+            	 fname = fname + ", " +originFileName;
+             }
+             System.out.println("originFileName : " + originFileName);
+             String safeFile = imagepath + originFileName;
              mf.transferTo(new File(safeFile));
-		
-
          }
-		
-
+        System.out.println("fname : " + fname);
 		Service ss = sqlSession.getMapper(Service.class);
 		ss.productinsert(snum,sname,stype,su,price,ssize,color,fname,intro,best);
 		
 		return "redirect:/main";
 	}
 
-	// DB 데이터 가져온 후 출력 화면으로 가기
+	// DB �곗�댄�� 媛��몄�� �� 異��� ��硫댁�쇰� 媛�湲�
 	@RequestMapping(value = "/productout")
 	public String productout(HttpServletRequest request, PageDTO dto, Model mo) {
 		String nowPage=request.getParameter("nowPage");
@@ -106,11 +108,12 @@ public class ProductController {
 		
 		mo.addAttribute("paging",dto);
 		mo.addAttribute("list", ss.productout(dto));
+		System.out.println(ss.productout(dto).get(0).ssize);
 		
 		return "productout";
 	}
 	
-	// 상품 클릭 시 상품 내용 화면으로 가기
+	// ���� �대┃ �� ���� �댁�� ��硫댁�쇰� 媛�湲�
 	@RequestMapping(value = "/detailview")
 	public String detailview(HttpServletRequest request, Model mo) {
 		int snum = Integer.parseInt(request.getParameter("snum"));
@@ -118,28 +121,28 @@ public class ProductController {
 		ArrayList<ProductDTO> list = ss.detailview(snum);
 		mo.addAttribute("list", list);
 		
-		// 상품 리뷰 출력 추가
+		// ���� 由щ럭 異��� 異�媛�
 		ArrayList<ProductreviewDTO> list1 = ss.productreviewout(snum);
 		mo.addAttribute("list1", list1);
 		return "detailview";
 	}
 	
-	// 상품 내용 창에서 장바구니 DB 저장
+	// ���� �댁�� 李쎌���� �λ�援щ�� DB ����
 	@RequestMapping(value = "/basket")
 	public String basket(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
-		// 로그인 시 id 가져오기
+		// 濡�洹몄�� �� id 媛��몄�ㅺ린
 		HttpSession hs = request.getSession();
 		String id = (String) hs.getAttribute("id");
 		
-		if(id != null) // 로그인 체크
+		if(id != null) // 濡�洹몄�� 泥댄��
 		{
 			Service ss = sqlSession.getMapper(Service.class);
 			String sname = request.getParameter("sname");
 			String color = request.getParameter("color");
-			Integer snum = ss.colorsnumsearch(sname,color); // 색상에 맞는 상품의 상품코드 가져오기
+			Integer snum = ss.colorsnumsearch(sname,color); // ������ 留��� ������ ����肄��� 媛��몄�ㅺ린
 			
-			if(snum!=null) // 색상에 맞는 상품이 있는지 체크(사용자는 어드민 출력 화면이 아니라 상품 내용 화면에서 색상을 선택하고 넘어가기 때문에 따로 체크해야함)
+			if(snum!=null) // ������ 留��� ������ ����吏� 泥댄��(�ъ�⑹���� �대��誘� 異��� ��硫댁�� ������ ���� �댁�� ��硫댁���� ������ ������怨� ���닿�湲� ��臾몄�� �곕� 泥댄�ы�댁�쇳��)
 			{
 				String stype = request.getParameter("stype");
 				int guestbuysu = Integer.parseInt(request.getParameter("guestbuysu"));
@@ -150,12 +153,12 @@ public class ProductController {
 				String ssize = request.getParameter("ssize");
 				String image = request.getParameter("image");
 				
-				int jaegocheck = ss.jaegocheck(snum,ssize,color,guestbuysu); // 상품 존재 유무 및 재고 체크
-				int snumcheck = ss.snumcheck(snum,ssize,color); // 장바구니 중복 체크
+				int jaegocheck = ss.jaegocheck(snum,ssize,color,guestbuysu); // ���� 議댁�� ��臾� 諛� �ш� 泥댄��
+				int snumcheck = ss.snumcheck(snum,ssize,color); // �λ�援щ�� 以�蹂� 泥댄��
 				
-				if(jaegocheck!=0) // 상품 재고 체크
+				if(jaegocheck!=0) // ���� �ш� 泥댄��
 				{
-					if(snumcheck==0) // 장바구니 중복 체크
+					if(snumcheck==0) // �λ�援щ�� 以�蹂� 泥댄��
 					{
 						ss.basketinsert(id,snum,sname,stype,guestbuysu,price,totprice,ssize,image,color);
 						return "redirect:/basketout";
@@ -164,7 +167,7 @@ public class ProductController {
 					{
 						response.setContentType("text/html;charset=utf-8");
 						PrintWriter printw = response.getWriter();
-						printw.print("<script> alert('중복된 제품이 장바구니에 있습니다.'); window.location.href='./basketout'; </script>");
+						printw.print("<script> alert('以�蹂듬�� ������ �λ�援щ���� ���듬����.'); window.location.href='./basketout'; </script>");
 						printw.close();
 						return null;
 					}
@@ -173,7 +176,7 @@ public class ProductController {
 				{
 					response.setContentType("text/html;charset=utf-8");
 					PrintWriter printw = response.getWriter();
-					printw.print("<script> alert('해당 상품의 재고가 없습니다.'); window.history.back(); </script>");
+					printw.print("<script> alert('�대�� ������ �ш�媛� ���듬����.'); window.history.back(); </script>");
 					printw.close();
 					return null;
 				}
@@ -182,7 +185,7 @@ public class ProductController {
 			{
 				response.setContentType("text/html;charset=utf-8");
 				PrintWriter printw = response.getWriter();
-				printw.print("<script> alert('해당 색상의 상품이 존재하지 않습니다.'); window.history.back(); </script>");
+				printw.print("<script> alert('�대�� ������ ������ 議댁�ы��吏� ���듬����.'); window.history.back(); </script>");
 				printw.close();
 				return null;
 			}
@@ -192,14 +195,14 @@ public class ProductController {
 		{
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter printw = response.getWriter();
-			printw.print("<script> alert('로그인이 필요합니다.'); window.location.href='./login'; </script>");
+			printw.print("<script> alert('濡�洹몄�몄�� �����⑸����.'); window.location.href='./login'; </script>");
 			printw.close();
 			return "redirect:./login";
 		}
 		
 	}
 	
-	// DB 저장한 장바구니 출력
+	// DB ���ν�� �λ�援щ�� 異���
 	@RequestMapping(value = "/basketout")
 	public String basketout(HttpServletRequest request, PageDTO dto, Model mo, HttpServletResponse response) throws IOException {
 		HttpSession hs = request.getSession();
@@ -235,40 +238,40 @@ public class ProductController {
 		{
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter printw = response.getWriter();
-			printw.print("<script> alert('로그인이 필요합니다.'); window.location.href='./login'; </script>");
+			printw.print("<script> alert('濡�洹몄�몄�� �����⑸����.'); window.location.href='./login'; </script>");
 			printw.close();
 			return "redirect:./login";
 		}
 		
 	}
 	
-	// 장바구니에서 체크박스 선택 후 구매확인 화면으로 이동
+	// �λ�援щ������ 泥댄�щ��� ���� �� 援щℓ���� ��硫댁�쇰� �대��
 	@RequestMapping(value = "/basketsell", method = RequestMethod.POST)
 	public String basketsell(HttpServletRequest request, Model mo, HttpServletResponse response) throws IOException {
 		Service ss = sqlSession.getMapper(Service.class);
-		ss.deleteproductsell(); // 구매 창을 누를 때마다 DB에 담긴 주문 정보 초기화(delete), 안하면 이전 주문정보를 전부 불러옴, 나중에 지금까지 구매했던 구매목록을 보고 싶다면 초기화 전에 다른 DB테이블을 따로 만들어서 저장하거나 다른 방법을 찾아야 할 것 같음
+		ss.deleteproductsell(); // 援щℓ 李쎌�� ��瑜� ��留��� DB�� �닿릿 二쇰Ц ��蹂� 珥�湲고��(delete), ����硫� �댁�� 二쇰Ц��蹂대�� ��遺� 遺��ъ��, ��以��� 吏�湲�源�吏� 援щℓ���� 援щℓ紐⑸��� 蹂닿� �띕�ㅻ㈃ 珥�湲고�� ���� �ㅻⅨ DB���대��� �곕� 留��ㅼ�댁�� ���ν��嫄곕�� �ㅻⅨ 諛⑸��� 李얠���� �� 寃� 媛���
 		
 		HttpSession hs = request.getSession();
 		String id = (String) hs.getAttribute("id");
 		
-		if(id != null) // 로그인 중이라면
+		if(id != null) // 濡�洹몄�� 以��대�쇰㈃
 		{
-			String [] items = request.getParameterValues("item"); // 체크박스로 선택한 목록 번호를 가져옴
-			String [] reguestbuysu = request.getParameterValues("guestbuysu"); // 장바구니에서 수정한 수량을 가져옴
-			String [] retotprice = request.getParameterValues("totprice"); // 장바구니에서 수정한 총 가격을 가져옴
+			String [] items = request.getParameterValues("item"); // 泥댄�щ��ㅻ� ������ 紐⑸� 踰��몃�� 媛��몄��
+			String [] reguestbuysu = request.getParameterValues("guestbuysu"); // �λ�援щ������ ������ ������ 媛��몄��
+			String [] retotprice = request.getParameterValues("totprice"); // �λ�援щ������ ������ 珥� 媛�寃⑹�� 媛��몄��
 			int [] basketnum = null;
 			int [] guestbuysu = null;
 			int [] totprice = null;
 			
 			if(items != null)
 			{
-				basketnum = new int[items.length]; // basketnum 배열 초기화, 안하면 널포인트 에러가 뜬다.
+				basketnum = new int[items.length]; // basketnum 諛곗�� 珥�湲고��, ����硫� ���ъ�명�� ���ш� �щ��.
 				guestbuysu = new int[reguestbuysu.length];
 		        totprice = new int[retotprice.length];
 		        
 				for(int i=0; i<items.length; i++)
 				{
-					basketnum[i] = Integer.parseInt(items[i]); // int 타입으로 전환
+					basketnum[i] = Integer.parseInt(items[i]); // int �����쇰� ����
 					guestbuysu[i] = Integer.parseInt(reguestbuysu[i]);
 					totprice[i] = Integer.parseInt(retotprice[i]);
 				}
@@ -276,7 +279,7 @@ public class ProductController {
 			
 			ArrayList<BasketDTO> list = new ArrayList<>(); 
 			for (int i = 0; i < basketnum.length; i++) {
-				ss.updatebasket(guestbuysu[i],totprice[i],basketnum[i]);// 장바구니에서 수정한 수량, 총 가격 업데이트
+				ss.updatebasket(guestbuysu[i],totprice[i],basketnum[i]);// �λ�援щ������ ������ ����, 珥� 媛�寃� ���곗�댄��
 			    list.add(ss.basketsell(basketnum[i]));
 			}
 			
@@ -288,18 +291,18 @@ public class ProductController {
 		{
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter printw = response.getWriter();
-			printw.print("<script> alert('로그인이 필요합니다.'); window.location.href='./login'; </script>");
+			printw.print("<script> alert('濡�洹몄�몄�� �����⑸����.'); window.location.href='./login'; </script>");
 			printw.close();
 			return "redirect:./login";
 		}
 	
 	}
 	
-	// 상품 내용 화면에서 즉시 구매 클릭 시 구매확인 화면으로 이동
+	// ���� �댁�� ��硫댁���� 利��� 援щℓ �대┃ �� 援щℓ���� ��硫댁�쇰� �대��
 	@RequestMapping(value = "/productsell", method = RequestMethod.POST)
 	public String productsell(HttpServletRequest request, Model mo, HttpServletResponse response) throws IOException {
 		Service ss = sqlSession.getMapper(Service.class);
-		ss.deleteproductsell(); // 구매 창을 누를 때마다 DB에 담긴 주문 정보 초기화(delete), 안하면 이전 주문정보를 전부 불러옴, 나중에 지금까지 구매했던 구매목록을 보고 싶다면 초기화 전에 다른 DB테이블을 따로 만들어서 저장하거나 다른 방법을 찾아야 할 것 같음
+		ss.deleteproductsell(); // 援щℓ 李쎌�� ��瑜� ��留��� DB�� �닿릿 二쇰Ц ��蹂� 珥�湲고��(delete), ����硫� �댁�� 二쇰Ц��蹂대�� ��遺� 遺��ъ��, ��以��� 吏�湲�源�吏� 援щℓ���� 援щℓ紐⑸��� 蹂닿� �띕�ㅻ㈃ 珥�湲고�� ���� �ㅻⅨ DB���대��� �곕� 留��ㅼ�댁�� ���ν��嫄곕�� �ㅻⅨ 諛⑸��� 李얠���� �� 寃� 媛���
 			
 		String image = request.getParameter("image");
 		int snum = Integer.parseInt(request.getParameter("snum"));
@@ -311,21 +314,21 @@ public class ProductController {
 		String stype = request.getParameter("stype");
 		
 		HttpSession hs = request.getSession();
-		String id = (String) hs.getAttribute("id"); // 로그인 중일 시 id 값을 가져옴
+		String id = (String) hs.getAttribute("id"); // 濡�洹몄�� 以��� �� id 媛��� 媛��몄��
 		
-		int jaegocheck = ss.jaegocheck(snum,ssize,color,guestbuysu); // 상품 존재 유무 및 재고 체크
-		if(jaegocheck!=0) // 상품 재고 체크
+		int jaegocheck = ss.jaegocheck(snum,ssize,color,guestbuysu); // ���� 議댁�� ��臾� 諛� �ш� 泥댄��
+		if(jaegocheck!=0) // ���� �ш� 泥댄��
 		{
-			if(id != null) // 로그인 유무 체크
+			if(id != null) // 濡�洹몄�� ��臾� 泥댄��
 			{
-				ArrayList<MembershipDTO> IDlist = ss.IDinformation(id); // 구매 시 정보 입력을 위해 회원 정보를 가져옴
-				MembershipDTO dto = IDlist.get(0); // IDlist에 기록된 첫번째 값을 불러옴
+				ArrayList<MembershipDTO> IDlist = ss.IDinformation(id); // 援щℓ �� ��蹂� ���μ�� ���� ���� ��蹂대�� 媛��몄��
+				MembershipDTO dto = IDlist.get(0); // IDlist�� 湲곕��� 泥ル�吏� 媛��� 遺��ъ��
 				String name = dto.getName();
 				String tel = dto.getTel();
 				String email = dto.getEmail();
 				String address = dto.getAddress();
 				
-				// 개인 정보와 구매 정보를 DB 테이블(Productsell)에 입력
+				// 媛��� ��蹂댁�� 援щℓ ��蹂대�� DB ���대�(Productsell)�� ����
 				ss.Productsellinsert(id,name,tel,email,address,image,snum,sname,ssize,guestbuysu,totprice,stype,color);
 				ArrayList<ProductSellDTO> pslist = ss.productsellout();
 				mo.addAttribute("list", pslist);
@@ -336,7 +339,7 @@ public class ProductController {
 			{
 				response.setContentType("text/html;charset=utf-8");
 				PrintWriter printw = response.getWriter();
-				printw.print("<script> alert('로그인이 필요합니다.'); window.location.href='./login'; </script>");
+				printw.print("<script> alert('濡�洹몄�몄�� �����⑸����.'); window.location.href='./login'; </script>");
 				printw.close();
 				return "redirect:./login";
 			}
@@ -345,17 +348,17 @@ public class ProductController {
 		{
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter printw = response.getWriter();
-			printw.print("<script> alert('해당 상품의 재고가 없습니다.'); window.history.back(); </script>");
+			printw.print("<script> alert('�대�� ������ �ш�媛� ���듬����.'); window.history.back(); </script>");
 			printw.close();
 			return null;
 		}
 			
 	}
 	
-	// 장바구니 목록 선택 후 삭제
+	// �λ�援щ�� 紐⑸� ���� �� ����
 	@RequestMapping(value = "/basketdelete")
 	public String basketdelete(HttpServletRequest request) {
-		String [] items = request.getParameterValues("item"); // 체크박스로 선택한 목록 번호를 가져옴
+		String [] items = request.getParameterValues("item"); // 泥댄�щ��ㅻ� ������ 紐⑸� 踰��몃�� 媛��몄��
 		int [] basketnum = null;
 		
 		if(items != null && items.length > 0)
@@ -374,7 +377,7 @@ public class ProductController {
 		return "redirect:/basketout";
 	}
 	
-	// 상품 내용 화면에서 상품 삭제하기
+	// ���� �댁�� ��硫댁���� ���� ������湲�
 	@RequestMapping(value = "/deleteproduct")
 	public String deleteproduct(HttpServletRequest request) {
 		int snum = Integer.parseInt(request.getParameter("snum"));
@@ -384,7 +387,7 @@ public class ProductController {
 		return "redirect:/productout";
 	}
 	
-	// 상품 내용 화면에서 상품 수정 화면으로 가기
+	// ���� �댁�� ��硫댁���� ���� ���� ��硫댁�쇰� 媛�湲�
 	@RequestMapping(value = "/updateproductview")
 	public String updateproductview(HttpServletRequest request, Model mo) {
 		int snum = Integer.parseInt(request.getParameter("snum"));
@@ -395,7 +398,7 @@ public class ProductController {
 		return "updateproductview";
 	}	
 		
-	// 상품 수정 화면에서 받은 데이터로 상품 정보 수정하기
+	// ���� ���� ��硫댁���� 諛��� �곗�댄�곕� ���� ��蹂� ������湲�
 	@RequestMapping(value = "/updateproduct", method = RequestMethod.POST)
 	public String updateproduct(MultipartHttpServletRequest mul) throws IllegalStateException, IOException {
 		int snum = Integer.parseInt(mul.getParameter("snum"));
@@ -416,18 +419,18 @@ public class ProductController {
 		
 		Service ss = sqlSession.getMapper(Service.class);
 		
-		// 이미지 업데이트, 어떤 이미지는 수정 입력하고 어떤 이미지는 입력 안하는 경우가 있기에 if문으로 하나하나 나눠야했음
+		// �대�몄� ���곗�댄��, �대�� �대�몄��� ���� ���ν��怨� �대�� �대�몄��� ���� ������ 寃쎌�곌� ��湲곗�� if臾몄�쇰� �������� �����쇳����
 		MultipartFile mf = mul.getFile("newimage");
 		String fname = mf.getOriginalFilename();
-		if(mf.getOriginalFilename().equals("")) // 메인이미지 수정 입력을 하지 않았다면
+		if(mf.getOriginalFilename().equals("")) // 硫��몄�대�몄� ���� ���μ�� ��吏� �����ㅻ㈃
 		{
-			ss.updateproductmainimage(newsnum,sname,stype,su,price,ssize,color,image,intro,best,snum); // 기존 이미지 업데이트
+			ss.updateproductmainimage(newsnum,sname,stype,su,price,ssize,color,image,intro,best,snum); // 湲곗〈 �대�몄� ���곗�댄��
 		}
 		else
 		{
 			mf.transferTo(new File(imagepath+"\\"+fname));
 			fname = mf.getOriginalFilename();
-			ss.updateproductmainimage(newsnum,sname,stype,su,price,ssize,color,fname,intro,best,snum); // 새 이미지 업데이트
+			ss.updateproductmainimage(newsnum,sname,stype,su,price,ssize,color,fname,intro,best,snum); // �� �대�몄� ���곗�댄��
 		}
 		
 		MultipartFile mf1 = mul.getFile("newsideimage1");
@@ -472,53 +475,53 @@ public class ProductController {
 		return "redirect:/productout";
 	}
 
-	// 구매창 주소 수정 화면으로
+	// 援щℓ李� 二쇱�� ���� ��硫댁�쇰�
 	@RequestMapping(value = "/updateaddress")
 	public String updateaddress() {
 		
 		return "updateaddress";
 	}
 	
-	// 구매창 이름 수정 화면으로
+	// 援щℓ李� �대� ���� ��硫댁�쇰�
 	@RequestMapping(value = "/updatename")
 	public String updatename() {
 		
 		return "updatename";
 	}
 	
-	// 구매창 연락처 수정 화면으로
+	// 援щℓ李� �곕�쎌� ���� ��硫댁�쇰�
 	@RequestMapping(value = "/updatetel")
 	public String updatetel() {
 		
 		return "updatetel";
 	}
-	// 구매창 이메일 수정 화면으로
+	// 援щℓ李� �대��� ���� ��硫댁�쇰�
 	@RequestMapping(value = "/updateemail")
 	public String updateemail() {
 		
 		return "updateemail";
 	}
 	
-	// 상품 리뷰 입력 화면으로
+	// ���� 由щ럭 ���� ��硫댁�쇰�
 	@RequestMapping(value = "/productreviewinput")
 	public String productreviewinput(HttpServletRequest request, Model mo, HttpServletResponse response) throws IOException {
 		HttpSession hs = request.getSession();
 		String id = (String) hs.getAttribute("id");
 		
-		if(id != null) // 로그인 유무 체크
+		if(id != null) // 濡�洹몄�� ��臾� 泥댄��
 		{
 			int snum = Integer.parseInt(request.getParameter("snum"));
 			
-			// 리뷰 쓰기 전 해당 상품을 구입했는지 체크
-			// 상품 구입 후 상품 구입 목록을 저장하는 DB를 후에 따로 만들어 체크해야함
-			// 지금은 상품 리뷰 DB(productreview)에서 자체 체크 
+			// 由щ럭 �곌린 �� �대�� ������ 援ъ������吏� 泥댄��
+			// ���� 援ъ�� �� ���� 援ъ�� 紐⑸��� ���ν���� DB瑜� ���� �곕� 留��ㅼ�� 泥댄�ы�댁�쇳��
+			// 吏�湲��� ���� 由щ럭 DB(productreview)���� ��泥� 泥댄�� 
 			Service ss = sqlSession.getMapper(Service.class);
 			Integer productbuy = ss.productbuysearch(id,snum);
 			if(productbuy == null || productbuy != 1)
 			{
 				response.setContentType("text/html;charset=utf-8");
 				PrintWriter printw = response.getWriter();
-				printw.print("<script> alert('상품 구입 기록이 없습니다.'); window.history.back(); </script>");
+				printw.print("<script> alert('���� 援ъ�� 湲곕��� ���듬����.'); window.history.back(); </script>");
 				printw.close();
 				return null;
 				
@@ -534,14 +537,14 @@ public class ProductController {
 		{
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter printw = response.getWriter();
-			printw.print("<script> alert('로그인이 필요합니다.'); window.location.href='./login'; </script>");
+			printw.print("<script> alert('濡�洹몄�몄�� �����⑸����.'); window.location.href='./login'; </script>");
 			printw.close();
 			return "redirect:./login";
 		}
 		
 	}
 	
-	// 상품 리뷰 입력 후 DB에 저장
+	// ���� 由щ럭 ���� �� DB�� ����
 	@RequestMapping(value = "/productreviewsave", method = RequestMethod.POST)
 	public String productreviewsave(MultipartHttpServletRequest mul) throws IllegalStateException, IOException {
 		HttpSession hs = mul.getSession();
@@ -560,7 +563,7 @@ public class ProductController {
 		
 		return "redirect:/productout";
 	}
-	// 수량 체크
+	// ���� 泥댄��
 	@ResponseBody
 	@RequestMapping(value = "/check", method = RequestMethod.POST)
 	public String stockcheck(HttpServletRequest request) {
@@ -571,4 +574,8 @@ public class ProductController {
 
 		return ss.stockcheck(snum,ssize);
 	}
+	
+	
+	
+	
 }

@@ -12,40 +12,33 @@
    
    <definition name="main" extends="baseLayout">
       <put-attribute name="title" value="woman"/>
-      <put-attribute name="body" value="/WEB-INF/views/product_detail.jsp"/>
+      <put-attribute name="body" value="/WEB-INF/views/main.jsp"/>
    </definition>
    
+
    
    
    
    
-   
-   <definition name="woman2" extends="baseLayout">
-      <put-attribute name="title" value="woman"/>
-      <put-attribute name="body" value="/WEB-INF/views/mainlayer/woman.jsp"/>
-   </definition>
-   <definition name="man2" extends="baseLayout">
-      <put-attribute name="title" value="man"/>
-      <put-attribute name="body" value="/WEB-INF/views/mainlayer/man.jsp"/>
-   </definition>
-   <definition name="kids2" extends="baseLayout">
-      <put-attribute name="title" value="kids"/>
-      <put-attribute name="body" value="/WEB-INF/views/mainlayer/kids.jsp"/>
-   </definition>
-   
+
 
    <definition name="productinput" extends="baseLayout">
       <put-attribute name="title" value="상품입력"/>
       <put-attribute name="body" value="/WEB-INF/views/product/productinput.jsp"/>
    </definition>
+   
+   <!-- 4.8수정 -->
    <definition name="productout" extends="baseLayout">
       <put-attribute name="title" value="상품출력"/>
-      <put-attribute name="body" value="/WEB-INF/views/product/productout.jsp"/>
+      <put-attribute name="body" value="/WEB-INF/views/product/product_out.jsp"/>
    </definition>
+	<!-- 4.8수정 -->
    <definition name="detailview" extends="baseLayout">
       <put-attribute name="title" value="상품내용출력"/>
-      <put-attribute name="body" value="/WEB-INF/views/product/detailview.jsp"/>
+      <put-attribute name="body" value="/WEB-INF/views/product/product_detail.jsp"/>
    </definition>
+   
+   
    <definition name="basketout" extends="baseLayout">
       <put-attribute name="title" value="장바구니출력"/>
       <put-attribute name="body" value="/WEB-INF/views/product/basketout.jsp"/>

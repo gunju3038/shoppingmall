@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +33,12 @@
 				<tr>
 					<td>
 						<input type="hidden" name="snum" value="${aa.snum }">
-						<img alt="" src="./image/${aa.image }" width="100px" height="100px">
+						<c:set var="imageArray" value="${fn:split(aa.image, ', ')}" />
+						<c:forEach items="${imageArray}" var="imageName" varStatus="loop">
+		   					<c:if test="${loop.index == 0}">
+		       					<img alt="" src="resources/image/${imageName}" width="100px" height="100px">
+		   					</c:if>
+						</c:forEach>
 					</td>
 				</tr>
 				<tr>

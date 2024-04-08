@@ -56,16 +56,12 @@
 	      </select>
       </div>
       <div class="input_group">
-      
-			<th>색상</th>
-			<td>
-				<select name="color">
+			<label for="color">색상</label>
+				<select name="color" id="color">
 					<option value="red">red</option>
 					<option value="blue">blue</option>
 					<option value="green">green</option>
 				</select>
-			</td> 
-		
 	  </div>
       <div class="input_group">
 	      <label for="intro">상품설명</label>

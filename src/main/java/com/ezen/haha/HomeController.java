@@ -27,16 +27,5 @@ public class HomeController {
 		
 		return "main";
 	}
-	@RequestMapping(value = "/woman")
-	public String home3() {
-		
-		return "main";
-	}
-	@RequestMapping(value = "/kids")
-	public String home4() {
-		
-		return "kids2";
-	}
-	
 	
 }

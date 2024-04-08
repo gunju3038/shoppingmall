@@ -273,13 +273,45 @@ input[type="number"] {
       </div>
 
 </div>
+
+
+	
 </section>
 
 
 
 
-<section class="info"></section>
-<section class="reivew"></section>
+
+<section class="info">
+	<div>
+		<h2 style="text-align: center;">상품설명</h2>
+	</div>
+</section>
+<section class="reivew">
+<h2 style="text-align: center;">상품리뷰</h2>
+			
+		<c:forEach items="${list1 }" var="bb">
+			<table border="1" width="400px" align="center">
+				<tr>
+					<td>${bb.productrank } / 5</td>
+					<td>${bb.bdate }</td>
+				</tr>
+				<tr>
+					<th colspan="2" style="text-align: center;">${bb.btitle }</th>
+				</tr>
+				<tr>
+					<td colspan="2">${bb.bcontent }</td>
+				</tr>
+				<tr>
+					<td colspan="2"><img alt="" src="./image/${bb.bpicture }" width="200px" height="200px"> </td>
+				</tr> 
+				
+			</table>
+		</c:forEach>
+
+</section>
+
+
 
 <script type="text/javascript">
 
