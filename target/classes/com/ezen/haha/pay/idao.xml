@@ -1,0 +1,20 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ezen.haha.pay.Service">
+	<!-- 상품 결재 완료 후 관련 데이터 DB 저장(payinfo) -->
+ 	<insert id="payinsert">
+		insert into payinfo values(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8},#{param9},#{param10},#{param11},#{param12},#{param13},#{param14}) 	
+ 	</insert>
+ 	<!-- 상품 결재 완료 후 결과 출력 -->
+ 	<select id="payout" resultType="com.ezen.haha.pay.PayDTO">
+ 		select * from payinfo where orderid=#{param1} and id=#{param2}
+ 	</select>
+ 	<!-- 상품 결재 완료 후 재고 감소 업데이트 -->
+ 	<update id="productsuupdate">
+ 		update product set su=su-#{param2} where snum=#{param1}
+ 	</update>
+ 	
+ 	
+</mapper>

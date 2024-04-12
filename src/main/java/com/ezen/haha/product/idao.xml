@@ -1,0 +1,221 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ezen.haha.product.Service">
+	<!-- 관리자 상품 정보 입력 -->
+	<insert id="productinsert">
+		insert into product values(#{param1},#{param2},#{param3},#{param4},#{param5},
+								   #{param6},#{param7},#{param8},#{param9},#{param10},
+								   #{param11},#{param12},#{param13},#{param14})
+	</insert>
+
+	<!-- 상품 정보(목록) 출력 -->
+	<select id="productout" resultType="com.ezen.haha.product.ProductDTO">		
+		select * from (
+        select 
+            row_number() over (order by sname, snum) as rn, A.* 
+        from (
+            select * from product) A
+    	) where rn between #{start} AND #{end}
+	</select>
+	
+	<!-- 상품 내용 출력 -->
+	<select id="detailview" resultType="com.ezen.haha.product.ProductDTO">
+		select * from product where snum=#{param1}
+	</select>
+	
+	<!-- 컬러에 맞는 제품의 상품 코드 가져오기 -->
+	<select id="colorsnumsearch" resultType="java.lang.Integer">
+		select snum from product where sname=#{param1} and color=#{param2}
+	</select>
+	<!-- 상품이 존재하는지 체크 -->
+	<select id="jaegocheck" resultType="int">
+		select count(*) from product where snum=#{param1} and ssize=#{param2} and color=#{param3} and su>=#{param4}
+	</select>
+	
+	<!-- 장바구니 동일 제품이 있는지 중복 체크  -->
+	<select id="snumcheck" resultType="int">
+		select count(*) from basket where snum=#{param1} and ssize=#{param2} and color=#{param3}
+	</select>
+	<!-- 장바구니 데이터 DB에 저장 -->
+	<insert id="basketinsert">
+		insert into basket(basketnum,id,snum,sname,stype_main,guestbuysu,price,totprice,ssize,image,color) values(basket_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8},#{param9},#{param10})
+	</insert>
+	
+	<!-- 장바구니 출력 -->
+	<select id="basketout" resultType="com.ezen.haha.product.BasketDTO">
+		select * from ( 
+		select rownum rn,A.* from(  
+		select basketnum,snum,sname,stype,guestbuysu,price,totprice,ssize,image,color from basket where id=#{param1} order by basketnum desc)A) 
+		where rn between #{param2} AND #{param3}
+	</select>
+	
+	<!-- 장바구니에서 수정한 수량, 총 가격 업데이트 -->
+	<update id="updatebasket">
+		update basket set guestbuysu=#{param1},totprice=#{param2} where basketnum=#{param3}
+	</update>
+	
+	<resultMap type="com.ezen.haha.membership.MembershipDTO" id="membership">
+		<result property="id" column="id"/>
+		<result property="pw" column="pw"/>
+		<result property="name" column="name"/>
+		<result property="tel" column="tel"/>
+		<result property="email" column="email"/>
+		<result property="pid" column="pid"/>
+		<result property="address" column="address"/>
+		<result property="stringrank" column="stringrank"/>
+		<result property="rank" column="rank"/>
+	</resultMap>
+	<resultMap type="com.ezen.haha.product.BasketDTO" id="basket">
+		<result property="id" column="id"/>
+		<result property="sname" column="sname"/>
+		<result property="stype" column="stype"/>
+		<result property="ssize" column="ssize"/>
+		<result property="image" column="image"/>
+		<result property="basketnum" column="basketnum"/>
+		<result property="snum" column="snum"/>
+		<result property="guestbuysu" column="guestbuysu"/>
+		<result property="totprice" column="totprice"/>
+		<result property="color" column="color"/>
+		<collection property="membershipdto" ofType="com.ezen.haha.membership.MembershipDTO" resultMap="membership"/>
+	</resultMap>
+		
+	<!-- 장바구니에서 체크박스 선택(장바구니 번호로 구분) 후 구매 화면으로 이동 -->
+	<select id="basketsell" resultMap="basket"> 
+		SELECT b.id, b.snum, b.sname, b.stype, b.guestbuysu, b.totprice, b.ssize, b.image, b.color,
+       		   m.name, m.tel, m.email, m.address
+		from basket b
+		inner join member m on b.id = m.id
+		where b.basketnum = #{param1}
+	</select>	
+	
+	<!-- 구매 시 정보 입력을 위해 회원 정보를 가져옴 -->
+	<select id="IDinformation" resultType="com.ezen.haha.membership.MembershipDTO">
+		select id,name,tel,email,address from member where id=#{param1}
+	</select>
+	
+	<!-- 구매 버튼 누를 시 주문 정보 초기화 -->
+	<delete id="deleteproductsell">
+		delete from productsell
+	</delete>
+	
+	<!-- 구매 버튼 누를 시 주문 정보 DB에 저장 -->
+	<insert id="Productsellinsert">
+		insert into productsell values(sell_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8},#{param9},#{param10},#{param11},#{param12},#{param13})
+	</insert>
+	
+	<!-- 구매 버튼 누를 시 주문 정보 출력 -->
+	<select id="productsellout" resultType="com.ezen.haha.product.ProductSellDTO">
+		select * from productsell
+	</select>
+	
+	<!-- 페이징 처리 -->
+	<select id="total" resultType="int">
+	   select count(distinct sname) from product <!-- 이름이 같을 경우 중복방지 --> 
+	</select>
+	<select id="totalbasket" resultType="int">
+	   select count(*) from basket where id=#{param1}
+	</select>
+	
+	<!-- 장바구니 목록 삭제 -->
+	<delete id="deletebasket">
+		delete from basket where basketnum=#{param1}
+	</delete>
+	
+	<!-- 상품 내용 화면에서 상품 삭제 -->
+	<delete id="deleteproduct">
+		delete from product where snum=#{param1}
+	</delete>
+	
+	<!-- 상품 내용 화면에서 상품 수정 화면으로 가기 -->
+	<select id="updateproductview" resultType="com.ezen.haha.product.ProductDTO">
+		select * from product where snum=#{param1}
+	</select>
+	
+	<!-- 상품 수정 화면에서 받은 데이터로 상품 정보 수정하기(이미지 개수 만큼 증가) -->
+	<update id="productupdate">
+		update product set sname=#{param2},stype=#{param3},stype_sub=#{param4},price=#{param5},
+						   ssize=#{param6},msize=#{param7},lsize=#{param8},xlsize=#{param9},
+						   color=#{param10},image=#{param11},intro=#{param12},best=#{param13},
+						   recommend=#{param14} 
+					   where snum=#{param1}
+	</update>
+
+	<!-- 리뷰 쓰기 전 해당 상품을 구입했는지 체크 -->
+	<!-- 상품 구입 후 상품 구입 목록을 저장하는 DB를 후에 따로 만들어 체크해야함 -->
+	<!-- 지금은 상품 리뷰 DB(productreview)에서 자체 체크 -->
+	<select id="productbuysearch" resultType="java.lang.Integer">
+		select snum from payinfo where id=#{param1} and snum=#{param2}
+	</select>
+	
+	<!-- 상품 리뷰 입력 후 DB에 저장 -->
+	<insert id="productreviewsave">
+		insert into productreview values(review_seq.nextval,#{param1},#{param2},1,#{param3},#{param4},#{param5},sysdate,#{param6})
+	</insert>
+	
+	<!-- 상품 리뷰 출력(detailview.jsp) -->
+	<select id="productreviewout" resultType="com.ezen.haha.product.ProductreviewDTO">
+		select id,btitle,bcontent,bpicture,to_char(bdate,'yyyy-MM-dd')bdate,productrank from productreview where snum=#{param1}
+	</select>
+	
+	<select id="stockcheck" resultType="String">
+		select ${param2} from product where snum = #{param1}
+	</select>
+	
+	<!-- 베스트 상품 화면 출력 -->
+	<select id="bestproductout" resultType="com.ezen.haha.product.ProductDTO">
+		select * from product where best=1
+	</select>
+	
+	
+	<!-- 관리자 상품 정보(목록) 출력 -->
+	<select id="searchout" resultType="com.ezen.haha.product.ProductDTO">      
+      select * from (
+       select row_number() over (order by snum) as rn, A.* from (
+        select * from product where stype=#{param1}) A) where rn between #{param2} and #{param3}
+   </select>
+	<select id="totalSearch" resultType="int">
+	   select count(*) from product where stype=#{param1}
+	</select>
+	
+	<!-- 추천 상품 찾기 -->
+	<select id="recommendsearch" resultType="com.ezen.haha.product.ProductDTO">
+		select * from product where recommend=#{recommendsearch}
+	</select>
+	
+	<select id="searchOutValue" resultType="com.ezen.haha.product.ProductDTO">      
+      select * from (
+       select row_number() over (order by snum) as rn, A.* from (
+        select * from product where sname like '%' || #{param1} || '%' ) A
+        ) where rn between #{param2} and #{param3}
+   </select>
+	<select id="totalValue" resultType="int">
+	   select count(*) from product where sname like '%' || #{param1} || '%'
+	</select>
+	
+	 <select id="searchOutKey" resultType="com.ezen.haha.product.ProductDTO">      
+      select * from (
+       select row_number() over (order by snum) as rn, A.* from (
+        select * from product where stype = #{param1} ) A
+        ) where rn between #{param2} and #{param3}
+   </select>
+	<select id="totalKey" resultType="int">
+	   select count(*) from product where stype = #{param1}
+	</select>
+	
+	<select id="searchOutKeyValue" resultType="com.ezen.haha.product.ProductDTO">      
+      select * from (
+       select row_number() over (order by snum) as rn, A.* from (
+        select * from product where stype = #{param1} and sname like '%' || #{param2} || '%' ) A
+        ) where rn between #{param3} and #{param4}
+   </select>
+	<select id="totalKeyValue" resultType="int">
+	   select count(*) from product where stype = #{param1} and sname like '%' || #{param2} || '%' 
+	</select>
+	
+	<!-- 삭제 찾기 -->
+	<select id="selectFile" resultType="String">
+		select image from product where snum=#{param1}
+	</select>
+</mapper>

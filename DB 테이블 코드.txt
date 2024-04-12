@@ -1,0 +1,65 @@
+CREATE TABLE member (
+	id	varchar2(20)	NOT NULL,
+	pw	varchar2(20)	NULL,
+	name	varchar2(20)	NULL,
+	tel	varchar2(20)	NULL,
+	email	varchar2(40)	NULL,
+	pid	varchar2(20)	NULL,
+	address	varchar2(100)	NULL
+);
+
+CREATE TABLE product (
+	snum	number(6)	NOT NULL,
+	sname	varchar2(20)	NULL,
+	stype	varchar2(20)	NULL,
+	su	number(6)	NULL,
+	price	number(10)	NULL,
+	ssize	varchar2(10)	NULL,
+	image	varchar2(40)	NULL,
+	intro	varchar2(200)	NULL
+);
+
+CREATE TABLE basket (
+	basketnum	number(10)	NOT NULL,
+	id	varchar2(20)	NOT NULL,
+	snum	number(6)	NULL,
+	sname	varchar2(20)	NULL,
+	stype	varchar2(20)	NULL,
+	guestbuysu	number(6)	NULL,
+	totprice	number(10)	NULL,
+	ssize	varchar2(10)	NULL,
+	image	varchar2(40)	NULL
+);
+
+CREATE TABLE productsell (
+	ordernum	number(10)	NOT NULL,
+	id	varchar2(20)	NULL,
+	name	varchar2(20)	NULL,
+	tel	varchar2(20)	NULL,
+	email	varchar2(40)	NULL,
+	address	varchar2(100)	NULL,
+	image	varchar2(40)	NULL,
+	snum	number(6)	NULL,
+	sname	varchar2(20)	NULL,
+	ssize	varchar2(10)	NULL,
+	guestbuysu	number(6)	NULL,
+	totprice	number(10)	NULL,
+	stype	varchar2(20)	NULL
+);
+
+ALTER TABLE member ADD CONSTRAINT PK_MEMBER PRIMARY KEY (
+	id
+);
+
+ALTER TABLE product ADD CONSTRAINT PK_PRODUCT PRIMARY KEY (
+	snum
+);
+
+ALTER TABLE basket ADD CONSTRAINT PK_BASKET PRIMARY KEY (
+	basketnum
+);
+
+ALTER TABLE productsell ADD CONSTRAINT PK_PRODUCTSELL PRIMARY KEY (
+	ordernum
+);
+

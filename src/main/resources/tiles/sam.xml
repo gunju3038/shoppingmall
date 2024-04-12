@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+   <definition name="baseLayout" template="/WEB-INF/views/layout.jsp">
+      <put-attribute name="title" value=""/>
+      <put-attribute name="top" value="/WEB-INF/views/top.jsp"/>
+      <put-attribute name="body" value=""/>
+      <put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
+   </definition>
+   
+   <definition name="adminLayout" template="/WEB-INF/views/layout.jsp">
+      <put-attribute name="title" value=""/>
+      <put-attribute name="top" value="/WEB-INF/views/top_admin.jsp"/>
+      <put-attribute name="body" value=""/>
+      <put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
+   </definition>
+   
+   
+   
+   <definition name="main" extends="baseLayout">
+      <put-attribute name="title" value="woman"/>
+      <put-attribute name="body" value="/WEB-INF/views/main.jsp"/>
+   </definition>
+   
+   
+   
+   
+   
+   
+   <definition name="woman2" extends="baseLayout">
+      <put-attribute name="title" value="woman"/>
+      <put-attribute name="body" value="/WEB-INF/views/mainlayer/woman.jsp"/>
+   </definition>
+   <definition name="man2" extends="baseLayout">
+      <put-attribute name="title" value="man"/>
+      <put-attribute name="body" value="/WEB-INF/views/mainlayer/man.jsp"/>
+   </definition>
+   <definition name="kids2" extends="baseLayout">
+      <put-attribute name="title" value="kids"/>
+      <put-attribute name="body" value="/WEB-INF/views/mainlayer/kids.jsp"/>
+   </definition>
+   
+
+   <definition name="productinput" extends="adminLayout">
+      <put-attribute name="title" value="상품입력"/>
+      <put-attribute name="body" value="/WEB-INF/views/product/productinput.jsp"/>
+   </definition>
+   <definition name="productout" extends="adminLayout">
+      <put-attribute name="title" value="상품출력"/>
+      <put-attribute name="body" value="/WEB-INF/views/product/productout.jsp"/>
+   </definition>
+   
+   <definition name="bestproductout" extends="baseLayout">
+      <put-attribute name="title" value="베스트상품보기"/>
+      <put-attribute name="body" value="/WEB-INF/views/product/bestproductout.jsp"/>
+   </definition>
+   
+   <definition name="detailview" extends="baseLayout">
+      <put-attribute name="title" value="상품내용출력"/>
+      <put-attribute name="body" value="/WEB-INF/views/product/detailview.jsp"/>
+   </definition>
+   <definition name="basketout" extends="baseLayout">
+      <put-attribute name="title" value="장바구니출력"/>
+      <put-attribute name="body" value="/WEB-INF/views/product/basketout.jsp"/>
+   </definition>
+   <definition name="basketsellout" extends="baseLayout">
+      <put-attribute name="title" value="장바구니구매출력"/>
+      <put-attribute name="body" value="/WEB-INF/views/product/basketsellout.jsp"/>
+   </definition>
+   
+   <definition name="productsellout" extends="baseLayout">
+      <put-attribute name="title" value="구매화면출력"/>
+      <put-attribute name="body" value="/WEB-INF/views/product/productsellout.jsp"/>
+   </definition>
+   
+   <definition name="updateproductview" extends="adminLayout">
+      <put-attribute name="title" value="상품수정화면출력"/>
+      <put-attribute name="body" value="/WEB-INF/views/product/updateproductview.jsp"/>
+   </definition>
+   <definition name="productreviewinput" extends="baseLayout">
+      <put-attribute name="title" value="상품리뷰입력화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/product/productreviewinput.jsp"/>
+   </definition>
+   <definition name="recommendout" extends="baseLayout">
+      <put-attribute name="title" value="추천상품화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/product/recommendout.jsp"/>
+   </definition>
+    <definition name="product_searchout" extends="adminLayout">
+      <put-attribute name="title" value="관리자상품관리"/>
+      <put-attribute name="body" value="/WEB-INF/views/product/product_searchout.jsp"/>
+   </definition>
+   
+   <definition name="payout" extends="adminLayout">
+      <put-attribute name="title" value="상품구입후출력"/>
+      <put-attribute name="body" value="/WEB-INF/views/pay/payout.jsp"/>
+   </definition>
+   
+   
+   <definition name="membershipjoin2" extends="baseLayout">
+      <put-attribute name="title" value="회원가입"/>
+      <put-attribute name="body" value="/WEB-INF/views/membership/membershipjoin2.jsp"/>
+   </definition>
+   
+   <definition name="logininput" extends="baseLayout">
+      <put-attribute name="title" value="로그인"/>
+      <put-attribute name="body" value="/WEB-INF/views/membership/logininput.jsp"/>
+   </definition>
+   
+   <definition name="mypagemain" extends="baseLayout">
+      <put-attribute name="title" value="마이페이지메인"/>
+      <put-attribute name="body" value="/WEB-INF/views/mypage/mypagemain.jsp"/>
+   </definition>
+   <definition name="couponview" extends="baseLayout">
+      <put-attribute name="title" value="쿠폰보기"/>
+      <put-attribute name="body" value="/WEB-INF/views/mypage/couponview.jsp"/>
+   </definition>
+   
+   <definition name="adminpage" extends="adminLayout">
+      <put-attribute name="title" value="관리자페이지메인"/>
+      <put-attribute name="body" value="/WEB-INF/views/mypage/adminpage.jsp"/>
+   </definition>
+   
+   <definition name="idserch" extends="baseLayout">
+      <put-attribute name="title" value="아이디찾기1"/>
+      <put-attribute name="body" value="/WEB-INF/views/membership/idserch.jsp"/>
+   </definition>
+   
+   <definition name="idfind" extends="baseLayout">
+      <put-attribute name="title" value="아이디찾기2"/>
+      <put-attribute name="body" value="/WEB-INF/views/membership/idfind.jsp"/>
+   </definition>
+   
+   <definition name="pwserch" extends="baseLayout">
+      <put-attribute name="title" value="비밀번호찾기1"/>
+      <put-attribute name="body" value="/WEB-INF/views/membership/pwserch.jsp"/>
+   </definition>
+   
+   <definition name="pwfind" extends="baseLayout">
+      <put-attribute name="title" value="비밀번호찾기2"/>
+      <put-attribute name="body" value="/WEB-INF/views/membership/pwfind.jsp"/>
+   </definition>
+   
+   
+   <definition name="memberviewall" extends="adminLayout">
+      <put-attribute name="title" value="관리자회원보기"/>
+      <put-attribute name="body" value="/WEB-INF/views/membership/memberviewall.jsp"/>
+   </definition>
+   
+    <definition name="qnahome" extends="baseLayout"> 
+       <put-attribute name="title" value="고객센터"/>
+       <put-attribute name="body" value="/WEB-INF/views/qna/qnahome.jsp"/>
+    </definition> 
+   
+   <definition name="noticepage" extends="baseLayout">
+       <put-attribute name="title" value="공지사항"/>
+      <put-attribute name="body" value="/WEB-INF/views/qna/noticepage.jsp"/>
+   </definition> 
+   
+   <definition name="noticeinputform" extends="baseLayout">
+      <put-attribute name="title" value="공지사항 입력"/> 
+      <put-attribute name="body" value="/WEB-INF/views/qna/noticeinputform.jsp"/>
+  </definition>
+  
+   <definition name="product_list" extends="baseLayout">
+      <put-attribute name="title" value="공지사항 입력"/> 
+      <put-attribute name="body" value="/WEB-INF/views/product/product_list.jsp"/>
+  </definition>
+   
+</tiles-definitions>

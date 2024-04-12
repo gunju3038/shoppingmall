@@ -1,0 +1,58 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ezen.haha.mypage.Service">
+	<resultMap type="com.ezen.haha.membership.MembershipDTO" id="membership">
+		<result property="id" column="id"/>
+		<result property="pw" column="pw"/>
+		<result property="name" column="name"/>
+		<result property="tel" column="tel"/>
+		<result property="email" column="email"/>
+		<result property="pid" column="pid"/>
+		<result property="address" column="address"/>
+		<result property="stringrank" column="stringrank"/>
+		<result property="rank" column="rank"/>
+	</resultMap>
+	<resultMap type="com.ezen.haha.mypage.CouponDTO" id="coupon">
+		<result property="id" column="id"/>
+		<result property="couponnum" column="couponnum"/>
+		<result property="twentinum" column="twentinum"/>
+		<result property="mannum" column="mannum"/>
+		<result property="tennum" column="tennum"/>
+		<collection property="membershipdto" ofType="com.ezen.haha.membership.MembershipDTO" resultMap="membership"/>
+	</resultMap>
+
+
+	<!-- 마이페이지 화면으로 가기 -->
+ 	<select id="mypageview" resultMap="coupon">
+ 		select m.id, m.name,
+       	case when m.rank = 1 then '패밀리'
+            when m.rank = 2 then '실버'
+            when m.rank = 3 then '골드'
+            when m.rank = 4 then 'VIP' end as stringrank,
+        c.couponnum from coupon c
+		inner join member m on c.id = m.id
+		where c.id=#{param1}
+ 	</select>
+ 	<!-- 쿠폰 보기 화면으로 가기 -->
+ 	<select id="couponview" resultType="com.ezen.haha.mypage.CouponDTO">
+ 		select * from coupon where id=#{param1}
+ 	</select>
+ 	
+ 	<!-- 마이페이지에서 결재 목록 보기 화면으로 -->
+ 	<select id="payoutview" resultType="com.ezen.haha.pay.PayDTO">
+ 		select * from payinfo where id=#{param1}
+ 	</select>
+ 	
+ 	<!-- 관리자페이지에서 결재 목록 보기 화면으로 -->
+ 	<select id="payoutviewall" resultType="com.ezen.haha.pay.PayDTO">
+ 		select * from payinfo
+ 	</select>
+ 	
+ 	<!-- 관리자페이지에서 회원 목록 보기 화면으로 -->
+ 	<select id="memberviewall" resultType="com.ezen.haha.membership.MembershipDTO">
+ 		select * from member
+ 	</select>
+ 	
+</mapper>
