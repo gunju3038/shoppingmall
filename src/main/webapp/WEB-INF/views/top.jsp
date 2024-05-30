@@ -34,7 +34,6 @@ p{
 	position: relative;
 	z-index: 100;
 }
-
 .header_logo{
 	position: relative;
 	float: left;
@@ -51,10 +50,8 @@ p{
 	background: url("resources/image/img_logo.png") no-repeat;
 	vertical-align: middle;
 }
-
 .header_util{ 
 	float: right;
-	
 }
 .header_util span{ 
 	display: inline-block;
@@ -66,7 +63,6 @@ p{
 .header_util span a{
 	color: #fff;
 }
-
 .header_gnb{
 	position: absolute;
 	display: flex;
@@ -91,7 +87,6 @@ p{
 	padding-right: 50px;
 	z-index: 1;
 }
-
 .header_gnb2 label{
 	background: url("./image/ico_search.png") no-repeat center;
 	display: inline-block;
@@ -101,7 +96,6 @@ p{
 	vertical-align: bottom;
 	cursor: pointer;
 }
-
 .gnb_category {
 	display: inline-block;
 }
@@ -111,7 +105,6 @@ p{
 	padding: 17px 10px;
 	font-size: 17px;
 	font-weight: 600;
-
 }
 .depth2{
 	position: absolute;
@@ -123,19 +116,16 @@ p{
     opacity: 0; /* 초기에 투명하게 설정 */
     pointer-events: none; /* 해당 요소에 마우스 이벤트 비활성화 */
 } 
-
 .gnb_category:hover .depth2 {
     opacity: 1; /* 마우스를 올릴 때 투명도를 1로 변경하여 보이도록 함 */
     pointer-events: auto; /* 마우스 이벤트 활성화 */
     
 }
-
 .depth2 a{
 	color: #000;
 	font-size: 14px;
 	font-weight: 400;
 }
-
 .gray{
     position: fixed;
     top: 0;
@@ -171,9 +161,6 @@ p{
 	background: url("./image/ico_top.png") center no-repeat;
 	background-size: 40px 40px;
 }
-
-
-
 </style>
 </head>
 <body>
@@ -184,8 +171,6 @@ p{
 		hs.setAttribute("loginstate", false);
 	}
 %>
-
-
 <div class="header_inner">
 	<div class="header_logo">
 		<a href="main"></a>
@@ -208,7 +193,6 @@ p{
 				</c:if>		
 			</c:otherwise>	
 		</c:choose>
-
 	</div>
 	<div class="header_gnb">
 		<div class="gnb_category">
@@ -244,9 +228,6 @@ p{
 				<a href="product_subList?stype_sub=점퍼" class="depth2_list">점퍼</a>
 			</div>
 		</div>
-		
-		
-		
 	</div>
 	<form action="gnb_search" method="get">
 		<div class="header_gnb2">
@@ -259,7 +240,6 @@ p{
 	</form>
 </div>
 <div class="gray"></div>
-
 <div class="fix_btn" id="fix_btn">
     <c:if test="${loginstate == true }">
 		<button type="button" onclick="location.href='roulette'" class="rouletteBtn"></button>    
@@ -322,8 +302,6 @@ p{
             fixedDiv.style.right = '0px'; // 여기에 원래 설정한 값으로 조정하세요
         }
     });    
-    
-    
 </script>
 </body>
 </html>

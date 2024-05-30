@@ -41,8 +41,10 @@ public class MypageController {
 
 	@Autowired
 	SqlSession sqlSession;
+	
+	// 파이썬 스크립트에 JSON 데이터 전달
+    String pythonScriptPath = "C:\\이젠디지탈12\\spring\\shoppingmall-master\\src\\main\\webapp\\resources\\python\\product_visual.py";
 
-	private static final Logger logger = LoggerFactory.getLogger(MypageController.class);
 
 	// 마이페이지 화면으로 가기
 	@RequestMapping(value = "/mypage")
@@ -253,9 +255,7 @@ public class MypageController {
 		try {
 			    jsonData = objectMapper.writeValueAsString(requestData);
 	
-			    // 파이썬 스크립트에 JSON 데이터 전달
-			    String pythonScriptPath = "C:\\이젠디지탈12\\spring\\shoppingmall-master\\src\\main\\webapp\\resources\\python\\product_visual.py";
-
+			    
 			    ProcessBuilder processBuilder = new ProcessBuilder("python", pythonScriptPath);
 			    processBuilder.redirectErrorStream(true);
 			    

@@ -6,7 +6,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset="UTF-8">
 <style type="text/css">
 a{
@@ -45,7 +44,6 @@ h5{
     min-width:1360px;
     left:330px;
     position: absolute;
-
 }
 .cart_list img{
   width: 120px;
@@ -59,9 +57,6 @@ h5{
 .cart_list_detail td:not(:nth-child(1)) { /* 이미지가 아닌 나머지 열의 td 요소를 선택합니다. */
   text-align: center; /* 텍스트를 가운데 정렬합니다. */
 }
-
-
-
 .cart_delete{
   width: 60px;
   height: 30px;
@@ -71,11 +66,10 @@ h5{
   color: #000;
   background-color:#fff;
   border: 1px #808080 solid;
-  }
+}
 .searchDiv{
 	float: right;
 }
-
 </style>
 </head>
 <body>
@@ -115,7 +109,6 @@ h5{
 		       					
 		   					</c:if>
 						</c:forEach>
-						
 					</td> 
 					<td class="adminouttd">${aa.stype}</td>
  				    <td class="adminouttd">${aa.sname}</td> 
@@ -131,30 +124,28 @@ h5{
 						<button type="button" class="cart_delete" onclick="deleteProduct(${aa.snum})">삭제</button>
 					</td>
 				</tr> 
-				
 				</c:forEach> 
 				<tr style="border-left: none;border-right: none;border-bottom: none;">
-				   <td colspan="7" style="text-align: center; font-size: 15px;  padding: 10px;">
-	   
-	   			   <c:if test="${paging.startPage!=1 }"> 
-	      		   		<a href="productout?nowPage=${paging.startPage-1 }&cntPerPage=${paging.cntPerPage}">◀</a> 
-	   			   </c:if>  
-	      		<c:forEach begin="${paging.startPage }" end="${paging.endPage}" var="p"> 
-	         	<c:choose>
-	            <c:when test="${p == paging.nowPage }"> 
-	               <b><span style="color: black;">${p}</span></b>
-	            </c:when>   
-	            <c:when test="${p != paging.nowPage }"> 
-	               <a href="productout?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
-	            </c:when>   
-		         </c:choose>
-		      </c:forEach>
-			      <c:if test="${paging.endPage != paging.lastPage}">
-			      <a href="productout?nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage }">▶</a>
-			   </c:if>
-	   		</td>
-		</tr>
-       </table>
+					   <td colspan="7" style="text-align: center; font-size: 15px;  padding: 10px;">
+			   			   <c:if test="${paging.startPage!=1 }"> 
+			      		   		<a href="productout?nowPage=${paging.startPage-1 }&cntPerPage=${paging.cntPerPage}">◀</a> 
+			   			   </c:if>  
+			      		<c:forEach begin="${paging.startPage }" end="${paging.endPage}" var="p"> 
+			         		<c:choose>
+					            <c:when test="${p == paging.nowPage }"> 
+					               <b><span style="color: black;">${p}</span></b>
+					            </c:when>   
+					            <c:when test="${p != paging.nowPage }"> 
+					               <a href="productout?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+					            </c:when>   
+					        </c:choose>
+				      </c:forEach>
+					      <c:if test="${paging.endPage != paging.lastPage}">
+					      <a href="productout?nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage }">▶</a>
+					   </c:if>
+		   			</td>
+				</tr>
+     	  </table>
        </div>
 </div>
 

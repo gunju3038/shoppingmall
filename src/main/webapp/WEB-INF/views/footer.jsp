@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
 <style type="text/css">
 .footerContainer {
     background-color: #000; /* 어두운 배경색 */
@@ -16,11 +15,9 @@
   	position : relative;
   	transform : translateY(20%);
     bottom: 0;
-    
 }
 .footerInfo, .maker{
 	padding: 0 0 10px 0;
-	
 }
 .footerInfo span:after{
     content:'|';
@@ -34,7 +31,6 @@
 .footerInfo span:last-child:after {
     content: none; /* 마지막 span 요소의 ::after 내용을 없앰 */
 }
-
 .maker span:after{
     content:'|';
     font-size: 10px;
@@ -47,12 +43,9 @@
 .maker span:last-child:after {
     content: none; /* 마지막 span 요소의 ::after 내용을 없앰 */
 }
-
 </style>
-
 </head>
 <body>
-
 <div class="footerContainer">
 	<div class="footerInfo">
 	    <span>이용약관</span>
@@ -68,8 +61,5 @@
 	</div>            
     <span>Snack Closet.</span>
 </div>
-
-
-
 </body>
 </html>

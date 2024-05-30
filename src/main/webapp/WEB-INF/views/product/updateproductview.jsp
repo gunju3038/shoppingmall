@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 <style type="text/css">
 body{  
   padding: 0;
@@ -84,18 +83,18 @@ input[type="checkbox"]{
 	margin-bottom: 100px;
 }
 .btn1 {
-  background: lightslategray;
-  color: #fff;
-  border-radius: 100px;
-  width: 200px;
-  height: 44px;
-  font-size: 16px;
-  text-align:center;
-  border: none;
-  margin-bottom: 15px;
+	background: lightslategray;
+	color: #fff;
+	border-radius: 100px;
+	width: 200px;
+	height: 44px;
+	font-size: 16px;
+	text-align:center;
+	border: none;
+	margin-bottom: 15px;
 }
 .btn1:hover {
-  background: slategray;
+	background: slategray;
 }
 .filebox label {
     display: inline-block;
@@ -129,7 +128,7 @@ input[type="checkbox"]{
 <form action="updateproduct" method="post" enctype="multipart/form-data">
 <div class="product_input">
   <div class="product_inputform">
-      <h3>상품입력</h3>
+      <h3>상품수정</h3>
       <c:forEach items="${list }" var="aa">
       <div class="input_group">
 	      <label for="snum">상품코드</label>
@@ -151,14 +150,18 @@ input[type="checkbox"]{
 	      <input type="text" id="sname" name="sname" value="${aa.sname }" required="required">
       </div>
       <div class="input_group">
-	      <label for="stype">상품타입</label>
-	      <select name="stype" id="stype">
-		      <option value="상의" ${aa.stype == '상의' ? 'selected' : ''}>상의</option>
-		      <option value="바지" ${aa.stype == '바지' ? 'selected' : ''}>바지</option>
+	      <label for="stype">분류</label>
+	      <select name="stype" id="stype" style="width: auto;" onchange="updateSubCategories()">
+	      	  <option value="상의" ${aa.stype == '상의' ? 'selected' : ''}>상의</option>
+		      <option value="하의" ${aa.stype == '하의' ? 'selected' : ''}>하의</option>
 		      <option value="아우터" ${aa.stype == '아우터' ? 'selected' : ''}>아우터</option>
-		      <option value="모자" ${aa.stype == '모자' ? 'selected' : ''}>모자</option>
 	      </select>
+	       <select id="stype_sub" name="stype_sub" style="width: auto;">
+           	  <option value="">선택하세요</option>
+        </select>
       </div>
+      
+      
       <div class="input_group">
 	      <label for="price">가격</label>
 	      <input type="text" id="price" name="price" value="${aa.price }" required="required">
@@ -317,7 +320,45 @@ input[type="checkbox"]{
 	    }
 	  }
 	)('att_zone', 'btnAtt')
+	function updateSubCategories() {
+            var stype = document.getElementById('stype');
+            var stype_sub = document.getElementById('stype_sub');
+            var selectedCategory = stype.value;
 
+            // Remove existing options
+            while (stype_sub.options.length > 1) {
+            	stype_sub.remove(1);
+            }
+
+            // Add new options based on the selected category
+            switch (selectedCategory) {
+                case '상의':
+                    addOption(stype_sub, '티셔츠');
+                    addOption(stype_sub, '반팔티셔츠');
+                    addOption(stype_sub, '니트');
+                    addOption(stype_sub, '셔츠');
+                    break;
+                case '하의':
+                    addOption(stype_sub, '데님');
+                    addOption(stype_sub, '반바지');
+                    addOption(stype_sub, '긴바지');
+                    addOption(stype_sub, '스포츠');
+                    break;
+                case '아우터':
+                    addOption(stype_sub, '패딩');
+                    addOption(stype_sub, '코트');
+                    addOption(stype_sub, '재킷');
+                    addOption(stype_sub, '점퍼');
+                    break;
+                default:
+                    break;
+            }
+        }
+		function addOption(selectElement, optionText) {
+		    var option = document.createElement('option');
+		    option.text = optionText;
+		    selectElement.add(option);
+		}
 </script>
 </form>
 </body>

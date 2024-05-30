@@ -13,6 +13,8 @@ public interface Service {
 	MembershipDTO kakaologin(String email);
 
 	ArrayList<MembershipDTO> memberidserch(String name, String email);
+	
+	MembershipDTO pwgetme(String id, String name, String email);
 
 	String email_check(String email);
 
@@ -22,7 +24,7 @@ public interface Service {
 
 	//MembershipDTO naverlogin(String name, String email);
 
-	MembershipDTO naverlogin(String name);
+	MembershipDTO naverlogin(String email);
 
 	ArrayList<MembershipDTO> membershipsearch(String id);
 

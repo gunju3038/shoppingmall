@@ -113,7 +113,6 @@ th:first-child {
 <title>Insert title here</title>
 </head>
 <body>
-
 <div class="container">
     <h2 class="pagetitle">FAQ</h2>
 <div class="row">
@@ -149,12 +148,9 @@ th:first-child {
             <!-- 페이징처리 -->
     <tr style="border-left: none;border-right: none;border-bottom: none">
        <td colspan="7" style="text-align: center;">
-       
        <c:if test="${paging.startPage!=1 }">
           <a href="faq?nowPage=${paging.startPage-1 }&cntPerPage=${paging.cntPerPage}">◀</a>
-          
        </c:if>   
-       
           <c:forEach begin="${paging.startPage }" end="${paging.endPage}" var="p"> 
              <c:choose>
                 <c:when test="${p == paging.nowPage }"> <!-- 현재 페이지를 빨갛게 표시 -->
@@ -165,11 +161,9 @@ th:first-child {
                 </c:when>   
              </c:choose>
           </c:forEach>
-         
           <c:if test="${paging.endPage != paging.lastPage}">
           <a href="faq?nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage }">▶</a>
        </c:if>
-       
        </td>
     </tr>
 <!-- 페이징처리 -->

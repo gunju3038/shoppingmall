@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 <style type="text/css">
 body{  
- 
   padding: 0;
   margin: 0;
   width: 100%;
@@ -125,15 +124,10 @@ input[type="checkbox"]{
 	color : #999;
 	font-size:17px;
 }
-
-
-
 </style>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-
 <form action="productsave" method="post" enctype="multipart/form-data">
 <div class="product_input">
   <div class="product_inputform">
@@ -199,10 +193,7 @@ input[type="checkbox"]{
       <input type="submit" value="상품등록" class="btn1">
       </div>
     </div>
-   
-     
 </div>
-
 
 <script type="text/javascript">
 ( /* att_zone : 이미지들이 들어갈 위치 id, btn : file tag id */
@@ -256,28 +247,28 @@ input[type="checkbox"]{
 	      
 	    }, false)
 	  
-	attZone.addEventListener('drop', function(e){
-	    e.preventDefault();
-	    e.stopPropagation();
-	    var dt = e.dataTransfer;
-	    var files = dt.files;
-	    
-	    var allFiles = new DataTransfer();
-	    for (var i = 0; i < btnAtt.files.length; i++) {
-	        allFiles.items.add(btnAtt.files[i]);
-	    }
-	    for (var i = 0; i < files.length; i++) {
-	        allFiles.items.add(files[i]);
-	    }
-	    
-	    // 새로운 FileList를 파일 선택 요소에 설정
-	    btnAtt.files = allFiles.files;
-	    
-	    
-	    for(f of files){
-	        imageLoader(f);
-	    }
-	}, false);
+		attZone.addEventListener('drop', function(e){
+		    e.preventDefault();
+		    e.stopPropagation();
+		    var dt = e.dataTransfer;
+		    var files = dt.files;
+		    
+		    var allFiles = new DataTransfer();
+		    for (var i = 0; i < btnAtt.files.length; i++) {
+		        allFiles.items.add(btnAtt.files[i]);
+		    }
+		    for (var i = 0; i < files.length; i++) {
+		        allFiles.items.add(files[i]);
+		    }
+		    
+		    // 새로운 FileList를 파일 선택 요소에 설정
+		    btnAtt.files = allFiles.files;
+		    
+		    
+		    for(f of files){
+		        imageLoader(f);
+		    }
+		}, false);
 	    
 
 	    
@@ -329,7 +320,6 @@ input[type="checkbox"]{
 	    }
 	  }
 	)('att_zone', 'btnAtt')
-
 	
 	function updateSubCategories() {
             var stype = document.getElementById('stype');
@@ -361,7 +351,6 @@ input[type="checkbox"]{
                     addOption(stype_sub, '재킷');
                     addOption(stype_sub, '점퍼');
                     break;
-                
                 default:
                     break;
             }

@@ -252,10 +252,10 @@ a:hover {
           <span>or</span>
     </div>
 		<div class="social_login">
-			<a href="https://kauth.kakao.com/oauth/authorize?client_id=e3b75c80af4089c257294b73789f4644&redirect_uri=http://localhost:8667/haha/kakaologin&response_type=code">
-			<img src="${pageContext.request.contextPath}/resources/image/kakaologin2.png" alt="Kakao Login"></a>
+	        <a href="https://kauth.kakao.com/oauth/authorize?client_id=c2b76515c2fe51b437e55701d58b14ce&redirect_uri=http://localhost:8686/haha/kakaologin&response_type=code">
+	        <img src="${pageContext.request.contextPath}/resources/image/kakaologin2.png" alt="Kakao Login"></a>
 			
-			<a href="https://nid.naver.com/oauth2.0/authorize?client_id=bZp1_Dnu3oky5iTcsVsO&response_type=code&redirect_uri=http://localhost:8667/haha/naverlogin&state=test">
+			<a href="https://nid.naver.com/oauth2.0/authorize?client_id=bZp1_Dnu3oky5iTcsVsO&response_type=code&redirect_uri=http://localhost:8686/haha/naverlogin&state=test">
 			<img src="${pageContext.request.contextPath}/resources/image/naverlogin2.png" alt="Naver Login"></a>
 	</div>
 </div>

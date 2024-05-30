@@ -15,7 +15,6 @@ a{
 	text-decoration: none;
 	color: black;
 }
-
 .addresslist{
 	margin: 5px;
 	padding: 10px;
@@ -43,14 +42,9 @@ a{
     color: white;
 }
 </style>
-
-
 </head>
 <body>
 <h2>배송지 목록</h2>
-
-
-
 <c:forEach items="${list }" var="aa">
 <div class="addresslist">
 	<div class="list_div">
@@ -62,15 +56,12 @@ a{
 	<span>${addressArray[1]}</span>
 	<span>${addressArray[2]}</span> 
 	</a>
-	
 	</div>
 	<div class="btn_div">
 		<button type="button" onclick="setAddress('${aa.adlistname}', '${aa.tel}', '${addressArray[0]}', '${addressArray[1]}', '${addressArray[2]}')">선택</button>
 	</div>
 </div>
 </c:forEach>
-
-
 <script type="text/javascript">
 function setAddress(name,tel,postcode,address1,address2) {
 	window.opener.document.getElementById('name').value = name;
@@ -80,7 +71,6 @@ function setAddress(name,tel,postcode,address1,address2) {
     window.opener.document.getElementById('address2').value = address2;
     window.close();
 }
-
 </script>
 </body>
 </html>

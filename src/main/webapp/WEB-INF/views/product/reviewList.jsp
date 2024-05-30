@@ -6,7 +6,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset="UTF-8">
 <style type="text/css">
 a{
@@ -59,9 +58,6 @@ h5{
 .cart_list_detail td:not(:nth-child(1)) { /* 이미지가 아닌 나머지 열의 td 요소를 선택합니다. */
   text-align: center; /* 텍스트를 가운데 정렬합니다. */
 }
-
-
-
 .cart_delete{
   width: 60px;
   height: 30px;
@@ -75,7 +71,6 @@ h5{
 .searchDiv{
 	float: right;
 }
-
 </style>
 </head>
 <body>
@@ -90,7 +85,6 @@ h5{
 				    <th class="adminoutth">상품명</th>
 				    <th class="adminoutth">아이디</th>
 				    <th class="adminoutth">리뷰제목</th>
-				    
 				</tr>
  				<c:forEach items="${list }" var="aa">
  				 <tr class="cart_list_detail"> 
@@ -133,6 +127,5 @@ h5{
        </table>
        </div>
 </div>
-
 </body>
 </html>

@@ -138,10 +138,10 @@ const rLayerPopup = (num) => {
             url: "couponUpdate",
             data: {"win": win},
             success: function(response) {
-                console.log('Coupon updated successfully:', response);
+                
             },
             error: function(xhr, status, error) {
-                console.error('Error updating coupon:', error);
+                
             }
         });
   		

@@ -11,8 +11,7 @@
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
-
-H2{
+h2{
   font-family: "Merriweather", serif;
   font-weight: 700;
   font-style: italic;
@@ -21,9 +20,10 @@ H2{
   margin-top: 54px; 
   margin-bottom:0;
   min-width: 1280px;
-  
 }
-
+p{
+	margin: 0;
+}
 .clearfix:after { 
 	content: ''; 
 	display: block; 
@@ -122,16 +122,15 @@ H2{
     	opacity: 0.8;
     	border: none;
     	z-index: 10;	
-    }
+}
 .slide_btn_prev {
          left: auto;
     	right: 1194px;
-    }
+}
 .slide_btn_next {    
     	left: 1194px;
     	right: auto;
-    }
-    
+}    
 .slide_btn_prev::before{
     content: ".";
     display: block;
@@ -143,7 +142,7 @@ H2{
     position: absolute;
     right: 14px;
     top: 42%;
-    }
+}
 .slide_btn_next::before{
     content: "";
     display: block;
@@ -155,9 +154,8 @@ H2{
     position: absolute;
     left: 14px;
     top: 42%;
-    }
-    
-.slide_pagination { 
+}
+.slide_pagination{ 
 	position: absolute; 
 	left: 50%; 
 	bottom: 0; 
@@ -166,19 +164,28 @@ H2{
 	padding: 0; 
 	transform: translateX(-50%); 
 }
-.slide_pagination .dot { display: inline-block; width: 15px; height: 15px; margin: 0 5px; overflow: hidden; background: #ddd; border-radius: 50%; transition: 0.3s; }
-.slide_pagination .dot.dot_active { background: #333; }
-.slide_pagination .dot a { display: block; width: 100%; height: 100%; }
-    
-
-
+.slide_pagination .dot{ 
+	display: inline-block; 
+	width: 15px; 
+	height: 15px; margin: 0 5px; 
+	overflow: hidden; 
+	background: #ddd; 
+	border-radius: 50%; 
+	transition: 0.3s; }
+.slide_pagination .dot.dot_active{ 
+	background: #333; 
+}
+.slide_pagination .dot a{
+	display: block; 
+	width: 100%; 
+	height: 100%; 
+}
 .clearfix2:after { 
 	content: ''; 
 	display: block; 
 	clear: both; 
 	float: none; 
 }
-
 .best_wrap{
     position: relative;
     max-width: 1920px;
@@ -246,7 +253,6 @@ H2{
     background-color: #f5f5f5;
     height: 400px;
 }
-
 .review_content{ 
     position: relative;
     float: left;
@@ -277,9 +283,7 @@ H2{
 .review_tit a {
             color: inherit; /* 부모 요소의 색상을 상속 */
             text-decoration: none; /* 링크의 밑줄 제거 */
-        }
-
-  
+}
 .review_sub{
 	display: flex;
 	justify-content: space-between;
@@ -293,25 +297,55 @@ H2{
     flex: 1;
     color: gray;
 }
-
-        .modal-bg {display:none;width:100%;height:100%;position:fixed;top:0;left:0;right:0;background: rgba(0, 0, 0, 0.6);z-index:1000;}
-        .modal-wrap {display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:1000px;height:600px;background:#fff;z-index:1001;    }
-		.modal-close{background: white; border:none; position: absolute; top: 0; right: 0; font-size: 20px; color: gray;}
-	 	.a{width: 360px; padding: 10px 30px; border-bottom: 1px solid #eeeeee;}
-	 	p{margin: 0;}
-		.review-wrap{flex: 1; }
-	.reviewScore img {
-		width: 14px;
-		
-	}
+.modal-bg {
+	display:none;
+	width:100%;
+	height:100%;
+	position:fixed;
+	top:0;
+	left:0;
+	right:0;
+	background: rgba(0, 0, 0, 0.6);
+	z-index:1000;
+}
+.modal-wrap {
+	display:none;
+	position:fixed;
+	top:50%;
+	left:50%;
+	transform:translate(-50%,-50%);
+	width:1000px;
+	height:600px;
+	background:#fff;
+	z-index:1001;    
+}
+.modal-close{
+	background: white; 
+	border:none; 
+	position: absolute; 
+	top: 0; 
+	right: 0; 
+	font-size: 20px; 
+	color: gray;
+}
+.a{
+	width: 360px; 
+	padding: 10px 30px; 
+	border-bottom: 1px solid #eeeeee;
+}
+.review-wrap{
+	flex: 1; 
+}
+.reviewScore img {
+	width: 14px;
+}
 .best_item a{
-	   color: #444444; /* 부모 요소의 색상을 상속 */
-       text-decoration: none; /* 링크의 밑줄 제거 */
+   color: #444444; /* 부모 요소의 색상을 상속 */
+   text-decoration: none; /* 링크의 밑줄 제거 */
 }
 .best_info {
     font-size: 16px;
 }
-
 .best_infofirst{
     font-size: 18px;
     font-weight: bold;
@@ -320,8 +354,6 @@ H2{
 </style>
 </head>
 <body>
-
-
 <section class="main">
 	<div class="slide_wrap">
 	  <div class="slide_box">
@@ -340,7 +372,7 @@ H2{
 	      	</div>
 	      </div>
 	      <div class="slide_content">
-	       <div class="img">
+	      	<div class="img">
 	        	<a href="">
 	        		<img alt="" src="resources/image/img2.jpg">
 	        	</a>
@@ -405,18 +437,13 @@ H2{
 	      	</div>
 	      </div>
 	    </div>
-	    <!-- // .slide_list -->
 	  </div>
-	  <!-- // .slide_box -->
 	  <div class="slide_btn_box">
 	    <button type="button" class="slide_btn_prev">Prev</button>
 	    <button type="button" class="slide_btn_next">Next</button>
 	  </div>
-	  <!-- // .slide_btn_box -->
 	  <ul class="slide_pagination"></ul>
-	  <!-- // .slide_pagination -->
 	</div>
-	<!-- // .slide_wrap -->
 </section>
 
 <section class="best_item">
@@ -438,7 +465,6 @@ H2{
       			</div>
       			<div class="best_str">
       				<a href="detailview?snum=${aa.snum}">
-      	
       				<span class="best_rank">${loop.index+1 }</span>
       				<span class="best_infofirst">${aa.sname }<br></span> 
       				<span class="best_info"><f:formatNumber value="${aa.price }" pattern="#,###"/><br></span>
@@ -446,12 +472,9 @@ H2{
       				</a>
       			</div>
       		</div>
-      		
       		</c:forEach>
-      		
 		</div>
 	</div>
-
 </div>
 </section>
 
@@ -474,10 +497,7 @@ H2{
       			</div>
       		</div>
       		</c:forEach>
-      		
 		</div>
-	
-	
 <div class="modal-bg" onClick="javascript:popClose();"></div>
   <div class="modal-wrap">
     <div>
@@ -494,23 +514,22 @@ H2{
    				<p></p>
    			</div>
    			<div class="a" style="display: flex; justify-content: space-between;">
-    <div class="reviewScore">
-        <p>평점</p>
-        <p></p>
-    </div>
-    <div>
-        <p>작성일</p>
-        <p></p>
-    </div>
-</div>
+			    <div class="reviewScore">
+			        <p>평점</p>
+			        <p></p>
+			    </div>
+			    <div>
+			        <p>작성일</p>
+			        <p></p>
+			    </div>
+			</div>
    			<div class="a">
    				<p style="font-size: 18px"></p>
    				<p></p>
    			</div>
    		</div>
    	</div> 
-  </div>
-	
+ </div>
 </section>
 
 
@@ -597,7 +616,7 @@ H2{
     	nextSlide();
     	loopInterval = setInterval(() => {
         	nextSlide();
-        	}, 1000);
+        	}, 4000);
 
     });
 	
@@ -607,7 +626,7 @@ H2{
     	preSlide();
     	loopInterval = setInterval(() => {
         	nextSlide();
-        	}, 1000);
+        	}, 4000);
     });
 
     /** Pagination Button Event */
@@ -629,26 +648,21 @@ H2{
         slideList.style.transform = "translate3d(-" + (slideWidth * (curIndex + 1)) + "px, 0px, 0px)";
       });
     });
-
     // 자동슬라이드
     loopInterval = setInterval(() => {
     	nextSlide();
     	}, 4000);
- // 슬라이드에 마우스가 올라간 경우 루프 멈추기
+	// 슬라이드에 마우스가 올라간 경우 루프 멈추기
     slideList.addEventListener("mouseover", () => {
       clearInterval(loopInterval);
     });
-
     // 슬라이드에서 마우스가 나온 경우 루프 재시작하기
     slideList.addEventListener("mouseout", () => {
       loopInterval = setInterval(() => {
     	  nextSlide();
       }, 4000);
     });    
-
   })();
-  
-  
 
 function fetchData(bnum) {
     $.ajax({
@@ -685,18 +699,14 @@ function displayDataInModal(data) {
 	document.querySelector('.modal-wrap .a:nth-child(4) p:nth-child(1)').textContent = data.btitle;
 	document.querySelector('.modal-wrap .a:nth-child(4) p:nth-child(2)').textContent = data.bcontent;
 
-
-    
 }
 
 function popOpen(bnum) {
-	console.log(bnum);
     var modalPop = $('.modal-wrap');
     var modalBg = $('.modal-bg'); 
     fetchData(bnum);
     $(modalPop).css('display', 'flex');
     $(modalBg).show();
-
 }
 
  function popClose() {
@@ -705,9 +715,7 @@ function popOpen(bnum) {
 
    $(modalPop).hide();
    $(modalBg).hide();
-
 }
-  </script>
-
+</script>
 </body>
 </html>

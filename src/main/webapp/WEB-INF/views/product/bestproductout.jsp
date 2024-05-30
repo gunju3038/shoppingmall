@@ -99,7 +99,6 @@ a{
 
 </head>
 <body>
-
 <div class="product_list">
 	<div class="box">
 		<h2>베스트 상품</h2>
@@ -122,7 +121,6 @@ a{
 				</a></div>
 				<div class="name"><a href="detailview?snum=${aa.snum}">${aa.sname}</a></div>
 				<div class="price"><a href="detailview?snum=${aa.snum}"><f:formatNumber value="${aa.price }" pattern="#,###"/></a></div>
-
 				<c:if test="${aa.count!=0 }">
 					<div class="review">
 						<div><a href="detailview?snum=${aa.snum}"><img alt="" src="./image/reviewStar.png" style="width: 17px;" > ${Math.round(aa.productrank*10)/10. }</a></div>
@@ -134,7 +132,6 @@ a{
 		</c:forEach>
 		</div>
 	</div>
-	
 	<div class="paging">
 		<ul>
 			<li>

@@ -1,0 +1,635 @@
+--------------------------------------------------------
+--  파일이 생성됨 - 수요일-5월-29-2024   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Sequence REVIEW_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "EZEN"."REVIEW_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 81 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence QNANUM_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "EZEN"."QNANUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 41 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence BNUM_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "EZEN"."BNUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 101 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence BASKET_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "EZEN"."BASKET_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 461 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence SELL_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "EZEN"."SELL_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1320 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence ORDERID_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "EZEN"."ORDERID_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 221 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Table PRODUCT
+--------------------------------------------------------
+
+  CREATE TABLE "EZEN"."PRODUCT" 
+   (	"SNUM" NUMBER(6,0), 
+	"SNAME" VARCHAR2(250 BYTE), 
+	"STYPE" VARCHAR2(20 BYTE), 
+	"STYPE_SUB" VARCHAR2(20 BYTE), 
+	"PRICE" NUMBER(10,0), 
+	"SSIZE" NUMBER(3,0), 
+	"MSIZE" NUMBER(3,0), 
+	"LSIZE" NUMBER(3,0), 
+	"XLSIZE" NUMBER(3,0), 
+	"IMAGE" VARCHAR2(1000 BYTE), 
+	"INTRO" VARCHAR2(1000 BYTE), 
+	"BEST" NUMBER(1,0), 
+	"RECOMMEND" VARCHAR2(10 BYTE), 
+	"VIEWNUM" NUMBER(6,0) DEFAULT 0
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table PRODUCTREVIEW
+--------------------------------------------------------
+
+  CREATE TABLE "EZEN"."PRODUCTREVIEW" 
+   (	"BNUM" NUMBER(10,0), 
+	"SNUM" NUMBER(6,0), 
+	"SNAME" VARCHAR2(200 BYTE), 
+	"ID" VARCHAR2(200 BYTE), 
+	"PRODUCTBUY" NUMBER(1,0) DEFAULT 0, 
+	"BTITLE" VARCHAR2(500 BYTE), 
+	"BCONTENT" VARCHAR2(1000 BYTE), 
+	"BPICTURE" VARCHAR2(100 BYTE), 
+	"BDATE" DATE DEFAULT sysdate, 
+	"PRODUCTRANK" NUMBER(1,0) DEFAULT 1, 
+	"IMAGE" VARCHAR2(100 BYTE), 
+	"BESTREVIEW" NUMBER DEFAULT 0
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table PRODUCTSELL
+--------------------------------------------------------
+
+  CREATE TABLE "EZEN"."PRODUCTSELL" 
+   (	"ORDERNUM" NUMBER(10,0), 
+	"ID" VARCHAR2(20 BYTE), 
+	"NAME" VARCHAR2(20 BYTE), 
+	"TEL" VARCHAR2(20 BYTE), 
+	"EMAIL" VARCHAR2(40 BYTE), 
+	"ADDRESS" VARCHAR2(100 BYTE), 
+	"IMAGE" VARCHAR2(80 BYTE), 
+	"SNUM" NUMBER(6,0), 
+	"SNAME" VARCHAR2(20 BYTE), 
+	"SSIZE" VARCHAR2(10 BYTE), 
+	"GUESTBUYSU" NUMBER(6,0), 
+	"TOTPRICE" NUMBER(10,0), 
+	"STYPE" VARCHAR2(20 BYTE), 
+	"COLOR" VARCHAR2(20 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table QNA
+--------------------------------------------------------
+
+  CREATE TABLE "EZEN"."QNA" 
+   (	"BNUM" NUMBER(6,0), 
+	"BID" VARCHAR2(20 BYTE), 
+	"BTYPE" VARCHAR2(20 BYTE), 
+	"BTITLE" VARCHAR2(50 BYTE), 
+	"BCONTENT" VARCHAR2(1000 BYTE), 
+	"BPICTURE" VARCHAR2(250 BYTE), 
+	"BDATE" DATE DEFAULT sysdate
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table QNABOARD
+--------------------------------------------------------
+
+  CREATE TABLE "EZEN"."QNABOARD" 
+   (	"BNUM" NUMBER(6,0), 
+	"BID" VARCHAR2(20 BYTE), 
+	"BTYPE" VARCHAR2(20 BYTE), 
+	"BTITLE" VARCHAR2(50 BYTE), 
+	"BCONTENT" VARCHAR2(1000 BYTE), 
+	"BPICTURE" VARCHAR2(250 BYTE), 
+	"BDATE" DATE DEFAULT sysdate, 
+	"GROUPS" NUMBER(6,0) DEFAULT 0, 
+	"STEP" NUMBER(6,0) DEFAULT 0, 
+	"INDENT" NUMBER(6,0) DEFAULT 0, 
+	"SECRET" NUMBER(1,0) DEFAULT 0, 
+	"QNASTATE" NUMBER(1,0) DEFAULT 0
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table PAYINFO
+--------------------------------------------------------
+
+  CREATE TABLE "EZEN"."PAYINFO" 
+   (	"TID" VARCHAR2(40 BYTE), 
+	"ORDERID" NUMBER(10,0), 
+	"ID" VARCHAR2(20 BYTE), 
+	"PAYTYPE" VARCHAR2(20 BYTE), 
+	"SNAME" VARCHAR2(200 BYTE), 
+	"PAYNUM" NUMBER(10,0), 
+	"TOTPRICE" NUMBER(10,0), 
+	"PAYENDTIME" DATE, 
+	"SNUM" VARCHAR2(200 BYTE), 
+	"ADDRESS" VARCHAR2(200 BYTE), 
+	"NAME" VARCHAR2(20 BYTE), 
+	"TEL" VARCHAR2(100 BYTE), 
+	"EMAIL" VARCHAR2(40 BYTE), 
+	"DREQUEST" VARCHAR2(200 BYTE), 
+	"PAYSTATE" NUMBER(1,0), 
+	"PAYMENT" VARCHAR2(30 BYTE), 
+	"USECOUPON" VARCHAR2(40 BYTE), 
+	"SAVEPOINT" NUMBER(10,0), 
+	"USEPOINT" NUMBER(10,0), 
+	"NOWPOINT" NUMBER(10,0)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table FAQ
+--------------------------------------------------------
+
+  CREATE TABLE "EZEN"."FAQ" 
+   (	"BNUM" NUMBER(6,0), 
+	"BID" VARCHAR2(20 BYTE), 
+	"BTYPE" VARCHAR2(20 BYTE), 
+	"BTITLE" VARCHAR2(200 BYTE), 
+	"BCONTENT" VARCHAR2(1000 BYTE), 
+	"BPICTURE" VARCHAR2(250 BYTE), 
+	"BDATE" DATE
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table ADDRESSLIST
+--------------------------------------------------------
+
+  CREATE TABLE "EZEN"."ADDRESSLIST" 
+   (	"ADDRESSNUM" NUMBER(10,0), 
+	"ID" VARCHAR2(20 BYTE), 
+	"ADLISTNAME" VARCHAR2(20 BYTE), 
+	"NAME" VARCHAR2(20 BYTE), 
+	"TEL" VARCHAR2(20 BYTE), 
+	"ADDRESS" VARCHAR2(200 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table BASKET
+--------------------------------------------------------
+
+  CREATE TABLE "EZEN"."BASKET" 
+   (	"BASKETNUM" NUMBER(10,0), 
+	"ID" VARCHAR2(20 BYTE), 
+	"SNUM" NUMBER(6,0), 
+	"GUESTBUYSU" NUMBER(6,0), 
+	"PSIZE" VARCHAR2(10 BYTE), 
+	"COLOR" VARCHAR2(20 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table MEMBER
+--------------------------------------------------------
+
+  CREATE TABLE "EZEN"."MEMBER" 
+   (	"ID" VARCHAR2(20 BYTE), 
+	"PW" VARCHAR2(80 BYTE), 
+	"NAME" VARCHAR2(20 BYTE), 
+	"TEL" VARCHAR2(20 BYTE), 
+	"EMAIL" VARCHAR2(40 BYTE), 
+	"PID" VARCHAR2(20 BYTE), 
+	"ADDRESS" VARCHAR2(100 BYTE), 
+	"RANK" NUMBER(1,0) DEFAULT 1, 
+	"POINT" NUMBER(10,0)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table VISUAL
+--------------------------------------------------------
+
+  CREATE TABLE "EZEN"."VISUAL" 
+   (	"SNUM" NUMBER(6,0), 
+	"VISUAL_IMAGE" VARCHAR2(100 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table COUPON
+--------------------------------------------------------
+
+  CREATE TABLE "EZEN"."COUPON" 
+   (	"ID" VARCHAR2(20 BYTE), 
+	"COUPONNUM" NUMBER(2,0), 
+	"TWENTINUM" NUMBER(2,0), 
+	"MANNUM" NUMBER(2,0), 
+	"TENNUM" NUMBER(2,0)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+REM INSERTING into EZEN.PRODUCT
+SET DEFINE OFF;
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2002,'블루 투 턱 서머 데님 팬츠','하의','데님',340000,30,30,30,30,'2002_3.jpg, 2002_1.jpg, 2002_2.jpg','블루 투 턱 서머 데님 팬츠',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2000,'그레이 스탠다드핏 데님 팬츠','하의','데님',150000,20,20,20,20,'2000_1.jpg, 2000_2.jpg, 2000_3.jpg','남성 크랍 레귤러 테이퍼',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2001,'라이트 그레이 스트레이트핏 데님 팬츠','하의','데님',350000,30,30,30,30,'2001_1.jpg, 2001_2.jpg, 2001_3.jpg','라이트 그레이 스트레이트핏 데님 팬츠',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2003,'솔트 워시드 데님 팬츠','하의','데님',333000,50,50,50,50,'2003_1.jpg, 2003_2.jpg, 2003_3.jpg','솔트 워시드 데님 팬츠',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2004,'블루 슬림 원 턱 데님 팬츠','하의','데님',350000,60,60,60,60,'블루 슬림 원 턱 데님 팬츠_2004_1.jpg, 블루 슬림 원 턱 데님 팬츠_2004_2.jpg, 블루 슬림 원 턱 데님 팬츠_2004_3.jpg','블루 슬림 원 턱 데님 팬츠
+
+',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2005,'컴포트 스트레치 레귤러핏 데님 진','하의','데님',140000,50,50,50,50,'컴포트 스트레치 레귤러핏 데님 진_2005_1.jpg, 컴포트 스트레치 레귤러핏 데님 진_2005_2.jpg, 컴포트 스트레치 레귤러핏 데님 진_2005_3.jpg','컴포트 스트레치 레귤러핏 데님 진',1,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2006,'와이드핏 미드블루 데님','하의','데님',125000,60,60,60,60,'와이드핏 미드블루 데님_2006_1.jpg, 와이드핏 미드블루 데님_2006_2.jpg, 와이드핏 미드블루 데님_2006_3.jpg','와이드핏 미드블루 데님',1,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2007,'M톤 커플구제 슬림 스트레이트','하의','데님',65000,30,30,30,30,'M톤 커플구제 슬림 스트레이트_2007_1.jpg, M톤 커플구제 슬림 스트레이트_2007_2.jpg','M톤 커플구제 슬림 스트레이트',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2008,'아이보리 코듀로이팬츠','하의','데님',64000,20,20,20,20,'아이보리 코듀로이팬츠_2008_1.jpg, 아이보리 코듀로이팬츠_2008_2.jpg','아이보리 코듀로이팬츠',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2009,'루즈핏 라이트블루 데님','하의','데님',105000,60,60,60,60,'루즈핏 라이트블루 데님_2009_1.jpg, 루즈핏 라이트블루 데님_2009_2.jpg, 루즈핏 라이트블루 데님_2009_3.jpg','루즈핏 라이트블루 데님',0,'1',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2010,'레귤러핏 크롭 블루 리지드 데님 진','하의','데님',160000,30,30,30,30,'레귤러핏 크롭 블루 리지드 데님 진_2010_1.jpg, 레귤러핏 크롭 블루 리지드 데님 진_2010_3.jpg, 레귤러핏 크롭 블루 리지드 데님 진_2010_2.jpg','레귤러핏 크롭 블루 리지드 데님 진',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2011,'릴렉스핏 에코 쿨 데님 쇼츠','하의','데님',185000,30,30,30,30,'릴렉스핏 에코 쿨 데님 쇼츠_2011_1.jpg, 릴렉스핏 에코 쿨 데님 쇼츠_2011_2.jpg, 릴렉스핏 에코 쿨 데님 쇼츠_2011_3.jpg','릴렉스핏 에코 쿨 데님 쇼츠',0,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2012,'아이보리 원 턱 서머 데님 팬츠','하의','데님',350000,30,30,30,30,'아이보리 원 턱 서머 데님 팬츠_2012_1.jpg, 아이보리 원 턱 서머 데님 팬츠_2012_2.jpg, 아이보리 원 턱 서머 데님 팬츠_2012_3.jpg','아이보리 원 턱 서머 데님 팬츠',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2013,'그레이 투 턱 서머 데님 팬츠','하의','데님',350000,50,50,50,50,'그레이 투 턱 서머 데님 팬츠_2013_1.jpg, 그레이 투 턱 서머 데님 팬츠_2013_2.jpg, 그레이 투 턱 서머 데님 팬츠_2013_3.jpg','그레이 투 턱 서머 데님 팬츠',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3001,'스탠드 카라 숏 다운','아우터','패딩',299000,75,72,83,70,'스탠드 카라 숏 다운_3001_1.jpg, 스탠드 카라 숏 다운_3001_2.jpg, 스탠드 카라 숏 다운_3001_3.jpg','스탠드 카라 숏 다운',1,'0',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2014,'빈티지 워싱 루즈핏 데님 팬츠','하의','데님',270000,55,55,55,55,'빈티지 워싱 루즈핏 데님 팬츠_2014_1.jpg, 빈티지 워싱 루즈핏 데님 팬츠_2014_2.jpg, 빈티지 워싱 루즈핏 데님 팬츠_2014_3.jpg',' 빈티지 워싱 루즈핏 데님 팬츠',1,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3000,'시베리안 구스 다운 숏 점퍼','아우터','패딩',1300000,30,30,30,30,'시베리안 구스다운 숏 점퍼_3000_1.jpg, 시베리안 구스다운 숏 점퍼_3000_2.jpg, 시베리안 구스다운 숏 점퍼_3000_3.jpg, 시베리안 구스다운 숏 점퍼_3000_4.jpg','시베리안 구스 다운 숏 점퍼',0,'0',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1000,'클럽 로고 스웻 티셔츠','상의','티셔츠',170000,30,30,30,30,'클럽 로고 스웻 티셔츠_1000_1.jpg, 클럽 로고 스웻 티셔츠_1000_2.jpg, 클럽 로고 스웻 티셔츠_1000_3.jpg','클럽 로고 스웻 티셔츠',0,'5',1);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2015,'매독스 쇼츠','하의','반바지',150000,30,30,30,30,'매독스 쇼츠_2015_1.jpg, 매독스 쇼츠_2015_2.jpg, 매독스 쇼츠_2015_3.jpg, 매독스 쇼츠_2015_4.jpg','매독스 쇼츠',0,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1001,'스트라이프 맨투맨 티셔츠','상의','티셔츠',120000,50,50,50,50,'스트라이프 맨투맨 티셔츠_1001_1.jpg, 스트라이프 맨투맨 티셔츠_1001_2.jpg, 스트라이프 맨투맨 티셔츠_1001_3.jpg','스트라이프 맨투맨 티셔츠',1,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3002,'에리퍼 탈착 점퍼','아우터','패딩',878000,70,75,75,70,'에리퍼 탈착 점퍼_3002_1.jpg, 에리퍼 탈착 점퍼_3002_2.jpg, 에리퍼 탈착 점퍼_3002_3.jpg','에리퍼 탈착 점퍼',0,'0',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2016,'자카드 테리 쇼츠','하의','반바지',180000,20,20,20,20,'자카드 테리 쇼츠_2016_1.jpg, 자카드 테리 쇼츠_2016_2.jpg, 자카드 테리 쇼츠_2016_3.jpg, 자카드 테리 쇼츠_2016_4.jpg','자카드 테리 쇼츠
+
+',1,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3003,'릴레스핏 다운 점퍼','아우터','패딩',1800000,70,75,75,70,'릴레스핏 다운 점퍼_3003_1.jpg, 릴레스핏 다운 점퍼_3003_2.jpg, 베이직 롱 다운 점퍼_3003_3.jpg','릴레스핏 다운 점퍼',0,'0',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2017,'버뮤다 숏팬츠 레귤러핏','하의','반바지',150000,55,55,55,55,'버뮤다 숏팬츠 레귤러핏_2017_1.jpg, 버뮤다 숏팬츠 레귤러핏_2017_2.jpg, 버뮤다 숏팬츠 레귤러핏_2017_3.jpg','버뮤다 숏팬츠 레귤러핏',0,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1002,'CK 뱃지 로고 스웻 티셔츠','상의','티셔츠',90000,50,50,50,50,'CK 뱃지 로고 스웻 티셔츠_1002_1.jpg, CK 뱃지 로고 스웻 티셔츠_1002_2.jpg, CK 뱃지 로고 스웻 티셔츠_1002_3.jpg','CK 뱃지 로고 스웻 티셔츠',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1003,'인디고 헨리넥 티셔츠','상의','티셔츠',100000,50,50,50,50,'인디고 헨리넥 티셔츠_1003_1.jpg, 인디고 헨리넥 티셔츠_1003_2.jpg, 인디고 헨리넥 티셔츠_1003_3.jpg','인디고 헨리넥 티셔츠',1,'15',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3004,'Air Down 구스 점퍼','아우터','패딩',1100000,72,78,72,78,'Air Down 구스 점퍼_3004_1.jpg, Air Down 구스 점퍼_3004_2.jpg, Air Down 구스 점퍼_3004_3.jpg, Air Down 구스 점퍼_3004_4.jpg','베이지 Velvet CorduroyAir Down 시베리안 구스 점퍼',1,'0',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2018,'린넨 스트링 반바지 테이퍼드핏','하의','반바지',230000,30,30,30,30,'린넨 스트링 반바지 테이퍼드핏_2018_1.jpg, 린넨 스트링 반바지 테이퍼드핏_2018_2.jpg, 린넨 스트링 반바지 테이퍼드핏_2018_3.jpg','린넨 스트링 반바지 테이퍼드핏',0,'20',1);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1004,'아카이브 게임 USA 크루넥 티셔츠','상의','티셔츠',120000,50,50,50,50,'아카이브 게임 USA 크루넥 티셔츠_1004_1.jpg, 아카이브 게임 USA 크루넥 티셔츠_1004_2.jpg, 아카이브 게임 USA 크루넥 티셔츠_1004_3.jpg','아카이브 게임 USA 크루넥 티셔츠',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1005,'아트워크 긴팔 티셔츠','상의','티셔츠',80000,50,50,50,50,'아트워크 긴팔 티셔츠_1005_1.jpg, 아트워크 긴팔 티셔츠_1005_2.jpg, 아트워크 긴팔 티셔츠_1005_3.jpg','아트워크 긴팔 티셔츠',0,'15',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1006,'프렌치 테리 반집업 스웨트 티셔츠','상의','티셔츠',70000,50,50,50,50,'프렌치 테리 반집업 스웨트 티셔츠_1006_1.jpg, 프렌치 테리 반집업 스웨트 티셔츠_1006_2.jpg, 프렌치 테리 반집업 스웨트 티셔츠_1006_3.jpg','프렌치 테리 반집업 스웨트 티셔츠',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3005,'WoolTech 구스 다운 숏','아우터','패딩',1300000,75,78,75,78,'WoolTech 구스 다운 숏_3005_1.jpg, WoolTech 구스 다운 숏_3005_2.jpg, WoolTech 구스 다운 숏_3005_3.jpg, WoolTech 구스 다운 숏_3005_4.jpg','챠콜 WoolTech 시베리안 구스다운 숏 점퍼',0,'0',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2019,'할렘 포플린 드로스트링 린넨 쇼츠','하의','반바지',160000,20,20,20,20,'할렘 포플린 드로스트링 린넨 쇼츠_2019_1.jpg, 할렘 포플린 드로스트링 린넨 쇼츠_2019_2.jpg, 할렘 포플린 드로스트링 린넨 쇼츠_2019_3.jpg','할렘 포플린 드로스트링 린넨 쇼츠',1,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1007,'스터드 프린트 맨투맨 티셔츠','상의','티셔츠',110000,50,50,50,50,'스터드 프린트 맨투맨 티셔츠_1007_1.jpg, 스터드 프린트 맨투맨 티셔츠_1007_2.jpg, 스터드 프린트 맨투맨 티셔츠_1007_3.jpg','스터드 프린트 맨투맨 티셔츠',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1008,'피치 코튼 워싱 가공 스웨트 티셔츠','상의','티셔츠',100000,50,50,50,50,'피치 코튼 워싱 가공 스웨트 티셔츠_1008_1.jpg, 피치 코튼 워싱 가공 스웨트 티셔츠_1008_2.jpg, 피치 코튼 워싱 가공 스웨트 티셔츠_1008_3.jpg','피치 코튼 워싱 가공 스웨트 티셔츠',1,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2020,'에이든 테크니컬 쇼츠','하의','반바지',100000,55,55,66,66,'에이든 테크니컬 쇼츠_2020_1.jpg, 에이든 테크니컬 쇼츠_2020_2.jpg, 에이든 테크니컬 쇼츠_2020_3.jpg','에이든 테크니컬 쇼츠
+
+',1,'20',1);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1009,'하프 집업 풀오버 티셔츠','상의','티셔츠',130000,50,50,50,50,'하프 집업 풀오버 티셔츠_1009_1.jpg, 하프 집업 풀오버 티셔츠_1009_2.jpg, 하프 집업 풀오버 티셔츠_1009_3.jpg','하프 집업 풀오버 티셔츠',1,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1010,'베이직 로고 긴팔 티셔츠','상의','티셔츠',80000,50,50,49,50,'베이직 로고 긴팔 티셔츠_1010_1.jpg, 베이직 로고 긴팔 티셔츠_1010_2.jpg, 베이직 로고 긴팔 티셔츠_1010_3.jpg','베이직 로고 긴팔 티셔츠',0,'15',2);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1011,'CK 뱃지 로고 기모 스웨트 티셔츠','상의','티셔츠',115000,50,50,50,50,'CK 뱃지 로고 기모 스웨트 티셔츠_1011_1.jpg, CK 뱃지 로고 기모 스웨트 티셔츠_1011_2.jpg, CK 뱃지 로고 기모 스웨트 티셔츠_1011_3.jpg','CK 뱃지 로고 기모 스웨트 티셔츠',1,'5',1);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2021,'남성 기능성 나일론 UV 쇼츠','하의','반바지',110000,88,88,88,88,'남성 기능성 나일론 UV 쇼츠_2021_1.jpg, 남성 기능성 나일론 UV 쇼츠_2021_3.jpg, 남성 기능성 나일론 UV 쇼츠_2021_2.jpg','남성 기능성 나일론 UV 쇼츠',0,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1012,'인스티튜셔널 로고 기모 스웨트 티셔츠','상의','티셔츠',140000,49,50,50,50,'인스티튜셔널 로고 기모 스웨트 티셔츠_1012_1.jpg, 인스티튜셔널 로고 기모 스웨트 티셔츠_1012_2.jpg, 인스티튜셔널 로고 기모 스웨트 티셔츠_1012_3.jpg','인스티튜셔널 로고 기모 스웨트 티셔츠',0,'5',5);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1013,'박시 바시티 크루넥 스웻 티셔츠','상의','티셔츠',90000,50,50,50,50,'박시 바시티 크루넥 스웻 티셔츠_1013_1.jpg, 박시 바시티 크루넥 스웻 티셔츠_1013_2.jpg, 박시 바시티 크루넥 스웻 티셔츠_1013_3.jpg','박시 바시티 크루넥 스웻 티셔츠',1,'5',1);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1014,'로고 프렌치 크루넥 스웨트 티셔츠','상의','티셔츠',70000,50,50,50,50,'로고 프렌치 크루넥 스웨트 티셔츠_1014_1.jpg, 로고 프렌치 크루넥 스웨트 티셔츠_1014_2.jpg, 로고 프렌치 크루넥 스웨트 티셔츠_1014_3.jpg','로고 프렌치 크루넥 스웨트 티셔츠',0,'5',2);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1015,'더블 로고 코튼 긴팔 티셔츠','상의','티셔츠',70000,50,50,50,50,'더블 로고 코튼 긴팔 티셔츠_1015_1.jpg, 더블 로고 코튼 긴팔 티셔츠_1015_2.jpg, 더블 로고 코튼 긴팔 티셔츠_1015_3.jpg','더블 로고 코튼 긴팔 티셔츠',1,'15',4);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2022,'할렘 릴렉스 테이퍼드핏 쇼츠','하의','반바지',140000,55,55,55,55,'할렘 릴렉스 테이퍼드핏 쇼츠_2022_1.jpg, 할렘 릴렉스 테이퍼드핏 쇼츠_2022_4.jpg, 할렘 릴렉스 테이퍼드핏 쇼츠_2022_2.jpg, 할렘 릴렉스 테이퍼드핏 쇼츠_2022_3.jpg','할렘 릴렉스 테이퍼드핏 쇼츠
+
+
+',1,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3006,'경량다운 맥코트형 점퍼','아우터','패딩',1700000,75,76,77,78,'경량다운 맥코트형 점퍼_3006_1.jpg, 경량다운 맥코트형 점퍼_3006_2.jpg, 경량다운 맥코트형 점퍼_3006_3.jpg','Prestigio di Allegri 경량다운 맥코트형 점퍼',0,'0',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3007,'피그먼트 왁스 양털 구스다운 자켓','아우터','패딩',739000,76,77,75,73,'피그먼트 왁스 양털 구스다운 자켓_3007_1.jpg, 피그먼트 왁스 양털 구스다운 자켓_3007_2.jpg, 피그먼트 왁스 양털 구스다운 자켓_3007_3.jpg','피그먼트 왁스 양털 구스다운 자켓',0,'0',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1020,'스트라이프 허니콤 폴로 반팔티셔츠','상의','반팔티셔츠',50000,50,50,50,50,'스트라이프 허니콤 폴로 반팔티셔츠_1020_1.jpg, 스트라이프 허니콤 폴로 반팔티셔츠_1020_2.jpg, 스트라이프 허니콤 폴로 반팔티셔츠_1020_3.jpg','스트라이프 허니콤 폴로 반팔티셔츠',0,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3008,'SuedeHybrid 다운 집업점퍼','아우터','패딩',990000,68,72,75,68,'SuedeHybrid 다운 집업점퍼_3008_1.jpg, SuedeHybrid 다운 집업점퍼_3008_2.jpg, SuedeHybrid 다운 집업점퍼_3008_3.jpg','Eco SuedeHybrid 다운 집업점퍼',0,'0',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3009,'남성 아웃퀼팅 후드퍼 토퍼','아우터','패딩',8990000,70,75,75,70,'아웃퀼팅 후드퍼 토퍼_3009_1.jpg, 아웃퀼팅 후드퍼 토퍼_3009_2.jpg, 아웃퀼팅 후드퍼 토퍼_3009_3.jpg','남성 아웃퀼팅 후드퍼 토퍼',0,'0',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3010,'폭스퍼 후드 토퍼 ','아우터','패딩',8990000,69,70,71,70,'폭스퍼 후드 토퍼_3010_1.jpg, 폭스퍼 후드 토퍼_3010_2.jpg, 폭스퍼 후드 토퍼_3010_3.jpg','폭스퍼 후드 토퍼 ',0,'0',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2023,'Black Essential Shorts','하의','반바지',100000,55,55,55,55,'Black Essential Shorts_2023_1.jpg, Black Essential Shorts_2023_2.jpg, Black Essential Shorts_2023_3.jpg','Black Essential Shorts',1,'20',1);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3011,'워싱 스탠카라 다운','아우터','패딩',699000,68,72,73,70,'워싱 스탠카라 다운_3011_1.jpg, 워싱 스탠카라 다운_3011_2.jpg, 워싱 스탠카라 다운_3011_3.jpg','워싱 스탠카라 다운',0,'0',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2024,'드로스트링 린넨 쇼츠','하의','반바지',160000,20,20,20,30,'드로스트링 린넨 쇼츠_2024_1.jpg, 드로스트링 린넨 쇼츠_2024_2.jpg, 드로스트링 린넨 쇼츠_2024_3.jpg, 드로스트링 린넨 쇼츠_2024_4.jpg, 드로스트링 린넨 쇼츠_2024_5.jpg','드로스트링 린넨 쇼츠',0,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2025,'버뮤다 쇼츠 팬츠','하의','반바지',410000,30,30,30,30,'버뮤다 쇼츠 팬츠_2025_1.jpg, 버뮤다 쇼츠 팬츠_2025_2.jpg, 버뮤다 쇼츠 팬츠_2025_3.jpg, 버뮤다 쇼츠 팬츠_2025_4.jpg','버뮤다 쇼츠 팬츠',0,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3012,'Comfort Wool 구스다운','아우터','패딩',890000,71,73,73,71,'Comfort Wool 구스다운_3012_1.jpg, Comfort Wool 구스다운_3012_2.jpg, Comfort Wool 구스다운_3012_3.jpg','Comfort Wool 구스다운',0,'0',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2026,'코튼 블렌드 쇼츠','하의','반바지',260000,30,30,30,30,'코튼 블렌드 쇼츠_2026_1.jpg, 코튼 블렌드 쇼츠_2026_2.jpg, 코튼 블렌드 쇼츠_2026_3.jpg, 코튼 블렌드 쇼츠_2026_4.jpg','코튼 블렌드 쇼츠
+
+',0,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3013,'Wool Tech 구스 다운 발마칸 트렌치','아우터','패딩',1350000,84,80,88,85,'Wool Tech 구스 다운 발마칸 트렌치_3013_1.jpg, Wool Tech 구스 다운 발마칸 트렌치_3013_2.jpg, Wool Tech 구스 다운 발마칸 트렌치_3013_3.jpg','Wool Tech 구스 다운 발마칸 트렌치',1,'0',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1021,'린넨 크루넥 티셔츠','상의','반팔티셔츠',40000,50,50,50,50,'린넨 크루넥 티셔츠_1021_1.jpg, 린넨 크루넥 티셔츠_1021_2.jpg, 린넨 크루넥 티셔츠_1021_3.jpg','린넨 크루넥 티셔츠',0,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2027,'버뮤다 카고 쇼츠 팬츠','하의','반바지',430000,20,20,10,20,'버뮤다 카고 쇼츠 팬츠_2027_1.jpg, 버뮤다 카고 쇼츠 팬츠_2027_2.jpg, 버뮤다 카고 쇼츠 팬츠_2027_3.jpg, 버뮤다 카고 쇼츠 팬츠_2027_4.jpg','버뮤다 카고 쇼츠 팬츠
+
+',1,'20',1);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1022,'인디고 헨리 티셔츠','상의','반팔티셔츠',70000,50,50,50,50,'인디고 헨리 티셔츠_1022_1.jpg, 인디고 헨리 티셔츠_1022_2.jpg, 인디고 헨리 티셔츠_1022_3.jpg','인디고 헨리 티셔츠',1,'20',1);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1023,'헤비 저지 티셔츠','상의','반팔티셔츠',80000,50,50,50,50,'헤비 저지 티셔츠_1023_1.jpg, 헤비 저지 티셔츠_1023_2.jpg, 헤비 저지 티셔츠_1023_3.jpg','헤비 저지 티셔츠',0,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1024,'오션 프린트 반팔 티셔츠','상의','반팔티셔츠',90000,50,50,50,50,'오션 프린트 반팔 티셔츠_1024_1.jpg, 오션 프린트 반팔 티셔츠_1024_2.jpg, 오션 프린트 반팔 티셔츠_1024_3.jpg','오션 프린트 반팔 티셔츠',1,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3014,'아웃 퀄팅 다운자켓','아우터','패딩',599000,72,75,73,71,'아웃 퀄팅 다운자켓_3014_1.jpg, 아웃 퀄팅 다운자켓_3014_2.jpg, 아웃 퀄팅 다운자켓_3014_3.jpg, 아웃 퀄팅 다운자켓_3014_4.jpg','아웃 퀄팅 다운자켓',0,'0',1);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1025,'저지 코튼 반팔 티셔츠','상의','반팔티셔츠',60000,50,50,50,50,'저지 코튼 반팔 티셔츠_1025_1.jpg, 저지 코튼 반팔 티셔츠_1025_2.jpg, 저지 코튼 반팔 티셔츠_1025_3.jpg','저지 코튼 반팔 티셔츠',0,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1026,'릴렉스핏 엠보싱 로고 반팔 티셔츠','상의','반팔티셔츠',95000,50,50,50,50,'릴렉스핏 엠보싱 로고 반팔 티셔츠_1026_1.jpg, 릴렉스핏 엠보싱 로고 반팔 티셔츠_1026_2.jpg, 릴렉스핏 엠보싱 로고 반팔 티셔츠_1026_3.jpg','릴렉스핏 엠보싱 로고 반팔 티셔츠',1,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1027,'포토프린트 브릿지 티셔츠','상의','반팔티셔츠',93000,49,50,50,50,'포토프린트 브릿지 티셔츠_1027_1.jpg, 포토프린트 브릿지 티셔츠_1027_2.jpg, 포토프린트 브릿지 티셔츠_1027_3.jpg','포토프린트 브릿지 티셔츠',1,'20',2);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1028,'로고 프린티드 베이직 크루넥 티셔츠','상의','반팔티셔츠',75000,50,50,50,50,'로고 프린티드 베이직 크루넥 티셔츠_1028_1.jpg, 로고 프린티드 베이직 크루넥 티셔츠_1028_2.jpg, 로고 프린티드 베이직 크루넥 티셔츠_1028_3.jpg','로고 프린티드 베이직 크루넥 티셔츠',0,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1029,'CK 뱃지로고 폴로 반팔 티셔츠','상의','반팔티셔츠',65000,50,50,50,50,'CK 뱃지로고 폴로 반팔 티셔츠_1029_1.jpg, CK 뱃지로고 폴로 반팔 티셔츠_1029_2.jpg, CK 뱃지로고 폴로 반팔 티셔츠_1029_3.jpg','CK 뱃지로고 폴로 반팔 티셔츠',0,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1030,'프린트 로고 레귤러핏 폴로셔츠','상의','반팔티셔츠',85000,50,50,50,50,'프린트 로고 레귤러핏 폴로셔츠_1030_1.jpg, 프린트 로고 레귤러핏 폴로셔츠_1030_2.jpg, 프린트 로고 레귤러핏 폴로셔츠_1030_3.jpg','프린트 로고 레귤러핏 폴로셔츠',1,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1031,'도그 프린트 코튼 반팔 티셔츠','상의','반팔티셔츠',100000,50,50,50,50,'도그 프린트 코튼 반팔 티셔츠_1031_1.jpg, 도그 프린트 코튼 반팔 티셔츠_1031_2.jpg, 도그 프린트 코튼 반팔 티셔츠_1031_3.jpg','도그 프린트 코튼 반팔 티셔츠',0,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1032,'오버사이즈 우븐 포켓 반팔 스웻셔츠','상의','반팔티셔츠',110000,49,50,50,50,'오버사이즈 우븐 포켓 반팔 스웻셔츠_1032_1.jpg, 오버사이즈 우븐 포켓 반팔 스웻셔츠_1032_2.jpg, 오버사이즈 우븐 포켓 반팔 스웻셔츠_1032_3.jpg','오버사이즈 우븐 포켓 반팔 스웻셔츠',0,'20',2);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1033,'스탠다드 로고 크루넥 반팔 티셔츠','상의','반팔티셔츠',99000,50,50,50,50,'스탠다드 로고 크루넥 반팔 티셔츠_1033_1.jpg, 스탠다드 로고 크루넥 반팔 티셔츠_1033_2.jpg, 스탠다드 로고 크루넥 반팔 티셔츠_1033_3.jpg','스탠다드 로고 크루넥 반팔 티셔츠',1,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1034,'로고 스트레치 반팔 티셔츠','상의','반팔티셔츠',88000,50,50,50,50,'인스티튜셔널 로고 스트레치 반팔 티셔츠_1034_1.jpg, 인스티튜셔널 로고 스트레치 반팔 티셔츠_1034_2.jpg, 인스티튜셔널 로고 스트레치 반팔 티셔츠_1034_3.jpg','인스티튜셔널 로고 스트레치 반팔 티셔츠',0,'20',2);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3015,'가먼트 다잉 맥 트렌치코트','아우터','코트',958000,50,50,50,50,'가먼트 다잉 맥 트렌치코트_3015_1.jpg, 가먼트 다잉 맥 트렌치코트_3015_2.jpg, 가먼트 다잉 맥 트렌치코트_3015_3.jpg, 가먼트 다잉 맥 트렌치코트_3015_4.jpg','가먼트 다잉 맥 트렌치코트',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1035,'빈티지 프린트 티셔츠','상의','반팔티셔츠',85000,50,50,50,50,'빈티지 프린트 티셔츠_1035_1.jpg, 빈티지 프린트 티셔츠_1035_2.jpg, 빈티지 프린트 티셔츠_1035_3.jpg','빈티지 프린트 티셔츠',0,'20',6);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3016,'데일리 맥 코트','아우터','코트',695000,50,50,50,50,'데일리 맥 코트_3016_1.jpg, 데일리 맥 코트_3016_2.jpg, 데일리 맥 코트_3016_3.jpg, 데일리 맥 코트_3016_4.jpg','데일리 맥 코트',1,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3017,'Textured 2way 레귤러핏 맥 트렌치','아우터','코트',850000,50,50,50,50,'Textured 2way 레귤러핏 맥 트렌치_3017_1.jpg, Textured 2way 레귤러핏 맥 트렌치_3017_2.jpg, Textured 2way 레귤러핏 맥 트렌치_3017_3.jpg','Textured 2way 레귤러핏 맥 트렌치',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3018,'코튼 싱글 코트','아우터','코트',429000,50,50,50,50,'코튼 싱글 코트_3018_1.jpg, 코튼 싱글 코트_3018_2.jpg, 코튼 싱글 코트_3018_3.jpg, 코튼 싱글 코트_3018_4.jpg','코튼 싱글 코트',1,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3019,'Cashmere-Rich 핸드메이드 발마칸 코트','아우터','코트',1300000,50,50,50,50,'Cashmere-Rich 핸드메이드 발마칸 코트_3019_1.jpg, Cashmere-Rich 핸드메이드 발마칸 코트_3019_2.jpg, Cashmere-Rich 핸드메이드 발마칸 코트_3019_3.jpg','Cashmere-Rich 핸드메이드 발마칸 코트',0,'0',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3020,'울 블렌드 더블 브레스트 코트','아우터','코트',1250000,50,50,50,50,'울 블렌드 더블 브레스트 코트_3020_1.jpg, 울 블렌드 더블 브레스트 코트_3020_2.jpg, 울 블렌드 더블 브레스트 코트_3020_3.jpg, 울 블렌드 더블 브레스트 코트_3020_4.jpg','울 블렌드 더블 브레스트 코트',0,'0',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3023,'풀 라이닝 울 코트','아우터','코트',795000,50,50,50,50,'풀 라이닝 울 코트_3023_1.jpg, 풀 라이닝 울 코트_3023_2.jpg, 풀 라이닝 울 코트_3023_3.jpg, 풀 라이닝 울 코트_3023_4.jpg','풀 라이닝 울 코트',0,'0',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3024,'방수 슬림핏 패딩 코트','아우터','코트',595000,50,50,50,50,'방수 슬림핏 패딩 코트_3024_1.jpg, 방수 슬림핏 패딩 코트_3024_3.jpg, 방수 슬림핏 패딩 코트_3024_2.jpg','방수 슬림핏 패딩 코트',1,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3025,'보드카 트렌치 롱 코트','아우터','코트',1380000,50,50,50,50,'보드카 트렌치 롱 코트_3025_1.jpg, 보드카 트렌치 롱 코트_3025_2.jpg, 보드카 트렌치 롱 코트_3025_3.jpg, 보드카 트렌치 롱 코트_3025_4.jpg','보드카 트렌치 롱 코트',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3026,'톤온톤 로고 릴렉스핏 트렌치 코트','아우터','코트',725000,50,50,50,50,'톤온톤 로고 릴렉스핏 트렌치 코트_3026_1.jpg, 톤온톤 로고 릴렉스핏 트렌치 코트_3026_2.jpg, 톤온톤 로고 릴렉스핏 트렌치 코트_3026_3.jpg, 톤온톤 로고 릴렉스핏 트렌치 코트_3026_4.jpg','톤온톤 로고 릴렉스핏 트렌치 코트',1,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1040,'비치 후드 니트 가디건','상의','니트',160000,50,50,50,50,'비치 후드 니트 가디건_1040_1.jpg, 비치 후드 니트 가디건_1040_2.jpg, 비치 후드 니트 가디건_1040_3.jpg','비치 후드 니트 가디건',1,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3027,'이너 레이어 울 캐시미어 코트','아우터','코트',895000,50,50,50,50,'이너 레이어 울 캐시미어 코트_3027_1.jpg, 이너 레이어 울 캐시미어 코트_3027_2.jpg, 이너 레이어 울 캐시미어 코트_3027_3.jpg, 이너 레이어 울 캐시미어 코트_3027_4.jpg','이너 레이어 울 캐시미어 코트',0,'0',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1041,'립 텍스처 폴로 니트','상의','니트',120000,50,50,50,50,'립 텍스처 폴로 니트_1041_1.jpg, 립 텍스처 폴로 니트_1041_2.jpg, 립 텍스처 폴로 니트_1041_3.jpg','립 텍스처 폴로 니트',0,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1042,'크로셰 반팔 가디건 릴렉스핏','상의','니트',180000,50,50,50,50,'크로셰 반팔 가디건 릴렉스핏_1042_1.jpg, 크로셰 반팔 가디건 릴렉스핏_1042_2.jpg, 크로셰 반팔 가디건 릴렉스핏_1042_3.jpg','크로셰 반팔 가디건 릴렉스핏',0,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1043,'썸머 텍스쳐 폴로 니트','상의','니트',130000,49,49,50,50,'썸머 텍스쳐 폴로 니트_1043_1.jpg, 썸머 텍스쳐 폴로 니트_1043_2.jpg, 썸머 텍스쳐 폴로 니트_1043_3.jpg','썸머 텍스쳐 폴로 니트',1,'20',2);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1044,'오가닉 울 릴랙스핏 니트','상의','니트',170000,50,50,50,50,'오가닉 울 릴랙스핏 니트_1044_1.jpg, 오가닉 울 릴랙스핏 니트_1044_2.jpg, 오가닉 울 릴랙스핏 니트_1044_3.jpg','오가닉 울 릴랙스핏 니트',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1045,'재그라이온 오버사이즈핏 니트','상의','니트',190000,50,50,50,50,'재그라이온 오버사이즈핏 니트_1045_1.jpg, 재그라이온 오버사이즈핏 니트_1045_2.jpg, 재그라이온 오버사이즈핏 니트_1045_3.jpg','재그라이온 오버사이즈핏 니트',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1046,'버진울 니트','상의','니트',210000,50,50,50,50,'버진울 니트_1046_1.jpg, 버진울 니트_1046_3.jpg, 버진울 니트_1046_2.jpg','버진울 니트',1,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1047,'울 레귤러핏 반집업 니트','상의','니트',150000,50,50,50,50,'울 레귤러핏 반집업 니트_1047_1.jpg, 울 레귤러핏 반집업 니트_1047_2.jpg, 울 레귤러핏 반집업 니트_1047_3.jpg','울 레귤러핏 반집업 니트',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3028,'스탠에리 왁스코팅 코트','아우터','코트',499000,50,50,50,50,'스탠에리 왁스코팅 코트_3028_1.jpg, 스탠에리 왁스코팅 코트_3028_2.jpg, 스탠에리 왁스코팅 코트_3028_3.jpg','스탠에리 왁스코팅 코트',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1048,'울 블렌드 스택 로고 니트','상의','니트',200000,50,50,50,50,'울 블렌드 스택 로고 니트_1048_1.jpg, 울 블렌드 스택 로고 니트_1048_2.jpg, 울 블렌드 스택 로고 니트_1048_3.jpg','울 블렌드 스택 로고 니트',1,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1049,'리브드 릴랙스핏 코튼 니트','상의','니트',195000,50,50,50,50,'리브드 릴랙스핏 코튼 니트_1049_1.jpg, 리브드 릴랙스핏 코튼 니트_1049_2.jpg, 리브드 릴랙스핏 코튼 니트_1049_3.jpg','리브드 릴랙스핏 코튼 니트',1,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1050,'오가닉 릴랙스핏 코튼 니트','상의','니트',195000,50,50,50,50,'오가닉 릴랙스핏 코튼 니트_1050_1.jpg, 오가닉 릴랙스핏 코튼 니트_1050_2.jpg, 오가닉 릴랙스핏 코튼 니트_1050_3.jpg','오가닉 릴랙스핏 코튼 니트',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1051,'레귤러핏 자수 로고 울 니트','상의','니트',180000,50,50,50,50,'레귤러핏 자수 로고 울 니트_1051_1.jpg, 레귤러핏 자수 로고 울 니트_1051_2.jpg, 레귤러핏 자수 로고 울 니트_1051_3.jpg','레귤러핏 자수 로고 울 니트',1,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1052,'골프 로고 코튼 반집업 니트','상의','니트',205000,50,50,50,50,'골프 로고 코튼 반집업 니트_1052_1.jpg, 골프 로고 코튼 반집업 니트_1052_2.jpg, 골프 로고 코튼 반집업 니트_1052_3.jpg','골프 로고 코튼 반집업 니트',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3029,'레귤러핏 후드 트렌치 코트','아우터','코트',1200000,50,50,50,50,'Natural Crease 레귤러핏 후드 트렌치 코트_3029_1.jpg, Natural Crease 레귤러핏 후드 트렌치 코트_3029_2.jpg, Natural Crease 레귤러핏 후드 트렌치 코트_3029_3.jpg','이태리 소재 레귤러핏 후드 트렌치 코트',0,'5',2);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2028,'썸머 액티브 팬츠','하의','긴바지',330000,50,50,50,50,'썸머 액티브 팬츠_2028_1.jpg, 썸머 액티브 팬츠_2028_2.jpg, 썸머 액티브 팬츠_2028_3.jpg, 썸머 액티브 팬츠_2028_4.jpg','썸머 액티브 팬츠
+
+',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1053,'레드 로고 라벨 코튼 니트','상의','니트',187000,50,50,50,50,'레드 로고 라벨 코튼 니트_1053_1.jpg, 레드 로고 라벨 코튼 니트_1053_2.jpg, 레드 로고 라벨 코튼 니트_1053_3.jpg','레드 로고 라벨 코튼 니트',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1054,'스트럭쳐 스트라이프 크루넥 니트','상의','니트',175000,50,50,50,50,'스트럭쳐 스트라이프 크루넥 니트_1054_1.jpg, 스트럭쳐 스트라이프 크루넥 니트_1054_2.jpg, 스트럭쳐 스트라이프 크루넥 니트_1054_3.jpg','스트럭쳐 스트라이프 크루넥 니트',1,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2029,'덴톤 스트레이트핏 치노 팬츠','하의','긴바지',197000,50,50,50,50,'덴톤 스트레이트핏 치노 팬츠_2029_1.jpg, 덴톤 스트레이트핏 치노 팬츠_2029_2.jpg, 덴톤 스트레이트핏 치노 팬츠_2029_3.jpg','덴톤 스트레이트핏 치노 팬츠',0,'5',1);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2030,'스트레이트핏 치노 팬츠','하의','긴바지',197000,50,50,50,50,'스트레이트핏 치노 팬츠_2030_1.jpg, 스트레이트핏 치노 팬츠_2030_2.jpg, 스트레이트핏 치노 팬츠_2030_3.jpg, 스트레이트핏 치노 팬츠_2030_4.jpg','스트레이트핏 치노 팬츠',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2031,'울혼방 스트레이트 핏 슬랙스','하의','긴바지',300000,50,50,50,50,'울혼방 스트레이트 핏 슬랙스_2031_1.jpg, 울혼방 스트레이트 핏 슬랙스_2031_2.jpg, 울혼방 스트레이트 핏 슬랙스_2031_3.jpg','울혼방 스트레이트 핏 슬랙스',1,'0',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2032,'첼시 포플린 버드 아이 팬츠','하의','긴바지',197000,50,50,50,50,'첼시 포플린 버드 아이 팬츠_2032_1.jpg, 첼시 포플린 버드 아이 팬츠_2032_2.jpg, 첼시 포플린 버드 아이 팬츠_2032_3.jpg, 첼시 포플린 버드 아이 팬츠_2032_4.jpg','첼시 포플린 버드 아이 팬츠',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2033,'로건 치노 팬츠','하의','긴바지',220000,50,50,50,50,'로건 치노 팬츠_2033_1.jpg, 로건 치노 팬츠_2033_2.jpg, 로건 치노 팬츠_2033_3.jpg, 로건 치노 팬츠_2033_4.jpg','로건 치노 팬츠',0,'0',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2034,'울 블렌드 세미 와이드 팬츠','하의','긴바지',370000,50,50,50,50,'울 블렌드 세미 와이드 팬츠_2034_1.jpg, 울 블렌드 세미 와이드 팬츠_2034_2.jpg, 울 블렌드 세미 와이드 팬츠_2034_3.jpg, 울 블렌드 세미 와이드 팬츠_2034_4.jpg','울 블렌드 세미 와이드 팬츠',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2035,'커프 팬츠','하의','긴바지',320000,50,50,50,50,'커프 팬츠_2035_1.jpg, 커프 팬츠_2035_2.jpg, 커프 팬츠_2035_3.jpg','커프 팬츠',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3022,'슬림핏 울 더블 코트','아우터','코트',940000,50,50,50,50,'슬림핏 울 더블 코트_3022_1.jpg, 슬림핏 울 더블 코트_3022_2.jpg, 슬림핏 울 더블 코트_3022_3.jpg, 슬림핏 울 더블 코트_3022_4.jpg','슬림핏 울 더블 코트',0,'0',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2036,'에어 라이트 팬츠','하의','긴바지',370000,50,50,50,50,'에어 라이트 팬츠_2036_1.jpg, 에어 라이트 팬츠_2036_2.jpg, 에어 라이트 팬츠_2036_3.jpg','에어 라이트 팬츠',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2037,'가먼트다이 스트레이트 핏 치노 팬츠','하의','긴바지',210000,50,50,50,50,'가먼트다이 스트레이트 핏 치노 팬츠_2037_1.jpg, 가먼트다이 스트레이트 핏 치노 팬츠_2037_2.jpg, 가먼트다이 스트레이트 핏 치노 팬츠_2037_3.jpg, 가먼트다이 스트레이트 핏 치노 팬츠_2037_4.jpg','가먼트다이 스트레이트 핏 치노 팬츠',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2038,'릴렉스 테이퍼드핏 카고 팬츠','하의','긴바지',250000,50,50,50,50,'릴렉스 테이퍼드핏 카고 팬츠_2038_1.jpg, 릴렉스 테이퍼드핏 카고 팬츠_2038_2.jpg, 릴렉스 테이퍼드핏 카고 팬츠_2038_3.jpg, 릴렉스 테이퍼드핏 카고 팬츠_2038_4.jpg','릴렉스 테이퍼드핏 카고 팬츠',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2039,'린넨 블렌디드 팬츠','하의','긴바지',370000,50,50,50,50,'린넨 블렌디드 팬츠_2039_1.jpg, 린넨 블렌디드 팬츠_2039_2.jpg, 린넨 블렌디드 팬츠_2039_3.jpg','린넨 블렌디드 팬츠
+
+',1,'15',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2040,'스트레이트핏 스판 팬츠','하의','긴바지',150000,50,50,50,50,'스트레이트핏 스판 팬츠_2040_1.jpg, 스트레이트핏 스판 팬츠_2040_2.jpg, 스트레이트핏 스판 팬츠_2040_3.jpg','스트레이트핏 스판 팬츠',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2041,'크롭 테이퍼드 팬츠','하의','긴바지',260000,50,50,50,50,'크롭 테이퍼드 팬츠_2041_1.jpg, 크롭 테이퍼드 팬츠_2041_2.jpg, 크롭 테이퍼드 팬츠_2041_3.jpg','크롭 테이퍼드 팬츠
+
+',1,'5',1);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3021,'가먼트 다잉 맥 트렌치코트','아우터','코트',958000,50,50,50,50,'가먼트 다잉 맥 트렌치코트_3021_1.jpg, 가먼트 다잉 맥 트렌치코트_3021_2.jpg, 가먼트 다잉 맥 트렌치코트_3021_3.jpg, 가먼트 다잉 맥 트렌치코트_3021_4.jpg','가먼트 다잉 맥 트렌치코트',0,'5',1);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2042,'블렌디드 럭스 데일리 팬츠','하의','긴바지',330000,50,50,50,50,'블렌디드 럭스 데일리 팬츠_2042_1.jpg, 블렌디드 럭스 데일리 팬츠_2042_2.jpg, 블렌디드 럭스 데일리 팬츠_2042_3.jpg','블렌디드 럭스 데일리 팬츠',0,'15',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2043,'스프링 액티브 팬츠','하의','긴바지',280000,50,50,50,50,'스프링 액티브 팬츠_2043_1.jpg, 스프링 액티브 팬츠_2043_2.jpg, 스프링 액티브 팬츠_2043_3.jpg, 스프링 액티브 팬츠_2043_4.jpg','스프링 액티브 팬츠
+
+',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3030,'시어서커 싱글 투버튼 자켓','아우터','재킷',940000,50,50,50,50,'시어서커 싱글 투버튼 자켓_3030_1.jpg, 시어서커 싱글 투버튼 자켓_3030_2.jpg, 시어서커 싱글 투버튼 자켓_3030_3.jpg, 시어서커 싱글 투버튼 자켓_3030_4.jpg','시어서커 싱글 투버튼 자켓',0,'1',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2044,'더블 스트레치 크롭 팬츠','하의','긴바지',280000,50,50,50,50,'더블 스트레치 크롭 팬츠_2044_1.jpg, 더블 스트레치 크롭 팬츠_2044_2.jpg, 더블 스트레치 크롭 팬츠_2044_3.jpg','더블 스트레치 크롭 팬츠',1,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2045,'우븐 조거 팬츠','하의','스포츠',45000,50,50,50,50,'우븐 조거 팬츠_2045_1.png, 우븐 조거 팬츠_2045_2.jpg','우븐 조거 팬츠',0,'15',2);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2046,'데님 라이크 팬츠','하의','스포츠',46000,50,50,50,50,'데님 라이크 팬츠_2046_1.jpg, 데님 라이크 팬츠_2046_2.jpg','데님 라이크 팬츠',0,'15',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2047,'퍼포먼스 롱 팬츠','하의','스포츠',46000,50,50,50,50,'퍼포먼스 롱 팬츠_2047_1.jpg, 퍼포먼스 롱 팬츠_2047_2.jpg','퍼포먼스 롱 팬츠',0,'15',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2048,'우븐 트레이닝 하의','하의','스포츠',48000,50,49,50,50,'우븐 트레이닝 하의_2048_1.jpg, 우븐 트레이닝 하의_2048_2.jpg','우븐 트레이닝 하의',0,'15',1);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2049,'소로나 하프팬츠','하의','스포츠',33000,50,50,50,50,'소로나 하프팬츠_2049_1.jpg, 소로나 하프팬츠_2049_2.jpg','소로나 하프팬츠',0,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2050,'모리 하프팬츠','하의','스포츠',20000,50,50,50,50,'모리 하프팬츠_2050_1.jpg, 모리 하프팬츠_2050_2.jpg','모리 하프팬츠',0,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2051,'라이트 기모 조거 팬츠','하의','스포츠',76000,50,50,50,50,'라이트 기모 조거 팬츠_2051_1.jpg, 라이트 기모 조거 팬츠_2051_2.jpg','라이트 기모 조거 팬츠',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2052,'크러쉬 남성 4부 팬츠','하의','스포츠',65000,50,50,50,50,'크러쉬 남성 4부 팬츠_2052_1.jpg, 크러쉬 남성 4부 팬츠_2052_2.jpg','크러쉬 남성 4부 팬츠',0,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2053,'스트래치 우븐 팬츠','하의','스포츠',43000,50,50,50,50,'스트래치 우븐 팬츠_2053_1.jpg, 스트래치 우븐 팬츠_2053_2.jpg','스트래치 우븐 팬츠',1,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2054,'라이트 트레이닝 팬츠','하의','스포츠',55000,50,50,50,50,'라이트 트레이닝 팬츠_2054_1.jpg, 라이트 트레이닝 팬츠_2054_2.jpg','라이트 트레이닝 팬츠',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2055,'액센트 롱팬츠','하의','스포츠',94000,50,50,50,50,'액센트 롱팬츠_2055_1.jpg, 액센트 롱팬츠_2055_2.jpg','액센트 롱팬츠',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2056,'미즈노 4부 스웨트 팬츠','하의','스포츠',31000,50,50,50,50,'미즈노 4부 스웨트 팬츠_2056_1.jpg, 미즈노 4부 스웨트 팬츠_2056_2.jpg','미즈노 4부 스웨트 팬츠',0,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2057,'인클라인 AS 팬츠','하의','스포츠',144000,50,50,50,50,'인클라인 AS 팬츠_2057_1.jpg, 인클라인 AS 팬츠_2057_2.jpg','인클라인 AS 팬츠',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3031,'하운드터치 패턴 자켓','아우터','재킷',695000,50,50,50,50,'하운드터치 패턴 자켓_3031_1.jpg, 하운드터치 패턴 자켓_3031_2.jpg, 하운드터치 패턴 자켓_3031_3.jpg, 하운드터치 패턴 자켓_3031_4.jpg','하운드터치 패턴 자켓',1,'15',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2058,'카고 하프 팬츠','하의','스포츠',26000,50,50,50,50,'카고 하프 팬츠_2058_1.jpg, 카고 하프 팬츠_2058_2.jpg','카고 하프 팬츠',0,'20',1);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2059,'Sound graphic shorts_White','하의','스포츠',165000,50,50,50,50,'Sound graphic shorts_White_2059_1.jpg, Sound graphic shorts_White_2059_2.jpg, Sound graphic shorts_White_2059_3.jpg','Sound graphic shorts_White',0,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (2060,'덴톤 핏 썸머 도비 셋업 팬츠','하의','스포츠',210000,50,49,50,50,'덴톤 핏 썸머 도비 셋업 팬츠_2060_1.jpg, 덴톤 핏 썸머 도비 셋업 팬츠_2060_2.jpg, 덴톤 핏 썸머 도비 셋업 팬츠_2060_3.jpg','덴톤 핏 썸머 도비 셋업 팬츠',0,'5',1);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3032,'서커 캐주얼 재킷','아우터','재킷',565000,50,50,50,50,'서커 캐주얼 재킷_3032_1.jpg, 서커 캐주얼 재킷_3032_2.jpg, 서커 캐주얼 재킷_3032_3.jpg, 서커 캐주얼 재킷_3032_4.jpg','서커 캐주얼 재킷',1,'15',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3033,'코튼 아이비 재킷','아우터','재킷',479000,50,50,50,50,'코튼 아이비 재킷_3033_1.jpg, 코튼 아이비 재킷_3033_2.jpg, 코튼 아이비 재킷_3033_3.jpg, 코튼 아이비 재킷_3033_4.jpg','코튼 아이비 재킷',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3034,'가먼트 다잉 블레이저','아우터','재킷',619000,50,50,50,50,'가먼트 다잉 블레이저_3034_1.jpg, 가먼트 다잉 블레이저_3034_2.jpg, 가먼트 다잉 블레이저_3034_3.jpg, 가먼트 다잉 블레이저_3034_4.jpg','가먼트 다잉 블레이저',0,'15',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3035,'썸머 도비 셋업 자켓','아우터','재킷',359100,49,50,50,50,'썸머 도비 셋업 자켓_3035_1.jpg, 썸머 도비 셋업 자켓_3035_2.jpg, 썸머 도비 셋업 자켓_3035_3.jpg, 썸머 도비 셋업 자켓_3035_4.jpg','썸머 도비 셋업 자켓',1,'15',1);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1060,'슬림 옥스퍼드 셔츠','상의','셔츠',100000,50,50,50,50,'슬림 옥스퍼드 셔츠_1060_1.jpg, 슬림 옥스퍼드 셔츠_1060_2.jpg, 슬림 옥스퍼드 셔츠_1060_3.jpg, 슬림 옥스퍼드 셔츠_1060_4.jpg','슬림 옥스퍼드 셔츠',1,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1061,'리노 위브 하프 슬리브 셔츠','상의','셔츠',120000,50,50,50,50,'리노 위브 하프 슬리브 셔츠_1061_1.jpg, 리노 위브 하프 슬리브 셔츠_1061_2.jpg, 리노 위브 하프 슬리브 셔츠_1061_3.jpg','리노 위브 하프 슬리브 셔츠',0,'15',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1062,'시어서커 반팔 셔츠 릴렉스핏','상의','셔츠',90000,50,50,50,50,'시어서커 반팔 셔츠 릴렉스핏_1062_1.jpg, 시어서커 반팔 셔츠 릴렉스핏_1062_2.jpg, 시어서커 반팔 셔츠 릴렉스핏_1062_3.jpg','시어서커 반팔 셔츠 릴렉스핏',0,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1063,'린넨 반팔 셔츠 레귤러핏','상의','셔츠',95000,50,50,50,50,'린넨 반팔 셔츠 레귤러핏_1063_1.jpg, 린넨 반팔 셔츠 레귤러핏_1063_2.jpg, 린넨 반팔 셔츠 레귤러핏_1063_3.jpg','린넨 반팔 셔츠 레귤러핏',1,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3036,'아카이브 게임즈 트랙 재킷','아우터','재킷',298000,50,50,50,50,'아카이브 게임즈 트랙 재킷_3036_1.jpg, 아카이브 게임즈 트랙 재킷_3036_2.jpg, 아카이브 게임즈 트랙 재킷_3036_3.jpg','아카이브 게임즈 트랙 재킷',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1064,'리도타 셔츠','상의','셔츠',130000,50,50,50,50,'리도타 셔츠_1064_1.jpg, 리도타 셔츠_1064_2.jpg, 리도타 셔츠_1064_3.jpg, 리도타 셔츠_1064_4.jpg','리도타 셔츠',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1065,'라이트 테크 피셔맨 셔츠','상의','셔츠',180000,50,50,50,50,'라이트 테크 피셔맨 셔츠_1065_1.jpg, 라이트 테크 피셔맨 셔츠_1065_2.jpg, 라이트 테크 피셔맨 셔츠_1065_3.jpg','라이트 테크 피셔맨 셔츠',1,'5',2);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1066,'위켄드 셔츠 아우터','상의','셔츠',160000,50,50,50,50,'위켄드 셔츠 아우터_1066_1.jpg, 위켄드 셔츠 아우터_1066_2.jpg, 위켄드 셔츠 아우터_1066_3.jpg','위켄드 셔츠 아우터',0,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1067,'솔리드 헤리티지 옥스포드 셔츠','상의','셔츠',150000,50,50,50,50,'솔리드 헤리티지 옥스포드 셔츠_1067_1.jpg, 솔리드 헤리티지 옥스포드 셔츠_1067_2.jpg, 솔리드 헤리티지 옥스포드 셔츠_1067_3.jpg','솔리드 헤리티지 옥스포드 셔츠',1,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3037,'라이트 셔츠 재킷','아우터','재킷',438000,50,50,50,50,'라이트 셔츠 재킷_3037_1.jpg, 라이트 셔츠 재킷_3037_2.jpg, 라이트 셔츠 재킷_3037_3.jpg, 라이트 셔츠 재킷_3037_4.jpg','라이트 셔츠 재킷',0,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1068,'코튼 반팔 셔츠 릴랙스핏','상의','셔츠',125000,50,50,50,50,'코튼 반팔 셔츠 릴랙스핏_1068_1.jpg, 코튼 반팔 셔츠 릴랙스핏_1068_2.jpg, 코튼 반팔 셔츠 릴랙스핏_1068_3.jpg','코튼 반팔 셔츠 릴랙스핏',0,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1069,'포플린 베이직 반팔 셔츠','상의','셔츠',145000,50,50,50,50,'포플린 베이직 반팔 셔츠_1069_1.jpg, 포플린 베이직 반팔 셔츠_1069_2.jpg, 포플린 베이직 반팔 셔츠_1069_3.jpg','포플린 베이직 반팔 셔츠',1,'20',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1070,'레귤러핏 긴팔 체크 셔츠','상의','셔츠',127000,50,50,50,49,'레귤러핏 긴팔 체크 셔츠_1070_1.jpg, 레귤러핏 긴팔 체크 셔츠_1070_2.jpg, 레귤러핏 긴팔 체크 셔츠_1070_3.jpg','레귤러핏 긴팔 체크 셔츠',0,'5',4);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1071,'테크니컬 집업 오버사이즈 셔츠','상의','셔츠',250000,48,48,50,50,'테크니컬 집업 오버사이즈 셔츠_1071_1.jpg, 테크니컬 집업 오버사이즈 셔츠_1071_2.jpg, 테크니컬 집업 오버사이즈 셔츠_1071_3.jpg','테크니컬 집업 오버사이즈 셔츠',1,'5',25);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1072,'플렉스 포플린 스트라이프 셔츠','상의','셔츠',90000,48,49,50,50,'플렉스 포플린 스트라이프 셔츠_1072_1.jpg, 플렉스 포플린 스트라이프 셔츠_1072_2.jpg, 플렉스 포플린 스트라이프 셔츠_1072_3.jpg','플렉스 포플린 스트라이프 셔츠',1,'5',40);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3038,'시카고 라이트웨이트 재킷','아우터','재킷',198000,50,50,50,50,'시카고 라이트웨이트 재킷_3038_1.jpg, 시카고 라이트웨이트 재킷_3038_2.jpg, 시카고 라이트웨이트 재킷_3038_3.jpg, 시카고 라이트웨이트 재킷_3038_4.jpg','시카고 라이트웨이트 재킷',0,'15',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1073,'릴렉스핏 데님 셔츠','상의','셔츠',140000,46,47,49,50,'릴렉스핏 데님 셔츠_1073_1.jpg, 릴렉스핏 데님 셔츠_1073_3.jpg, 릴렉스핏 데님 셔츠_1073_2.jpg','릴렉스핏 데님 셔츠',0,'5',58);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (1074,'릴렉스 클래식 셔츠','상의','셔츠',150000,48,46,47,50,'릴렉스 클래식 셔츠_1074_1.jpg, 릴렉스 클래식 셔츠_1074_2.jpg, 릴렉스 클래식 셔츠_1074_3.jpg','릴렉스 클래식 셔츠',1,'5',28);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3039,'립스탑 셔츠 재킷','아우터','재킷',359000,50,50,50,50,'립스탑 셔츠 재킷_3039_1.jpg, 립스탑 셔츠 재킷_3039_2.jpg, 립스탑 셔츠 재킷_3039_3.jpg, 립스탑 셔츠 재킷_3039_4.jpg','립스탑 셔츠 재킷',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3040,'울 스트레치 데일리 재킷','아우터','재킷',735000,50,50,50,50,'울 스트레치 데일리 재킷_3040_1.jpg, 울 스트레치 데일리 재킷_3040_2.jpg, 울 스트레치 데일리 재킷_3040_3.jpg, 울 스트레치 데일리 재킷_3040_4.jpg','울 스트레치 데일리 재킷',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3041,'도비 블레이저','아우터','재킷',399000,50,50,50,50,'도비 블레이저_3041_1.jpg, 도비 블레이저_3041_2.jpg, 도비 블레이저_3041_3.jpg, 도비 블레이저_3041_4.jpg','도비 블레이저',1,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3042,'썸머 텍스처 폴리 재킷','아우터','재킷',665000,50,50,50,50,'썸머 텍스처 폴리 재킷_3042_1.jpg, 썸머 텍스처 폴리 재킷_3042_2.jpg, 썸머 텍스처 폴리 재킷_3042_3.jpg, 썸머 텍스처 폴리 재킷_3042_4.jpg','썸머 텍스처 폴리 재킷',0,'15',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3043,'시카고 테크 아웃도어 재킷','아우터','재킷',298000,50,50,50,50,'시카고 테크 아웃도어 재킷_3043_1.jpg, 시카고 테크 아웃도어 재킷_3043_2.jpg, 시카고 테크 아웃도어 재킷_3043_3.jpg, 시카고 테크 아웃도어 재킷_3043_4.jpg','시카고 테크 아웃도어 재킷',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3044,'포틀랜드 후드 재킷','아우터','재킷',399000,50,50,50,50,'포틀랜드 후드 재킷_3044_1.jpg, 포틀랜드 후드 재킷_3044_2.jpg, 포틀랜드 후드 재킷_3044_3.jpg, 포틀랜드 후드 재킷_3044_4.jpg','포틀랜드 후드 재킷',1,'5',1);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3047,'아치 셔츠 점퍼','아우터','점퍼',458000,50,50,50,50,'아치 셔츠 점퍼_3047_1.jpg, 아치 셔츠 점퍼_3047_2.jpg, 아치 셔츠 점퍼_3047_3.jpg','아치 셔츠 점퍼',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3048,'먼데이 집업 점퍼','아우터','점퍼',498000,50,50,50,50,'먼데이 집업 점퍼_3048_1.jpg, 먼데이 집업 점퍼_3048_2.jpg, 먼데이 집업 점퍼_3048_3.jpg, 먼데이 집업 점퍼_3048_4.jpg','먼데이 집업 점퍼',1,'5',3);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3049,'썸머 집업 점퍼','아우터','점퍼',498000,50,50,50,50,'썸머 집업 점퍼_3049_1.jpg, 썸머 집업 점퍼_3049_2.jpg, 썸머 집업 점퍼_3049_3.jpg, 썸머 집업 점퍼_3049_4.jpg','썸머 집업 점퍼',0,'15',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3050,'레귤러핏 세미와이드 카라 점퍼','아우터','점퍼',690000,50,50,50,50,'레귤러핏 세미와이드 카라 점퍼_3050_1.jpg, 레귤러핏 세미와이드 카라 점퍼_3050_2.jpg, 레귤러핏 세미와이드 카라 점퍼_3050_3.jpg, 레귤러핏 세미와이드 카라 점퍼_3050_4.jpg','레귤러핏 세미와이드 카라 점퍼',1,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3051,'서커 캐주얼 점퍼','아우터','점퍼',495000,50,50,50,50,'서커 캐주얼 점퍼_3051_1.jpg, 서커 캐주얼 점퍼_3051_2.jpg, 서커 캐주얼 점퍼_3051_3.jpg, 서커 캐주얼 점퍼_3051_4.jpg','서커 캐주얼 점퍼',0,'15',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3045,'스트레치 데일리 점퍼','아우터','점퍼',535000,50,50,50,50,'스트레치 데일리 점퍼_3045_1.jpg, 스트레치 데일리 점퍼_3045_2.jpg, 스트레치 데일리 점퍼_3045_3.jpg, 스트레치 데일리 점퍼_3045_4.jpg','스트레치 데일리 점퍼',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3046,'마이크로써커 점퍼','아우터','점퍼',595000,50,50,50,50,'마이크로써커 점퍼_3046_1.jpg, 마이크로써커 점퍼_3046_2.jpg, 마이크로써커 점퍼_3046_3.jpg','마이크로써커 점퍼',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3052,'시티 야상 점퍼','아우터','점퍼',458000,50,50,50,50,'시티 야상 점퍼_3052_1.jpg, 시티 야상 점퍼_3052_2.jpg, 시티 야상 점퍼_3052_3.jpg','시티 야상 점퍼',0,'0',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3053,'리 셔츠 점퍼','아우터','점퍼',498000,50,50,50,50,'리 셔츠 점퍼_3053_1.jpg, 리 셔츠 점퍼_3053_2.jpg, 리 셔츠 점퍼_3053_3.jpg, 리 셔츠 점퍼_3053_4.jpg','리 셔츠 점퍼',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3054,'테크 셔츠 자켓','아우터','점퍼',219000,50,50,50,50,'테크 셔츠 자켓_3054_1.jpg, 테크 셔츠 자켓_3054_2.jpg, 테크 셔츠 자켓_3054_3.jpg, 테크 셔츠 자켓_3054_4.jpg','테크 셔츠 자켓',0,'5',2);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3055,'스웨이드 배색 니트 점퍼','아우터','점퍼',695000,49,49,50,50,'스웨이드 배색 니트 점퍼_3055_1.jpg, 스웨이드 배색 니트 점퍼_3055_2.jpg, 스웨이드 배색 니트 점퍼_3055_3.jpg, 스웨이드 배색 니트 점퍼_3055_4.jpg','스웨이드 배색 니트 점퍼',1,'5',2);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3056,'마이크로 패턴 울 슬림핏 자켓','아우터','점퍼',1050000,50,50,50,50,'마이크로 패턴 울 슬림핏 자켓_3056_1.jpg, 마이크로 패턴 울 슬림핏 자켓_3056_2.jpg, 마이크로 패턴 울 슬림핏 자켓_3056_3.jpg','마이크로 패턴 울 슬림핏 자켓',0,'0',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3057,'Tweed Crochet 카라 짚업 점퍼','아우터','점퍼',690000,50,50,50,50,'Tweed Crochet 카라 짚업 점퍼_3057_1.jpg, Tweed Crochet 카라 짚업 점퍼_3057_2.jpg, Tweed Crochet 카라 짚업 점퍼_3057_3.jpg','Tweed Crochet 카라 짚업 점퍼',0,'5',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3058,'위켄드 썸머 봄버 점퍼','아우터','점퍼',398000,50,50,50,50,'위켄드 썸머 봄버 점퍼_3058_1.jpg, 위켄드 썸머 봄버 점퍼_3058_2.jpg, 위켄드 썸머 봄버 점퍼_3058_3.jpg, 위켄드 썸머 봄버 점퍼_3058_4.jpg','위켄드 썸머 봄버 점퍼',0,'15',0);
+Insert into EZEN.PRODUCT (SNUM,SNAME,STYPE,STYPE_SUB,PRICE,SSIZE,MSIZE,LSIZE,XLSIZE,IMAGE,INTRO,BEST,RECOMMEND,VIEWNUM) values (3059,'레귤러핏 카라 짚업 점퍼','아우터','점퍼',790000,50,50,50,50,'레귤러핏 카라 짚업 점퍼_3059_1.jpg, 레귤러핏 카라 짚업 점퍼_3059_2.jpg, 레귤러핏 카라 짚업 점퍼_3059_3.jpg, 레귤러핏 카라 짚업 점퍼_3059_4.jpg','레귤러핏 카라 짚업 점퍼',0,'5',0);
+REM INSERTING into EZEN.PRODUCTREVIEW
+SET DEFINE OFF;
+Insert into EZEN.PRODUCTREVIEW (BNUM,SNUM,SNAME,ID,PRODUCTBUY,BTITLE,BCONTENT,BPICTURE,BDATE,PRODUCTRANK,IMAGE,BESTREVIEW) values (62,1071,'테크니컬 집업 오버사이즈 셔츠','kky6940',1,'착용감이 너무 좋아요','옷 재질이 좋아서 그런지 착용감이 너무 좋아요. 추천합니다!','테크니컬 집업 오버사이즈 셔츠_1071_re1.jpg',to_date('24/05/24','RR/MM/DD'),4,'테크니컬 집업 오버사이즈 셔츠_1071_1.jpg',1);
+Insert into EZEN.PRODUCTREVIEW (BNUM,SNUM,SNAME,ID,PRODUCTBUY,BTITLE,BCONTENT,BPICTURE,BDATE,PRODUCTRANK,IMAGE,BESTREVIEW) values (63,1071,'테크니컬 집업 오버사이즈 셔츠','javamaster',1,'사진만 봐선 몰랐는데 너무 좋아요','사진만 봐선 몰랐는데 입어보니까 너무 좋아요. 많이 파세요.','0',to_date('24/05/24','RR/MM/DD'),5,'테크니컬 집업 오버사이즈 셔츠_1071_1.jpg',0);
+Insert into EZEN.PRODUCTREVIEW (BNUM,SNUM,SNAME,ID,PRODUCTBUY,BTITLE,BCONTENT,BPICTURE,BDATE,PRODUCTRANK,IMAGE,BESTREVIEW) values (64,1027,'포토프린트 브릿지 티셔츠','rhgus123',1,'너무 멋있어요!','등 뒤 다리 프린팅이 너무 멋있네요! 만족합니다.','포토프린트 브릿지 티셔츠_1027_re1.jpg',to_date('24/05/24','RR/MM/DD'),5,'포토프린트 브릿지 티셔츠_1027_1.jpg',1);
+Insert into EZEN.PRODUCTREVIEW (BNUM,SNUM,SNAME,ID,PRODUCTBUY,BTITLE,BCONTENT,BPICTURE,BDATE,PRODUCTRANK,IMAGE,BESTREVIEW) values (65,1032,'오버사이즈 우븐 포켓 반팔 스웻셔츠','rjswn123',1,'반팔 티셔츠 필요해서 샀는데 좋네요','스타일이 마음에 듭니다. 잘 샀습니다.','오버사이즈 우븐 포켓 반팔 스웻셔츠_1032_re1.jpg',to_date('24/05/24','RR/MM/DD'),5,'오버사이즈 우븐 포켓 반팔 스웻셔츠_1032_1.jpg',1);
+Insert into EZEN.PRODUCTREVIEW (BNUM,SNUM,SNAME,ID,PRODUCTBUY,BTITLE,BCONTENT,BPICTURE,BDATE,PRODUCTRANK,IMAGE,BESTREVIEW) values (66,1012,'인스티튜셔널 로고 기모 스웨트 티셔츠','ghrn123',1,'이번에도 좋은 티셔츠 구해갑니다','잘 샀습니다. 감사합니다.','인스티튜셔널 로고 기모 스웨트 티셔츠_1012_re1.jpg',to_date('24/05/24','RR/MM/DD'),5,'인스티튜셔널 로고 기모 스웨트 티셔츠_1012_1.jpg',1);
+Insert into EZEN.PRODUCTREVIEW (BNUM,SNUM,SNAME,ID,PRODUCTBUY,BTITLE,BCONTENT,BPICTURE,BDATE,PRODUCTRANK,IMAGE,BESTREVIEW) values (67,1074,'릴렉스 클래식 셔츠','SunnyDays123',1,'자주 입게 될 것 같네요','요즘 입기에도 괜찮고 정말 좋은 셔츠 구해갑니다.','릴렉스 클래식 셔츠_1074_re1.jpg',to_date('24/05/24','RR/MM/DD'),5,'릴렉스 클래식 셔츠_1074_1.jpg',1);
+Insert into EZEN.PRODUCTREVIEW (BNUM,SNUM,SNAME,ID,PRODUCTBUY,BTITLE,BCONTENT,BPICTURE,BDATE,PRODUCTRANK,IMAGE,BESTREVIEW) values (68,2060,'덴톤 핏 썸머 도비 셋업 팬츠','admin',1,'멋쟁이 팬츠','핏이 살아있어요','0',to_date('24/05/27','RR/MM/DD'),5,'덴톤 핏 썸머 도비 셋업 팬츠_2060_1.jpg',0);
+REM INSERTING into EZEN.PRODUCTSELL
+SET DEFINE OFF;
+REM INSERTING into EZEN.QNA
+SET DEFINE OFF;
+Insert into EZEN.QNA (BNUM,BID,BTYPE,BTITLE,BCONTENT,BPICTURE,BDATE) values (76,'관리자','공지','브랜드 판매 시작에 따른 안내','많은 성원과 응원에 감사드립니다.','null',to_date('24/05/24','RR/MM/DD'));
+Insert into EZEN.QNA (BNUM,BID,BTYPE,BTITLE,BCONTENT,BPICTURE,BDATE) values (85,'관리자','이벤트','룰렛 쿠폰 이벤트','로그인 후 오른쪽 하단에 룰렛 쿠폰 이벤트가 실시 됩니다. 
+많은 참여 부탁드립니다.','null',to_date('24/05/24','RR/MM/DD'));
+Insert into EZEN.QNA (BNUM,BID,BTYPE,BTITLE,BCONTENT,BPICTURE,BDATE) values (74,'관리자','공지','Snack Closet 서비스 점검 안내','안녕하세요, Snack Closet 입니다.
+
+서비스 품질 향상을 위한 시스템 점검이 있을 예정입니다.
+고객님의 서비스 이용에 불편을 드려 죄송합니다.','null',to_date('24/05/24','RR/MM/DD'));
+Insert into EZEN.QNA (BNUM,BID,BTYPE,BTITLE,BCONTENT,BPICTURE,BDATE) values (75,'관리자','이벤트','사은품 증정 공지','많은 성원과 관심에 감사드립니다.','null',to_date('24/05/24','RR/MM/DD'));
+REM INSERTING into EZEN.QNABOARD
+SET DEFINE OFF;
+Insert into EZEN.QNABOARD (BNUM,BID,BTYPE,BTITLE,BCONTENT,BPICTURE,BDATE,GROUPS,STEP,INDENT,SECRET,QNASTATE) values (23,'관리자','문의답변글','답변입니다.','안녕하세요, 재질에 대해 질문 주셨는데요.
+
+100% 면 입니다. 감사합니다.',null,to_date('24/05/24','RR/MM/DD'),0,1,1,0,0);
+Insert into EZEN.QNABOARD (BNUM,BID,BTYPE,BTITLE,BCONTENT,BPICTURE,BDATE,GROUPS,STEP,INDENT,SECRET,QNASTATE) values (27,'ghrn123','환불문의','환불하고 싶은데요','환불과정이 어떻게 되나요? 알려주세요.','cda9982f-1e3d-482b-ac66-8cc8c7f3e806_1716538061917.',to_date('24/05/24','RR/MM/DD'),0,0,0,0,0);
+Insert into EZEN.QNABOARD (BNUM,BID,BTYPE,BTITLE,BCONTENT,BPICTURE,BDATE,GROUPS,STEP,INDENT,SECRET,QNASTATE) values (30,'rjswn123','배송문의','배송은 보통 며칠 걸리나요?','빨리 받고 싶어요','724938ec-b98b-4777-ae4b-aa5c653a04e6_1716538967688.',to_date('24/05/24','RR/MM/DD'),0,0,0,1,0);
+Insert into EZEN.QNABOARD (BNUM,BID,BTYPE,BTITLE,BCONTENT,BPICTURE,BDATE,GROUPS,STEP,INDENT,SECRET,QNASTATE) values (23,'kky6940','상품문의','이거 재질이 어떻게 되나요?','재질이 궁금해요','b1826727-ede8-4c5e-b567-8d5b588c19e4_1716537549305.jpg',to_date('24/05/24','RR/MM/DD'),0,0,0,0,1);
+REM INSERTING into EZEN.PAYINFO
+SET DEFINE OFF;
+Insert into EZEN.PAYINFO (TID,ORDERID,ID,PAYTYPE,SNAME,PAYNUM,TOTPRICE,PAYENDTIME,SNUM,ADDRESS,NAME,TEL,EMAIL,DREQUEST,PAYSTATE,PAYMENT,USECOUPON,SAVEPOINT,USEPOINT,NOWPOINT) values ('T6502c67257c75a51a8f',201,'kky6940','MONEY','테크니컬 집업 오버사이즈 셔츠',1,220000,to_date('24/05/24','RR/MM/DD'),'1071','16455, 경기 수원시 팔달구 매산로1가 16, mbc아카데미','남동수','010-1111-1111','kky6940123@naver.com',null,0,'카카오페이','tennum',2500,5000,7500);
+Insert into EZEN.PAYINFO (TID,ORDERID,ID,PAYTYPE,SNAME,PAYNUM,TOTPRICE,PAYENDTIME,SNUM,ADDRESS,NAME,TEL,EMAIL,DREQUEST,PAYSTATE,PAYMENT,USECOUPON,SAVEPOINT,USEPOINT,NOWPOINT) values (null,202,'javamaster',null,'테크니컬 집업 오버사이즈 셔츠',1,250000,to_date('24/05/24','RR/MM/DD'),'1071','48060,부산 해운대구 APEC로 17,2001호','설악산','010-6666-6666','javamaster@naver.com',null,0,'무통장입금',null,2500,0,2500);
+Insert into EZEN.PAYINFO (TID,ORDERID,ID,PAYTYPE,SNAME,PAYNUM,TOTPRICE,PAYENDTIME,SNUM,ADDRESS,NAME,TEL,EMAIL,DREQUEST,PAYSTATE,PAYMENT,USECOUPON,SAVEPOINT,USEPOINT,NOWPOINT) values (null,203,'javamaster',null,'테크니컬 집업 오버사이즈 셔츠',1,250000,to_date('24/05/24','RR/MM/DD'),'1071','48060,부산 해운대구 APEC로 17,2001호','설악산','010-6666-6666','javamaster@naver.com',null,0,'무통장입금',null,2500,0,5000);
+Insert into EZEN.PAYINFO (TID,ORDERID,ID,PAYTYPE,SNAME,PAYNUM,TOTPRICE,PAYENDTIME,SNUM,ADDRESS,NAME,TEL,EMAIL,DREQUEST,PAYSTATE,PAYMENT,USECOUPON,SAVEPOINT,USEPOINT,NOWPOINT) values (null,204,'javamaster',null,'테크니컬 집업 오버사이즈 셔츠',1,250000,to_date('24/05/24','RR/MM/DD'),'1071','48060,부산 해운대구 APEC로 17,2001호','설악산','010-6666-6666','javamaster@naver.com',null,1,'무통장입금',null,2500,0,7500);
+Insert into EZEN.PAYINFO (TID,ORDERID,ID,PAYTYPE,SNAME,PAYNUM,TOTPRICE,PAYENDTIME,SNUM,ADDRESS,NAME,TEL,EMAIL,DREQUEST,PAYSTATE,PAYMENT,USECOUPON,SAVEPOINT,USEPOINT,NOWPOINT) values (null,205,'rhgus123',null,'포토프린트 브릿지 티셔츠',1,93000,to_date('24/05/24','RR/MM/DD'),'1027','04557,서울 중구 필동1가 51-5,102호','이고현','010-8080-8080','rhgus@naver.com',null,1,'무통장입금',null,930,0,930);
+Insert into EZEN.PAYINFO (TID,ORDERID,ID,PAYTYPE,SNAME,PAYNUM,TOTPRICE,PAYENDTIME,SNUM,ADDRESS,NAME,TEL,EMAIL,DREQUEST,PAYSTATE,PAYMENT,USECOUPON,SAVEPOINT,USEPOINT,NOWPOINT) values (null,206,'rjswn123',null,'오버사이즈 우븐 포켓 반팔 스웻셔츠',1,110000,to_date('24/05/24','RR/MM/DD'),'1032','17532,경기 안성시 일죽면 화봉리 323-14,404호','이진철','010-4545-6565','rjswn123@naver.com',null,1,'무통장입금',null,1100,0,1100);
+Insert into EZEN.PAYINFO (TID,ORDERID,ID,PAYTYPE,SNAME,PAYNUM,TOTPRICE,PAYENDTIME,SNUM,ADDRESS,NAME,TEL,EMAIL,DREQUEST,PAYSTATE,PAYMENT,USECOUPON,SAVEPOINT,USEPOINT,NOWPOINT) values (null,207,'ghrn123',null,'인스티튜셔널 로고 기모 스웨트 티셔츠',1,140000,to_date('24/05/24','RR/MM/DD'),'1012','21689,인천 남동구 호구포로 8,505호','박구호','010-5959-5959','ghrn123@hanmail.net',null,1,'무통장입금',null,1400,0,1400);
+Insert into EZEN.PAYINFO (TID,ORDERID,ID,PAYTYPE,SNAME,PAYNUM,TOTPRICE,PAYENDTIME,SNUM,ADDRESS,NAME,TEL,EMAIL,DREQUEST,PAYSTATE,PAYMENT,USECOUPON,SAVEPOINT,USEPOINT,NOWPOINT) values (null,208,'rjswn123',null,'릴렉스 클래식 셔츠',1,150000,to_date('24/05/24','RR/MM/DD'),'1074','13480,경기 성남시 분당구 대왕판교로 477,503호','김민정','010-9240-8985','rjswn123@naver.com',null,1,'무통장입금',null,1500,0,2600);
+Insert into EZEN.PAYINFO (TID,ORDERID,ID,PAYTYPE,SNAME,PAYNUM,TOTPRICE,PAYENDTIME,SNUM,ADDRESS,NAME,TEL,EMAIL,DREQUEST,PAYSTATE,PAYMENT,USECOUPON,SAVEPOINT,USEPOINT,NOWPOINT) values (null,209,'SunnyDays123',null,'릴렉스 클래식 셔츠',1,150000,to_date('24/05/24','RR/MM/DD'),'1074','05089,서울 광진구 강변북로 2140,101호','선태양','010-3333-3333','sunny123@hanmail.net',null,1,'무통장입금',null,1500,0,1500);
+Insert into EZEN.PAYINFO (TID,ORDERID,ID,PAYTYPE,SNAME,PAYNUM,TOTPRICE,PAYENDTIME,SNUM,ADDRESS,NAME,TEL,EMAIL,DREQUEST,PAYSTATE,PAYMENT,USECOUPON,SAVEPOINT,USEPOINT,NOWPOINT) values (null,210,'djaak123',null,'릴렉스 클래식 셔츠',1,150000,to_date('24/05/24','RR/MM/DD'),'1074','47387,부산 부산진구 개금동 620-3,1102호','김엄마','010-6666-6666','djaak123@naver.com',null,1,'무통장입금',null,1500,0,1500);
+Insert into EZEN.PAYINFO (TID,ORDERID,ID,PAYTYPE,SNAME,PAYNUM,TOTPRICE,PAYENDTIME,SNUM,ADDRESS,NAME,TEL,EMAIL,DREQUEST,PAYSTATE,PAYMENT,USECOUPON,SAVEPOINT,USEPOINT,NOWPOINT) values (null,211,'dkQk123',null,'릴렉스 클래식 셔츠',1,150000,to_date('24/05/24','RR/MM/DD'),'1074','17821,경기 평택시 고덕면 첨단대로 59,1104호','최아빠','010-7777-7777','dkQK123@naver.com',null,1,'무통장입금',null,1500,0,1500);
+Insert into EZEN.PAYINFO (TID,ORDERID,ID,PAYTYPE,SNAME,PAYNUM,TOTPRICE,PAYENDTIME,SNUM,ADDRESS,NAME,TEL,EMAIL,DREQUEST,PAYSTATE,PAYMENT,USECOUPON,SAVEPOINT,USEPOINT,NOWPOINT) values (null,212,'cjdsus2030',null,'릴렉스 클래식 셔츠',1,150000,to_date('24/05/24','RR/MM/DD'),'1074','34672,대전 동구 판암동 497-7,202호','문청년','010-1234-1234','cjdsus123@hanmail.net',null,1,'무통장입금',null,1500,0,1500);
+Insert into EZEN.PAYINFO (TID,ORDERID,ID,PAYTYPE,SNAME,PAYNUM,TOTPRICE,PAYENDTIME,SNUM,ADDRESS,NAME,TEL,EMAIL,DREQUEST,PAYSTATE,PAYMENT,USECOUPON,SAVEPOINT,USEPOINT,NOWPOINT) values (null,213,'admin',null,'덴톤 핏 썸머 도비 셋업 팬츠',1,159500,to_date('24/05/24','RR/MM/DD'),'2060','13473,경기 성남시 분당구 삼평동 421,304호','집','010-1234-1234','admin123@naver.com',null,1,'무통장입금','mannum',2100,30000,66000);
+Insert into EZEN.PAYINFO (TID,ORDERID,ID,PAYTYPE,SNAME,PAYNUM,TOTPRICE,PAYENDTIME,SNUM,ADDRESS,NAME,TEL,EMAIL,DREQUEST,PAYSTATE,PAYMENT,USECOUPON,SAVEPOINT,USEPOINT,NOWPOINT) values (null,214,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+Insert into EZEN.PAYINFO (TID,ORDERID,ID,PAYTYPE,SNAME,PAYNUM,TOTPRICE,PAYENDTIME,SNUM,ADDRESS,NAME,TEL,EMAIL,DREQUEST,PAYSTATE,PAYMENT,USECOUPON,SAVEPOINT,USEPOINT,NOWPOINT) values ('T6502aaa29fd342c8bf0',200,'admin','MONEY','릴렉스핏 데님 셔츠',1,114000,to_date('24/05/24','RR/MM/DD'),'1073','16455, 경기 수원시 팔달구 매산로1가 16, mbc아카데미','남동수','010-1111-1111','admin123@naver.com',null,1,'카카오페이','tennum',1400,5000,93900);
+REM INSERTING into EZEN.FAQ
+SET DEFINE OFF;
+Insert into EZEN.FAQ (BNUM,BID,BTYPE,BTITLE,BCONTENT,BPICTURE,BDATE) values (81,'admin','교환/반품문의','상품을 교환/반품하고 싶어요.','교환 및 반품은 미사용 상품에 한하여 가능하며, 마이페이지을 통해 직접하실 수 있습니다. 상품을 회수한 후 검수 단계에서 문제가 발견되면 고객님께 연락을 드릴 수 있습니다. 교환은 구매 상품과 동일한 상품으로만 가능합니다. 색상 및 사이즈 변경을 원하시면 반품 후 재구매를 해 주시기 바랍니다.',null,to_date('24/05/24','RR/MM/DD'));
+Insert into EZEN.FAQ (BNUM,BID,BTYPE,BTITLE,BCONTENT,BPICTURE,BDATE) values (79,'admin','회원문의','Snack Closet 마일리지 유효 기간은 어떻게 되나요','Snack Closet 마일리지 유효 기간은 적립일로부터 2년이며, 기간 내 미사용시 자동 소멸됩니다.',null,to_date('24/05/24','RR/MM/DD'));
+Insert into EZEN.FAQ (BNUM,BID,BTYPE,BTITLE,BCONTENT,BPICTURE,BDATE) values (80,'admin','주문/결제문의','포인트로 결재했다가 환불했을 경우 마일리지는 어떻게 되나요','주문/결재 시 사용한 쿠폰과 마일리지는 환불 시 재적립됩니다.',null,to_date('24/05/24','RR/MM/DD'));
+Insert into EZEN.FAQ (BNUM,BID,BTYPE,BTITLE,BCONTENT,BPICTURE,BDATE) values (82,'admin','배송문의','주문한 상품은 언제 배송되나요?','배송 예정일은 마이페이지을 통해 직접 확인할 수 있습니다.',null,to_date('24/05/24','RR/MM/DD'));
+Insert into EZEN.FAQ (BNUM,BID,BTYPE,BTITLE,BCONTENT,BPICTURE,BDATE) values (83,'admin','회원문의','회원 탈퇴는 어떻게 하나요?','회원 탈퇴는 아래의 절차를 따라 하실 수 있습니다. 탈퇴 시 회원 전용 웹 서비스 이용이 불가합니다. 탈퇴 전 유의사항을 반드시 확인해 주시기 바랍니다. 
+
+마이페이지 -> 회원탈퇴',null,to_date('24/05/24','RR/MM/DD'));
+Insert into EZEN.FAQ (BNUM,BID,BTYPE,BTITLE,BCONTENT,BPICTURE,BDATE) values (84,'admin','회원문의','회원정보 수정은 어떻게 하나요?','로그인 후 마이페이지에서 회원정보를 수정할 수 있습니다. 수정 가능한 회원정보는 이름(개명), 아이디(이메일), 휴대폰 번호입니다. 주소록(배송지)은 별도의 경로에서 수정이 가능합니다.',null,to_date('24/05/24','RR/MM/DD'));
+REM INSERTING into EZEN.ADDRESSLIST
+SET DEFINE OFF;
+Insert into EZEN.ADDRESSLIST (ADDRESSNUM,ID,ADLISTNAME,NAME,TEL,ADDRESS) values (44,'admin','본가','이승철','010-1234-1234','34129,대전 유성구 가정동 138,201동 1107호');
+Insert into EZEN.ADDRESSLIST (ADDRESSNUM,ID,ADLISTNAME,NAME,TEL,ADDRESS) values (45,'admin','친구집','이승철','010-1234-1234','16661,경기 수원시 권선구 경수대로 83,805호');
+Insert into EZEN.ADDRESSLIST (ADDRESSNUM,ID,ADLISTNAME,NAME,TEL,ADDRESS) values (41,'admin','집','이승철','010-1234-1234','13473,경기 성남시 분당구 삼평동 421,304호');
+Insert into EZEN.ADDRESSLIST (ADDRESSNUM,ID,ADLISTNAME,NAME,TEL,ADDRESS) values (42,'admin','회사','이승철','010-1234-1234','13473,경기 성남시 분당구 삼평동 421,한컴타워 2층');
+REM INSERTING into EZEN.BASKET
+SET DEFINE OFF;
+Insert into EZEN.BASKET (BASKETNUM,ID,SNUM,GUESTBUYSU,PSIZE,COLOR) values (437,'kky6940',1071,1,'S','BLACK');
+Insert into EZEN.BASKET (BASKETNUM,ID,SNUM,GUESTBUYSU,PSIZE,COLOR) values (438,'kky6940',1071,1,'S','BLACK');
+Insert into EZEN.BASKET (BASKETNUM,ID,SNUM,GUESTBUYSU,PSIZE,COLOR) values (441,'admin',1027,1,'M','BLACK');
+Insert into EZEN.BASKET (BASKETNUM,ID,SNUM,GUESTBUYSU,PSIZE,COLOR) values (445,'kky6940',1074,1,'S','BLACK');
+Insert into EZEN.BASKET (BASKETNUM,ID,SNUM,GUESTBUYSU,PSIZE,COLOR) values (453,'admin',1071,7,'L','WHITE');
+Insert into EZEN.BASKET (BASKETNUM,ID,SNUM,GUESTBUYSU,PSIZE,COLOR) values (452,'admin',1074,1,'M','BLACK');
+Insert into EZEN.BASKET (BASKETNUM,ID,SNUM,GUESTBUYSU,PSIZE,COLOR) values (454,'admin',1071,1,'L','WHITE');
+REM INSERTING into EZEN.MEMBER
+SET DEFINE OFF;
+Insert into EZEN.MEMBER (ID,PW,NAME,TEL,EMAIL,PID,ADDRESS,RANK,POINT) values ('SunnyDays123','!sunny123','선태양','010-3333-3333','sunny123@hanmail.net','970925-2222222','서울 광진구 강변북로 2140 101호',1,1500);
+Insert into EZEN.MEMBER (ID,PW,NAME,TEL,EMAIL,PID,ADDRESS,RANK,POINT) values ('BlueSky','!bluesky123','이하늘','010-4444-4444','BlueSky@gmail.com','051108-3333333','대구 남구 큰골길 2 202호',1,0);
+Insert into EZEN.MEMBER (ID,PW,NAME,TEL,EMAIL,PID,ADDRESS,RANK,POINT) values ('coffeelover','!coffee123','김커피','010-5555-5555','coffeelover@nate.com','030205-4144444','인천 옹진군 백령면 콩돌로 170 1008호',1,0);
+Insert into EZEN.MEMBER (ID,PW,NAME,TEL,EMAIL,PID,ADDRESS,RANK,POINT) values ('javamaster','!java123','설악산','010-6666-6666','javamaster@naver.com','780712-1111111','부산 해운대구 APEC로 17 2001호',2,2500);
+Insert into EZEN.MEMBER (ID,PW,NAME,TEL,EMAIL,PID,ADDRESS,RANK,POINT) values ('springmaster','!spring123','한라산','010-7777-7777','springmaster@gmail.com','030606-4444444','서울 마포구 잔다리로 3 303호',1,0);
+Insert into EZEN.MEMBER (ID,PW,NAME,TEL,EMAIL,PID,ADDRESS,RANK,POINT) values ('rjswn123','!rjswn123','이진철','010-4545-6565','rjswn123@naver.com','950304-1502020','경기 안성시 일죽면 화봉리 323-14 404호',2,2600);
+Insert into EZEN.MEMBER (ID,PW,NAME,TEL,EMAIL,PID,ADDRESS,RANK,POINT) values ('ghrn123','!ghrn123','박구호','010-5959-5959','ghrn123@hanmail.net','591212-1234567','인천 남동구 호구포로 8 505호',1,1400);
+Insert into EZEN.MEMBER (ID,PW,NAME,TEL,EMAIL,PID,ADDRESS,RANK,POINT) values ('dudtnr345','!dudtnr345','이영숙','010-0606-0606','dudtn345@naver.com','880421-1234567','서울 영등포구 여의도동 2 102동 1105호',1,0);
+Insert into EZEN.MEMBER (ID,PW,NAME,TEL,EMAIL,PID,ADDRESS,RANK,POINT) values ('rhgus123','!rhgus123','이고현','010-8080-8080','rhgus@naver.com','030312-2345678','서울 중구 필동1가 51-5 102호',1,930);
+Insert into EZEN.MEMBER (ID,PW,NAME,TEL,EMAIL,PID,ADDRESS,RANK,POINT) values ('djaak123','!djaak123','김엄마','010-6666-6666','djaak123@naver.com','661201-2666666','대전 동구 판암동 502-5 1102호',1,1500);
+Insert into EZEN.MEMBER (ID,PW,NAME,TEL,EMAIL,PID,ADDRESS,RANK,POINT) values ('admin','!admin123','관리자','010-1111-1111','admin123@naver.com','981201-1111111','경기 수원시 팔달구 매산로1가 16-9 mbc아카데미',2,66000);
+Insert into EZEN.MEMBER (ID,PW,NAME,TEL,EMAIL,PID,ADDRESS,RANK,POINT) values ('kky6940','!kky6940123','남동수','010-2222-2222','kky6940@naver.com','891224-1111111','경기 수원시 팔달구 매산로1가 16-9 mbc아카데미',2,5000);
+Insert into EZEN.MEMBER (ID,PW,NAME,TEL,EMAIL,PID,ADDRESS,RANK,POINT) values ('dkQk123','!dkQK345','최아빠','010-7777-7777','dkQK123@naver.com','601022-1234567','서울 강동구 암사동 445-15 1405호',1,1500);
+Insert into EZEN.MEMBER (ID,PW,NAME,TEL,EMAIL,PID,ADDRESS,RANK,POINT) values ('cjdsus2030','!cjdsus123','문청년','010-1212-1212','cjdsus123@hanmail.net','920227-1523468','서울 성동구 청계천로 426 1507호',1,1500);
+REM INSERTING into EZEN.VISUAL
+SET DEFINE OFF;
+Insert into EZEN.VISUAL (SNUM,VISUAL_IMAGE) values (1000,'product_visual_1000.png');
+Insert into EZEN.VISUAL (SNUM,VISUAL_IMAGE) values (1030,'product_visual_1030.png');
+Insert into EZEN.VISUAL (SNUM,VISUAL_IMAGE) values (1001,'product_visual_1001.png');
+Insert into EZEN.VISUAL (SNUM,VISUAL_IMAGE) values (5000,'product_visual_5000.png');
+Insert into EZEN.VISUAL (SNUM,VISUAL_IMAGE) values (5001,'product_visual_5001.png');
+Insert into EZEN.VISUAL (SNUM,VISUAL_IMAGE) values (6000,'product_visual_6000.png');
+Insert into EZEN.VISUAL (SNUM,VISUAL_IMAGE) values (1099,'product_visual_1099.png');
+Insert into EZEN.VISUAL (SNUM,VISUAL_IMAGE) values (1110,'0');
+Insert into EZEN.VISUAL (SNUM,VISUAL_IMAGE) values (1111,'product_visual_1111.png');
+Insert into EZEN.VISUAL (SNUM,VISUAL_IMAGE) values (1112,'product_visual_1112.png');
+REM INSERTING into EZEN.COUPON
+SET DEFINE OFF;
+Insert into EZEN.COUPON (ID,COUPONNUM,TWENTINUM,MANNUM,TENNUM) values ('rjswn123',0,0,0,0);
+Insert into EZEN.COUPON (ID,COUPONNUM,TWENTINUM,MANNUM,TENNUM) values ('ghrn123',0,0,0,0);
+Insert into EZEN.COUPON (ID,COUPONNUM,TWENTINUM,MANNUM,TENNUM) values ('dudtnr345',0,0,0,0);
+Insert into EZEN.COUPON (ID,COUPONNUM,TWENTINUM,MANNUM,TENNUM) values ('rhgus123',0,0,0,0);
+Insert into EZEN.COUPON (ID,COUPONNUM,TWENTINUM,MANNUM,TENNUM) values ('djaak123',0,0,0,0);
+Insert into EZEN.COUPON (ID,COUPONNUM,TWENTINUM,MANNUM,TENNUM) values ('dkQk123',0,0,0,0);
+Insert into EZEN.COUPON (ID,COUPONNUM,TWENTINUM,MANNUM,TENNUM) values ('cjdsus2030',0,0,0,0);
+Insert into EZEN.COUPON (ID,COUPONNUM,TWENTINUM,MANNUM,TENNUM) values ('admin',7,3,2,2);
+Insert into EZEN.COUPON (ID,COUPONNUM,TWENTINUM,MANNUM,TENNUM) values ('kky6940',12,3,5,4);
+Insert into EZEN.COUPON (ID,COUPONNUM,TWENTINUM,MANNUM,TENNUM) values ('SunnyDays123',0,0,0,0);
+Insert into EZEN.COUPON (ID,COUPONNUM,TWENTINUM,MANNUM,TENNUM) values ('BlueSky',0,0,0,0);
+Insert into EZEN.COUPON (ID,COUPONNUM,TWENTINUM,MANNUM,TENNUM) values ('coffeelover',0,0,0,0);
+Insert into EZEN.COUPON (ID,COUPONNUM,TWENTINUM,MANNUM,TENNUM) values ('javamaster',0,0,0,0);
+Insert into EZEN.COUPON (ID,COUPONNUM,TWENTINUM,MANNUM,TENNUM) values ('springmaster',0,0,0,0);
+--------------------------------------------------------
+--  Constraints for Table PRODUCT
+--------------------------------------------------------
+
+  ALTER TABLE "EZEN"."PRODUCT" MODIFY ("BEST" NOT NULL ENABLE);
+  ALTER TABLE "EZEN"."PRODUCT" MODIFY ("SNUM" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table PRODUCTSELL
+--------------------------------------------------------
+
+  ALTER TABLE "EZEN"."PRODUCTSELL" MODIFY ("ORDERNUM" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table QNA
+--------------------------------------------------------
+
+  ALTER TABLE "EZEN"."QNA" MODIFY ("BNUM" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table QNABOARD
+--------------------------------------------------------
+
+  ALTER TABLE "EZEN"."QNABOARD" MODIFY ("BNUM" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table ADDRESSLIST
+--------------------------------------------------------
+
+  ALTER TABLE "EZEN"."ADDRESSLIST" MODIFY ("NAME" NOT NULL ENABLE);
+  ALTER TABLE "EZEN"."ADDRESSLIST" MODIFY ("ADLISTNAME" NOT NULL ENABLE);
+  ALTER TABLE "EZEN"."ADDRESSLIST" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "EZEN"."ADDRESSLIST" MODIFY ("ADDRESSNUM" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table BASKET
+--------------------------------------------------------
+
+  ALTER TABLE "EZEN"."BASKET" MODIFY ("COLOR" NOT NULL ENABLE);
+  ALTER TABLE "EZEN"."BASKET" MODIFY ("SNUM" NOT NULL ENABLE);
+  ALTER TABLE "EZEN"."BASKET" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "EZEN"."BASKET" MODIFY ("BASKETNUM" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table MEMBER
+--------------------------------------------------------
+
+  ALTER TABLE "EZEN"."MEMBER" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table COUPON
+--------------------------------------------------------
+
+  ALTER TABLE "EZEN"."COUPON" MODIFY ("ID" NOT NULL ENABLE);

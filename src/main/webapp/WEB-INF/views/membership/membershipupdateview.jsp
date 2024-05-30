@@ -315,7 +315,7 @@ function openPidUpdateWindow() {
         if (event.data.type === 'pidUpdate') {
         	
 	        var newPid = event.data.data;
-	        console.log(newPid);
+	        
 	        document.getElementById('pid').value = newPid.updatedPid;
 	        
 	        updateWindow.close();

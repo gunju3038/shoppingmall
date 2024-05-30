@@ -5,7 +5,6 @@
 <html>
 <head>
 <style type="text/css">
-
 .container {
     width: 600px;
     height: auto;
@@ -100,7 +99,6 @@ h2 {
 </style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
 </head>
 <body>
    <div class="container" role="main">
@@ -190,28 +188,28 @@ h2 {
          
        }, false)
      
-   attZone.addEventListener('drop', function(e){
-       e.preventDefault();
-       e.stopPropagation();
-       var dt = e.dataTransfer;
-       var files = dt.files;
-       
-       var allFiles = new DataTransfer();
-       for (var i = 0; i < btnAtt.files.length; i++) {
-           allFiles.items.add(btnAtt.files[i]);
-       }
-       for (var i = 0; i < files.length; i++) {
-           allFiles.items.add(files[i]);
-       }
-       
-       // 새로운 FileList를 파일 선택 요소에 설정
-       btnAtt.files = allFiles.files;
-       
-       
-       for(f of files){
-           imageLoader(f);
-       }
-   }, false);
+	   attZone.addEventListener('drop', function(e){
+	       e.preventDefault();
+	       e.stopPropagation();
+	       var dt = e.dataTransfer;
+	       var files = dt.files;
+	       
+	       var allFiles = new DataTransfer();
+	       for (var i = 0; i < btnAtt.files.length; i++) {
+	           allFiles.items.add(btnAtt.files[i]);
+	       }
+	       for (var i = 0; i < files.length; i++) {
+	           allFiles.items.add(files[i]);
+	       }
+	       
+	       // 새로운 FileList를 파일 선택 요소에 설정
+	       btnAtt.files = allFiles.files;
+	       
+	       
+	       for(f of files){
+	           imageLoader(f);
+	       }
+	   }, false);
     
        /*첨부된 이미리즐을 배열에 넣고 미리보기 */
        imageLoader = function(file){

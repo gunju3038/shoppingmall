@@ -102,8 +102,6 @@ h3{
 
 </head>
 <body>
-
-
 <div class="product_list">
 	<div class="box">
 		<h3>'${sname}' 검색 결과</h3>

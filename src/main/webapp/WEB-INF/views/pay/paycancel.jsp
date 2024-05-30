@@ -5,7 +5,6 @@
 <html>
 <head>
 <style type="text/css">
-
 h2{
   text-align:center;
   margin:0;
@@ -37,7 +36,6 @@ h2{
 
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 <meta charset="UTF-8">
 <title>결제환불</title>
 </head>
@@ -52,19 +50,19 @@ h2{
 		<th>결재시간</th>
 	</tr>
 	<tr>
-			<td>${aa.orderid }</td>
-			<td>${aa.sname }</td>
-			<td>${aa.paynum }</td>
-			<td>
-				${aa.totprice }
-				<input type="hidden" name="totprice" value="${aa.totprice }" id="totprice">
-			</td>
-			<td>
-				${aa.payendtime }
-				${aa.orderid }
-				<input type="hidden" name="tid" value="${aa.tid }" id="tid">	
-				<input type="hidden" name="orderid" value="${aa.orderid }" id="orderid">					
-			</td>	
+		<td>${aa.orderid }</td>
+		<td>${aa.sname }</td>
+		<td>${aa.paynum }</td>
+		<td>
+			${aa.totprice }
+			<input type="hidden" name="totprice" value="${aa.totprice }" id="totprice">
+		</td>
+		<td>
+			${aa.payendtime }
+			${aa.orderid }
+			<input type="hidden" name="tid" value="${aa.tid }" id="tid">	
+			<input type="hidden" name="orderid" value="${aa.orderid }" id="orderid">					
+		</td>	
 	</tr>	
 	<tr>
 		<td colspan="5" align="center"><span>정말로 환불하시겠습니까?</span></td>
@@ -77,7 +75,6 @@ h2{
 	
 </c:forEach>
 </table>
-
 <script type="text/javascript">
 function kakaopaycancel(payment) {
 	if (payment === '카카오페이') {
@@ -118,6 +115,5 @@ function kakaopaycancel(payment) {
     }
 }
 </script>
-
 </body>
 </html>

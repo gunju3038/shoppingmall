@@ -162,20 +162,12 @@
 		select * from product where snum=#{param1}
 	</select>
 	
-	<!-- 상품 수정 화면에서 받은 데이터로 상품 정보 수정하기(이미지 개수 만큼 증가) -->
-	<update id="updateproductmainimage">
-		update product set snum=#{param1},sname=#{param2},stype=#{param3},su=#{param4},price=#{param5},
-			ssize=#{param6},color=#{param7},image=#{param8},intro=#{param9},best=#{param10} 
-			where snum=#{param11}
-	</update>
-	<update id="updateproductsideimage1">
-		update product set sideimage1=#{param1} where snum=#{param2}
-	</update>
-	<update id="updateproductsideimage2">
-		update product set sideimage2=#{param1} where snum=#{param2}
-	</update>
-	<update id="updateproductsideimage3">
-		update product set sideimage3=#{param1} where snum=#{param2}
+	<!-- 상품 수정 화면에서 받은 데이터로 상품 정보 수정하기 -->
+	<update id="productupdate">
+    update product set sname=#{param1}, stype=#{param2}, stype_sub=#{param3}, price=#{param4},
+        ssize=#{param5}, msize=#{param6}, lsize=#{param7}, xlsize=#{param8}, image=#{param9},
+        intro=#{param10}, best=#{param11}, recommend=#{param12} 
+        where snum=#{param13}
 	</update>
 	
 	<!-- 상품 리뷰 입력 후 DB에 저장 -->
@@ -446,11 +438,6 @@
    </select>
 	<select id="totalKeyValue" resultType="int">
 	   select count(*) from product where stype = #{param1} and sname like '%' || #{param2} || '%' 
-	</select>
-	
-	<!-- 삭제 찾기 -->
-	<select id="selectFile" resultType="String">
-		select image from product where snum=#{param1}
 	</select>
 	
 	<!-- 주소지 목록 불러오기-->

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,11 +18,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -61,10 +58,7 @@ public class PayController {
 		String usecoupon = formData.getOrDefault("usecoupon", "");
 		int guestbuysu = Integer.parseInt(formData.getOrDefault("guestbuysu", ""));
 		String email = ss.email(id);
-		
-		
 		String snum =formData.getOrDefault("snum", "");
-		
 		String stringTotprice =formData.getOrDefault("totprice", "");
 		stringTotprice = stringTotprice.replace(",", "");
 		int totprice = Integer.parseInt(stringTotprice); 
@@ -119,7 +113,7 @@ public class PayController {
         restTemplate.setMessageConverters(messageConverters);
         // 한글 인코딩 end
         
-     // 이 중간에 QR 코드가 뜨고 클라이언트가 결재 과정을 진행한다.(카카오 서버에서 직접 처리하는 과정이라 관여할 부분은 없음)
+        // 이 중간에 QR 코드가 뜨고 클라이언트가 결재 과정을 진행한다.(카카오 서버에서 직접 처리하는 과정이라 관여할 부분은 없음)
         
         ResponseEntity<String> response = restTemplate.postForEntity(apiUrl, requestEntity, String.class); // 받은 자료들을 response에 저장
 
@@ -150,7 +144,6 @@ public class PayController {
                 dto.setUsecoupon(usecoupon);
                 dto.setUsepoint(usepoint);
                 dto.setSavepoint(savepoint);
-                
                 
                 return ResponseEntity.ok(nextRedirectPcUrl); // PC에서 결재를 진행할 것이기에 nextRedirectPcUrl 링크 사용
             } catch (JsonProcessingException e) {
@@ -256,12 +249,9 @@ public class PayController {
         	
         	int paystate = 1; // 결재 상태 1 = 결재 완료
         	String payment = "카카오페이"; //결제 방식 구분
-    
         	
         	// 결재 완료 후 클라이언트에게 보여줄 부분만 가져와서 DB에(payinfo) 저장
         	Service ss = sqlSession.getMapper(Service.class);
-        	System.out.println("usecoupon: "+useCoupon);
-        	System.out.println("savepoint: "+savePoint);
         	String insertCoupon = "";
         	if(useCoupon.equals("10000원 할인쿠폰")) {
         		insertCoupon = "mannum";
@@ -307,16 +297,13 @@ public class PayController {
         	mv.addObject("list", list);
         	mv.setViewName("payout"); // 상품 구입 후 출력
         	return mv;
-        	
         }
         else
         {
 //        	return "결제를 실패했습니다.";
         }
 		return mv;
-   
     }    
-    
     
     // 환불 과정(카카오 단건결재 API)
     @PostMapping("/paycancelrequest") // 데이터값 POST 지정, 카카오 서버는 POST 자료만 받는다고 명시되어 있음
@@ -366,7 +353,6 @@ public class PayController {
         // 한글 인코딩 end
         
         ResponseEntity<String> response = restTemplate.postForEntity(apiUrl, requestEntity, String.class); // 받은 자료들을 response에 저장
-        System.out.println(response);
         if (response.getStatusCode().is2xxSuccessful()) { // response가 true 라면 아래 실행
             // 받은 JSON 응답을 객체로 매핑하여 출력
             try {
@@ -385,9 +371,6 @@ public class PayController {
                 String quantity = root.get("quantity").asText(); // 상품 수량
                 String approved_at = root.get("approved_at").asText(); // 결재 승인 시각
                 String canceled_at = root.get("canceled_at").asText(); // 결재 취소 시각
-                
-                System.out.println(tid1);
-                System.out.println(partner_order_id);
                 
                 String message = "환불이 완료되었습니다.";
                 

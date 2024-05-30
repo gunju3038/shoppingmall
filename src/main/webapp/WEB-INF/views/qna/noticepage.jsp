@@ -88,7 +88,6 @@ a:link, a:visited {
 <title>Insert title here</title>
 </head>
 <body>
-
 <div class="container">
     <h2 class="pagetitle">공지사항</h2>
 <div class="row">
@@ -118,9 +117,7 @@ a:link, a:visited {
       
       <c:if test="${paging.startPage!=1 }"> <!-- 현재 페이지가 1페이지가 아니라면 -->
          <a href="notice?nowPage=${paging.startPage-1 }&cntPerPage=${paging.cntPerPage}">◀</a> <!--"page?nowPage=${paging.startPage-1 } = 시작 페이지에서 -1 빼서 넘김 -->
-         
       </c:if>   
-      
          <c:forEach begin="${paging.startPage }" end="${paging.endPage}" var="p"> 
             <c:choose>
                <c:when test="${p == paging.nowPage }"> <!-- 현재 페이지를 빨갛게 표시 -->
@@ -135,7 +132,6 @@ a:link, a:visited {
          <c:if test="${paging.endPage != paging.lastPage}">
          <a href="notice?nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage }">▶</a>
       </c:if>
-      
       </td>
    </tr>
 <!-- 페이징처리 -->

@@ -87,7 +87,6 @@ h5{
 		<option value="상의">상의</option>
 		<option value="하의">하의</option>
 		<option value="아우터">아우터</option>
-		
 	</select>	
 	<input type="text" name="search_value" >
 	<label for="product_search" style="border: 1px solid; width: 40px; height: 26px;"><h5>검색</h5></label> 
@@ -100,7 +99,6 @@ h5{
 				    <th class="adminouttd">이미지</th>
 				    <th class="adminouttd">분류</th>
 				    <th class="adminouttd">상품명</th>
-				    
 				    <th class="adminouttd">사이즈 별 재고</th>
 				    <th class="adminouttd">상품금액</th>
 				    <th  class="adminouttd" style="width: 150px;">비고</th>
@@ -165,7 +163,7 @@ function deleteProduct(snum) {
 	}
 }
 function modifyProduct(snum) {
-    window.location.href = "modifyProduct?snum=" + snum; 
+    window.location.href = "updateproductview?snum=" + snum; 
 }
 </script>
 </body>

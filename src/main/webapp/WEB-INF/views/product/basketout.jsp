@@ -7,7 +7,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <style type="text/css">
 a{
 	text-decoration: none;
@@ -22,7 +21,6 @@ h5{
     font-size: 15px;
     line-height: 4px;
 }
-
 .baskettable {
   border-top: solid 2px black;
   border-collapse: collapse;
@@ -45,7 +43,6 @@ h5{
     min-width:1360px;
     left:330px;
     position: absolute;
-
 }
 
 .cart_list_detail td:nth-child(1) { /* 이미지가 있는 두 번째 열의 td 요소를 선택합니다. */
@@ -87,7 +84,6 @@ h5{
   display: flex;
   margin: auto;
 }
-
 .cart_btn {
   width: 170px;
   height: 50px;
@@ -113,7 +109,6 @@ h5{
 input[type="number"]{
 	width:50px;
 }
-
 </style>
 <meta charset="UTF-8">
 <title>장바구니</title>
@@ -137,7 +132,6 @@ input[type="number"]{
 						<!-- 선택 -->
                         <td class="baskettd">
                             <input type="checkbox" name="item" value="${aa.basketnum }" class="checkitem" style="width: 17px; height: 17px;">
-                            
                         </td>  
 						<!-- 이미지 -->
 						<td class="baskettd">
@@ -180,7 +174,6 @@ input[type="number"]{
                         	</c:choose>
                             <p>재고 : ${aa.stock }</p>
                         </td>
-             
                         <!-- 가격 -->
                         <td class="baskettd">
                             <span id="totpriceview_${loop.index}">  
@@ -214,12 +207,8 @@ input[type="number"]{
       </div>
          
 </form>
-
 </div>
-
-
 <script>
-
 $(document).ready(function() {
     // 수량이 변경되었을 때 총 가격 업데이트
     $('input[name="guestbuysu"]').change(function() {
@@ -328,10 +317,8 @@ function checkNumber(element) {
 	    element.value = 1;  // 숫자가 아니면 1로 설정
 	  } else if (value > max) {
 	    element.value = max;  // 최대값을 초과하면 최대값으로 설정
-	  
 	}
 }
-
 </script>
 </body>
 </html>

@@ -6,16 +6,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -34,12 +29,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.ezen.haha.mypage.CouponDTO;
-import com.ezen.haha.qna.PageDTO;
-
-
-
-
 
 @Controller
 public class QnaController {
@@ -47,7 +36,6 @@ public class QnaController {
 	SqlSession sqlSession;
 
 	String imagepath = "C:\\이젠디지탈12\\spring\\shoppingmall-master\\src\\main\\webapp\\resources\\qnaimg";
-	private static final Logger logger = LoggerFactory.getLogger(QnaController.class);
 
 	//고객센터 main
 	@RequestMapping(value = "/qnahome")
@@ -65,7 +53,6 @@ public class QnaController {
 		        int qnastate = ((BigDecimal) status.get("QNASTATE")).intValue();
 		        BigDecimal count = (BigDecimal) status.get("COUNT(*)");
 
-
 		        if (qnastate == 1) {
 		            qnasuccess = count.intValue();
 		        } else {
@@ -78,11 +65,10 @@ public class QnaController {
 
 		    return "qnahome";
 		}
-
 	
-	//공지사항
+	// 고객센터 공지사항출력화면
 	@RequestMapping(value = "/notice")
-	public String qna2(HttpServletRequest request, com.ezen.haha.qna.PageDTO dto , Model mo) {
+	public String notice(HttpServletRequest request, com.ezen.haha.qna.PageDTO dto , Model mo) {
 		String nowPage=request.getParameter("nowPage");
         String cntPerPage=request.getParameter("cntPerPage");
 		Service ss = sqlSession.getMapper(Service.class);
@@ -162,7 +148,6 @@ public class QnaController {
 		HttpSession hs = request.getSession();
 		String id = (String) hs.getAttribute("id");
 		
-		
 		int bnum = Integer.parseInt(request.getParameter("bnum"));
 		Service ss = sqlSession.getMapper(Service.class);
 		ArrayList<QnaDTO> list = ss.contentpage(bnum);
@@ -198,7 +183,7 @@ public class QnaController {
 		}
 	}
 	
-	//수정
+	//공지사항 수정
 	@RequestMapping(value = "/nmodify")
 	public String qna7(HttpServletRequest request,Model mo) throws UnsupportedEncodingException {
 		int bnum = Integer.parseInt(request.getParameter("bnum"));
@@ -374,7 +359,7 @@ public class QnaController {
 		return "redirect:/faq";
 	}
 	
-	//faq수정
+	//FAQ 글 수정
 	@RequestMapping(value = "/fmodifypage")
 	public String qna14(HttpServletRequest request,Model mo) throws UnsupportedEncodingException {
 		int bnum = Integer.parseInt(request.getParameter("bnum"));
@@ -535,7 +520,6 @@ public class QnaController {
 			mo.addAttribute("list", list);
 			return "qnacontentpage";
 		}
-		
 	}
 	
 	// qna 게시판 답글 쓰기 화면으로

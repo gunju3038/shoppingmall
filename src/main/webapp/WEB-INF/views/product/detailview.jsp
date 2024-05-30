@@ -9,63 +9,60 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 <style type="text/css">
-    .clearfix:after { content: ''; display: block; clear: both; float: none; }
-    .slide_wrap { position: relative; width: 900px; margin: auto; padding-bottom: 30px; }
-    .slide_box { width: 100%; margin: auto; overflow-x: hidden; }
-    .slide_content {  float: left; width: 450px; height: 540px; }
-    .slide_content img { width:100%; height:100%;}
-    .slide_btn_box button { 
-    	position: absolute;  
-    	width: 60px; 
-    	height: 60px; 
-    	cursor: pointer; 
-    }
-    .slide_btn_box .slide_btn_prev { 
-    	left: 0px; 
-    	top:40%;
-    	background: rgba(0, 0, 0, 0.2); 
-    	cursor: pointer; 	
-    	border: none;
-    	z-index: 10;	
-    }
-    .slide_btn_prev::before{
-    content: "";
-    width: 40px;
-    height: 70px;
-    opacity: 0.5;
-    background-image: url(resources/image/ico_prenavbar.png);
-    background-repeat: no-repeat;
-    position: absolute;
-    right: 14px;
-    top: -9%;
-    }
-    .slide_btn_box .slide_btn_next { 
-    	right: 0px; 
-    	top:40%;
-    	background: rgba(0, 0, 0, 0.2); 
-    	cursor: pointer; 
-    	border: none;
-    	z-index: 10;	
-    }
-    .slide_btn_next::before{
-    content: "";
-    width: 40px;
-    height: 70px;
-    opacity: 0.5;
-    background-image: url("resources/image/ico_nextnavbar.png");
-    background-repeat: no-repeat;
-    position: absolute;
-    left: 14px;
-    top: -9%;
-    }
-    .slide_pagination { position: absolute; left: 50%; bottom: 0; list-style: none; margin: 0; padding: 0; transform: translateX(-50%); }
-    .slide_pagination .dot { display: inline-block; width: 15px; height: 15px; margin: 0 5px; overflow: hidden; background: #ddd; border-radius: 50%; transition: 0.3s; }
-    .slide_pagination .dot.dot_active { background: #333; }
-    .slide_pagination .dot a { display: block; width: 100%; height: 100%; }
-
-
+.clearfix:after { content: ''; display: block; clear: both; float: none; }
+.slide_wrap { position: relative; width: 900px; margin: auto; padding-bottom: 30px; }
+.slide_box { width: 100%; margin: auto; overflow-x: hidden; }
+.slide_content {  float: left; width: 450px; height: 540px; }
+.slide_content img { width:100%; height:100%;}
+.slide_btn_box button { 
+	position: absolute;  
+	width: 60px; 
+	height: 60px; 
+	cursor: pointer; 
+}
+.slide_btn_box .slide_btn_prev { 
+	left: 0px; 
+	top:40%;
+	background: rgba(0, 0, 0, 0.2); 
+	cursor: pointer; 	
+	border: none;
+	z-index: 10;	
+}
+.slide_btn_prev::before{
+	content: "";
+	width: 40px;
+	height: 70px;
+	opacity: 0.5;
+	background-image: url(resources/image/ico_prenavbar.png);
+	background-repeat: no-repeat;
+	position: absolute;
+	right: 14px;
+	top: -9%;
+}
+.slide_btn_box .slide_btn_next { 
+	right: 0px; 
+	top:40%;
+	background: rgba(0, 0, 0, 0.2); 
+	cursor: pointer; 
+	border: none;
+	z-index: 10;	
+}
+.slide_btn_next::before{
+	content: "";
+	width: 40px;
+	height: 70px;
+	opacity: 0.5;
+	background-image: url("resources/image/ico_nextnavbar.png");
+	background-repeat: no-repeat;
+	position: absolute;
+	left: 14px;
+	top: -9%;
+}
+.slide_pagination { position: absolute; left: 50%; bottom: 0; list-style: none; margin: 0; padding: 0; transform: translateX(-50%); }
+.slide_pagination .dot { display: inline-block; width: 15px; height: 15px; margin: 0 5px; overflow: hidden; background: #ddd; border-radius: 50%; transition: 0.3s; }
+.slide_pagination .dot.dot_active { background: #333; }
+.slide_pagination .dot a { display: block; width: 100%; height: 100%; }
 .main{
 	display: flex;
 	justify-content: center;
@@ -95,7 +92,6 @@
 	color:#444; 
 	text-align: left;
 }
-
 .option table input { 
 	width:44px; 
 	height: 30px; 
@@ -134,8 +130,6 @@
   border: none;
 }
 
-
-
 #dynamicULArea ul {
   padding:5px;
   margin: 30px 0;
@@ -159,7 +153,6 @@ input[type="number"] {
   height: 30px; /* 인풋 높이 조절 */
   text-align: center; /* 수량 입력값 중앙 정렬 */
   border: none;
-  
 }
 .btn-wrapper {
   display: flex;
@@ -178,8 +171,6 @@ input[type="number"] {
   height: 30px; /* 버튼 높이 조절 */
   vertical-align: middle;
 }
-
-
 .minus {
   background-image: url("resources/image/ico_minus.png"); /* 이미지 경로 설정 */
   background-repeat: no-repeat;
@@ -226,7 +217,6 @@ input[type="number"] {
     <div class="slide_wrap">
       <div class="slide_box">
         <div class="slide_list clearfix">
-  
           <c:set var="imageArray" value="${fn:split(aa.image, ',')}" />
 			<c:forEach items="${imageArray}" var="imageName" varStatus="loop">
 				<div class="slide_content slide${loop.index }">		   					
@@ -234,20 +224,14 @@ input[type="number"] {
   				</div>	
 			</c:forEach>
         </div>
-        <!-- // .slide_list -->
       </div>
-      <!-- // .slide_box -->
       <div class="slide_btn_box">
         <button type="button" class="slide_btn_prev"></button>
         <button type="button" class="slide_btn_next"></button>
       </div>
-      <!-- // .slide_btn_box -->
       <ul class="slide_pagination"></ul>
-      <!-- // .slide_pagination -->
     </div>
-    <!-- // .slide_wrap -->
   </div>
-  <!-- // .container -->
 <div class="option">
 <h2> ${aa.sname }</h2>
 	<table>
@@ -289,39 +273,24 @@ input[type="number"] {
 		</tr>
 	</table>
 	<input type="hidden" value="${aa.snum }" name="snum">
-	
 	<div id="dynamicULArea"></div>
       <div class="product_mainbtns">
             <button class="product_btn left" onclick="submitfrom('./basket')">장바구니</button>
             <button class="product_btn right"  onclick="submitfrom('./directBuy')">바로구매</button>
       </div>
-
 </div>
-<c:set var="imageArray" value="${fn:split(aa.image, ', ')}" />
-<c:if test="${not empty imageArray}">
-    <div >
-    <!-- 이미지 첫번째만 가져가기 -->
-        
-    </div>
-</c:if>
-</c:forEach>
-	
+</c:forEach>	
 </section>
-
 </form>
 
 <section class="info">
 	<div style="text-align: center;">
 		<h2 style="text-align: center;">상품설명</h2>
-		<img src="${pageContext.request.contextPath}${visual_image}" width="600px" height="600px" 
-     	style="max-width:100%; height:auto;">
-
-
+		<img src="${pageContext.request.contextPath}${visual_image}" width="600px" height="600px" style="max-width:100%; height:auto;">
 	</div>
 </section>
 <section class="reivew">
 <h2 style="text-align: center;">상품리뷰</h2>
-			
 		<c:forEach items="${list1 }" var="bb">
 			<div class="reviewDiv">
 			    <div class="reviewInfo">
@@ -345,13 +314,10 @@ input[type="number"] {
 			        <img alt="" src="./image/${bb.bpicture}" width="140px" height="140px">
 			    </div>
 			    </c:if>
-			    
 			        <p>${bb.bcontent}</p>
 			    </div>
-				
 			</div>
 		</c:forEach>
-
 </section>
 
 <script type="text/javascript">
@@ -436,7 +402,6 @@ function removeul(element) {
 	}
 // 새로운 리스트 아이템을 추가하는 함수
 
-
 function numbercommas(a) {
     return a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); // 0,000원 결과값을 만들기 위한 정규식
 }
@@ -448,11 +413,6 @@ function totalprice() {
     document.getElementById("totpriceview").innerText = numbercommas(totprice) + "원";
 }
 
-
-
-
-
-
 function submitfrom(action) {
 	var form = document.getElementById('formchoice');
 	var guestbuysuElement = document.getElementById('guestbuysu');
@@ -462,15 +422,9 @@ function submitfrom(action) {
         alert('구매 수량과 색상을 선택해야 합니다.');
         return false; 
     }
-	
 	form.action = action;
 	form.submit();
 }
-	
-
-
-
-
 
 (function () {
     const slideList = document.querySelector('.slide_list');  // Slide parent dom
@@ -571,8 +525,6 @@ function submitfrom(action) {
       });
     });
   })();
-
 </script>
-
 </body>
 </html>

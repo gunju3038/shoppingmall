@@ -7,7 +7,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 var email;
-
 $(document).ready(function(){
     $('#selectemail').change(function() {
         var selectedValue = $(this).val();
@@ -41,9 +40,6 @@ function submitUpdatedemail() {
     
     window.opener.postMessage({ type: 'emailUpdate', data: updatedEmailData }, '*');
 }
-
-
-
 
 </script>
 <meta charset="UTF-8">

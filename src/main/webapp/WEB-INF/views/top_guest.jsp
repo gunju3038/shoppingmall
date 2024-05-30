@@ -5,10 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
-
-
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
 .amdinline{ 
@@ -40,18 +36,14 @@
     color: #3B5249;
     transition: color 0.3s ease, text-decoration 0.3s ease;
 }
-
 .admintd a:hover {
     text-decoration: underline;
     color: #1D2D50;
 }
-
 .bottomline{
 	padding-bottom: 3px;
 	border-bottom: 1px solid black;
 }
-
-
 body {
 	width: 100%;
 	margin: 0;
@@ -78,7 +70,6 @@ p{
 	position: relative;
 	z-index: 100;
 }
-
 .header_logo{
 	position: relative;
 	float: left;
@@ -94,10 +85,8 @@ p{
 	background: url("resources/image/img_logo.png") no-repeat;
 	vertical-align: middle;
 }
-
 .header_util{ 
 	float: right;
-	
 }
 .header_util span{ 
 	display: inline-block;
@@ -109,7 +98,6 @@ p{
 .header_util span a{
 	color: #fff;
 }
-
 .header_gnb{
 	position: absolute;
 	display: flex;
@@ -143,19 +131,16 @@ p{
     opacity: 0; /* 초기에 투명하게 설정 */
     pointer-events: none; /* 해당 요소에 마우스 이벤트 비활성화 */
 } 
-
 .gnb_category:hover .depth2 {
     opacity: 1; /* 마우스를 올릴 때 투명도를 1로 변경하여 보이도록 함 */
     pointer-events: auto; /* 마우스 이벤트 활성화 */
     
 }
-
 .depth2 a{
 	color: #000;
 	font-size: 14px;
 	font-weight: 400;
 }
-
 .gray{
     position: fixed;
     top: 0;
@@ -168,10 +153,6 @@ p{
     opacity: 0; /* 초기에 투명하게 설정 */
     display: none;
 }
-
-
-
-
 </style>
 </head>
 <body>
@@ -237,14 +218,10 @@ p{
 </div>
 <div class="gray"></div>
 <div class="amdinline"></div>
-
-
 	<table width="200px" align="left" class="admintable">
 		<tr>
 			<th class="adminth"><a href="mypage">MYPAGE</a></th>
 		</tr>
-		
-		
 		<tr>
 			<th class="adminth">쇼핑정보</th>
 		</tr>
@@ -257,8 +234,6 @@ p{
 		<tr>
 			<td class="admintd"><a href="basketout">장바구니</a></td>
 		</tr>
-		
-		
 		<tr>
 			<th class="adminth">혜택정보</th>
 		</tr>
@@ -268,8 +243,6 @@ p{
 		<tr>
 			<td class="admintd"><a href="mileageview">마일리지</a></td>
 		</tr>
-		
-		
 		<tr>
 			<th class="adminth">참여 & 문의</th>
 		</tr>
@@ -279,9 +252,6 @@ p{
 		<tr>
 			<td class="admintd"><a href="myproductreview">상품 리뷰</a></td>
 		</tr>
-		
-		
-		
 		<tr>
 			<th class="adminth">회원정보</th>
 		</tr>
@@ -295,9 +265,6 @@ p{
 			<td class="admintd"><a href="membershipdeleteview">회원 탈퇴</a></td>
 		</tr>
 	</table>
-
-
-
 <script>
     // JavaScript로 hover 이벤트 처리
     var gnbCategories = document.querySelectorAll('.gnb_category');

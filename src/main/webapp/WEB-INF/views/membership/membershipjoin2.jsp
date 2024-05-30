@@ -78,9 +78,15 @@ a{
 }
 
 .member-footer {
-   
+    text-align: center;
+    font-size: 12px;
+    margin-top: 20px;
 }
 
+.member-footer div a:hover{
+    text-decoration: underline;
+    color:#2db400;
+}
 
 .member-footer div a:after{
     content:'|';
@@ -138,9 +144,6 @@ input[type="password"]
 }
 .submitgo:hover {
   background: #000000;
-}
-#pw_error1, #pw_error{
-	font-size: 11px;
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -246,7 +249,7 @@ $(document).ready(function(){
         $('#pw').on('input', function() {
             var pw = $(this).val();
             if (!pwcheck1(pw)) {
-                $('#pw_error1').text('비밀번호는 영문자, 숫자, 특수문자를 포함하여 8자 이상이어야 합니다.').css('color', 'red');
+                $('#pw_error1').text('비밀번호는 영문자, 숫자, 특수문자를 모두 포함하여 8자 이상이어야 합니다.').css('color', 'red');
             } else {
                 $('#pw_error1').html('&#10003;').css('color', 'green');
                 
@@ -256,7 +259,6 @@ $(document).ready(function(){
             var regex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
             return regex.test(pw);
         }
-        
         
         $('#pw_check').on('input', function() {
             var pw = $('#pw').val();
@@ -293,7 +295,7 @@ $(document).ready(function(){
     });
     
     
-		//이메일 선택
+    $(document).ready(function(){
         $('#selectemail').change(function() {
             var selectedValue = $(this).val();
             var emailInput = $('input[name="email2"]');
@@ -304,11 +306,20 @@ $(document).ready(function(){
                 emailInput.prop("disabled", true).val(selectedValue);
             }
 
-            var email1 = $('input[name="email1"]').val();
-            var selected_email = emailInput.val();
-            var email = email1 + "@" + selected_email;
-            $('input[name="email"]').val(email);
+            updateEmail();
         });
+
+        $('input[name="email1"], input[name="email2"]').on('input', function() {
+            updateEmail();
+        });
+
+        function updateEmail() {
+            var email1 = $('input[name="email1"]').val();
+            var email2 = $('input[name="email2"]').val();
+            var email = email1 + "@" + email2;
+            $('input[name="email"]').val(email);
+        }
+    });
 
 
         function update_tel() {
@@ -392,12 +403,12 @@ function sample6_execDaumPostcode() {
 	</div>
 	<div class="field">
     <b>비밀번호</b>
-	<input type="password" id="pw" name="pw"><br>
+	<input type="password" id="pw" name="pw">
 	<span id="pw_error1" class="error-message1"></span>
 	</div>
 	<div class="field">
     <b>비밀번호 재확인</b>
-        <input type="password" id="pw_check"><br>
+        <input type="password" id="pw_check">
         <span id="pw_error" class="error-message"></span>
     </div>
 	<div class="field">
@@ -435,7 +446,7 @@ function sample6_execDaumPostcode() {
 	
 	<!-- 주민번호 -->
 	<div class="field birth">
-	<b>주민등록번호</b>
+	<b>주민번호</b>
 	<input type="text" name="pid1" maxlength="6" class="textbox1" id="pid1">
 	<span style="font-size: 20px; font-weight: bold; vertical-align: middle;">-</span>
 	<input type="password" name="pid2" maxlength="7" class="textbox1" id="pid2">
@@ -452,7 +463,17 @@ function sample6_execDaumPostcode() {
 	</div>
 	 <button type="submit" class="submitgo" id="go">가입하기</button>
 </div>
-
+	
+	<!-- 푸터 -->
+        <div class="member-footer">
+            <div>
+                <a href="#none">이용약관</a>
+                <a href="#none">개인정보처리방침</a>
+                <a href="#none">책임의 한계와 법적고지</a>
+                <a href="#none">회원정보 고객센터</a>
+            </div>
+            <span><a href="#none">Snack Closet.</a></span>
+         </div>
 </form>
 </body>
 </html>

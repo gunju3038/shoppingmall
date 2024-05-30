@@ -13,21 +13,17 @@
    box-sizing: border-box;       
    font-family: 'Noto Sans KR', sans-serif;
 }
-
 .container {
   text-align: center;
   margin-top: 5%;
   margin-left: auto;
   margin-right: auto;
-  
 }
-
 h2 {
   margin-bottom: 30px;
   margin-top: 5%;
   font-family: 'Noto Sans KR', sans-serif;
 }
-
 .menu_box {
     background-color: #ffffff;
     border: 1px solid transparent;
@@ -42,13 +38,11 @@ h2 {
     width: 90%;
     margin: 0 auto;
 }
-
 .nav {
     position: relative;
     display: flex;
     align-items: center;
 }
-
 .item {
     padding: 15px 20px;
     margin: 0 10px;
@@ -58,17 +52,14 @@ h2 {
     transition: 0.5s;
     flex-shrink: 0;
 }
-
 .item:hover {
     color: #51829B;
 }
-
 .item.active,
 .item.active:hover {
     color: #35374B;
     border-bottom: 2px solid #35374B;
 }
-
 .indicator {
     position: absolute;
     left: 0;
@@ -80,14 +71,12 @@ h2 {
     transform: translateX(var(--transformJS));
     transition: 0.5s;
 }
-
 .myqna {
   background-color: #EAD8C0;
   padding: 20px; 
   border-radius: 10px;
   margin-top: 20px;
   color: #222831;
-  
 }
 
 .myqna dl {
@@ -153,7 +142,6 @@ function fetchData(status) {
         data: { status: status },
         dataType: "json",
         success: function(data) {
-            console.log(data);
             updateTable(data);
         },
         error: function(xhr, textStatus, errorThrown) {
@@ -230,11 +218,6 @@ $(document).ready(function() {
     });
 });
 </script>
-<script>
-    var membership = {
-        id: "${membership.id}"
-    };
-</script>
 </head>
 <body>
 <div class="container">
@@ -260,7 +243,6 @@ $(document).ready(function() {
                 </dl>
             </div>
             <div class="container2">
-               
             </div>
          </c:when>
          <c:otherwise>
@@ -268,7 +250,7 @@ $(document).ready(function() {
                 <dl>
                     <dt>MY문의 진행현황</dt>
                     <dd>문의를 보기 위해선 로그인 해주세요.</dd>
-                    <a href="login">로그인</a>
+					<dd><a href="login"> 로그인</a></dd>
                 </dl>
             </div>
         </c:otherwise>

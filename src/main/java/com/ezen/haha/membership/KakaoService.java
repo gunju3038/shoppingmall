@@ -15,102 +15,102 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class KakaoService{
 
-	public String getAccessToken(String authorize_code) throws Throwable {
-		String access_Token = "";
-		String refresh_Token = "";
-		String reqURL = "https://kauth.kakao.com/oauth/token";
+   public String getAccessToken(String authorize_code) throws Throwable {
+      String access_Token = "";
+      String refresh_Token = "";
+      String reqURL = "https://kauth.kakao.com/oauth/token";
 
-		try {
-			URL url = new URL(reqURL);
+      try {
+         URL url = new URL(reqURL);
 
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-			conn.setRequestMethod("POST");
-			conn.setDoOutput(true);
+         conn.setRequestMethod("POST");
+         conn.setDoOutput(true);
 
-			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
-			StringBuilder sb = new StringBuilder();
-			sb.append("grant_type=authorization_code");
+         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+         StringBuilder sb = new StringBuilder();
+         sb.append("grant_type=authorization_code");
 
-			sb.append("&client_id=e3b75c80af4089c257294b73789f4644"); //REST APIŰ �Է�
-			sb.append("&redirect_uri=http://localhost:8686/haha/kakaologin"); //redirect_uri �Է�
+         sb.append("&client_id=c2b76515c2fe51b437e55701d58b14ce"); //REST API 
+         sb.append("&redirect_uri=http://localhost:8686/haha/kakaologin"); //redirect_uri   
 
-			sb.append("&code=" + authorize_code);
-			bw.write(sb.toString());
-			bw.flush();
+         sb.append("&code=" + authorize_code);
+         bw.write(sb.toString());
+         bw.flush();
 
-			int responseCode = conn.getResponseCode();
+         int responseCode = conn.getResponseCode();
 
-			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			String line = "";
-			String result = "";
+         BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+         String line = "";
+         String result = "";
 
-			while ((line = br.readLine()) != null) {
-				result += line;
-			}
+         while ((line = br.readLine()) != null) {
+            result += line;
+         }
 
-			ObjectMapper objectMapper = new ObjectMapper();
-			// JSON String -> Map
-			Map<String, Object> jsonMap = objectMapper.readValue(result, new TypeReference<Map<String, Object>>() {
-			});
+         ObjectMapper objectMapper = new ObjectMapper();
+         // JSON String -> Map
+         Map<String, Object> jsonMap = objectMapper.readValue(result, new TypeReference<Map<String, Object>>() {
+         });
 
-			access_Token = jsonMap.get("access_token").toString();
-			refresh_Token = jsonMap.get("refresh_token").toString();
+         access_Token = jsonMap.get("access_token").toString();
+         refresh_Token = jsonMap.get("refresh_token").toString();
 
-			br.close();
-			bw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return access_Token;
-	}
-	
-	
-	
-	public HashMap<String, Object> getUserInfo(String access_Token) throws Throwable {
-		HashMap<String, Object> userInfo = new HashMap<String, Object>();
-		String reqURL = "https://kapi.kakao.com/v2/user/me";
+         br.close();
+         bw.close();
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+      return access_Token;
+   }
+   
+   
+   
+   public HashMap<String, Object> getUserInfo(String access_Token) throws Throwable {
+      HashMap<String, Object> userInfo = new HashMap<String, Object>();
+      String reqURL = "https://kapi.kakao.com/v2/user/me";
 
-		try {
-			URL url = new URL(reqURL);
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("GET");
+      try {
+         URL url = new URL(reqURL);
+         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+         conn.setRequestMethod("GET");
 
-			conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+         conn.setRequestProperty("Authorization", "Bearer " + access_Token);
 
-			int responseCode = conn.getResponseCode();
+         int responseCode = conn.getResponseCode();
 
-			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-			
-			String line = "";
-			String result = "";
+         BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+         
+         String line = "";
+         String result = "";
 
-			while ((line = br.readLine()) != null) {
-				result += line;
-			}
+         while ((line = br.readLine()) != null) {
+            result += line;
+         }
 
-			try {
-				ObjectMapper objectMapper = new ObjectMapper();
-				Map<String, Object> jsonMap = objectMapper.readValue(result, new TypeReference<Map<String, Object>>() {
-				});
+         try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            Map<String, Object> jsonMap = objectMapper.readValue(result, new TypeReference<Map<String, Object>>() {
+            });
 
-				Map<String, Object> properties = (Map<String, Object>) jsonMap.get("properties");
-				Map<String, Object> kakao_account = (Map<String, Object>) jsonMap.get("kakao_account");
+            Map<String, Object> properties = (Map<String, Object>) jsonMap.get("properties");
+            Map<String, Object> kakao_account = (Map<String, Object>) jsonMap.get("kakao_account");
 
-				
-				String email = kakao_account.get("email").toString();
-				
-				
-				userInfo.put("email", email);
+            
+            String email = kakao_account.get("email").toString();
+            
+            
+            userInfo.put("email", email);
 
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+         } catch (Exception e) {
+            e.printStackTrace();
+         }
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return userInfo;
-	}
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+      return userInfo;
+   }
 
 }

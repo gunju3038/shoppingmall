@@ -5,7 +5,6 @@
 <html>
 <head>
 <style type="text/css">
-
 .container {
     width: 600px;
     height: auto;
@@ -125,7 +124,6 @@ h2 {
            <option value="회원문의">회원문의</option>
        </select>
    </div>
-   
    <div class="inputform">
       <label for="btitle">제목</label>
       <input type="text" class="form-control" name="btitle" id="btitle" value="${aa.btitle}">
@@ -275,7 +273,6 @@ h2 {
        }
      }
    )('att_zone', 'btnAtt')
-   
 
 $(document).ready(function(){
    $("#btnSave").click(function(event){

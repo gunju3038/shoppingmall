@@ -22,7 +22,6 @@
 </style>
 </head>
 <body>
-
 <div class="bankDiv">
 	<p>아래 계좌번호로 입금 부탁드립니다.</p>
 	<p>은행명: ${bankChoice}은행</p>

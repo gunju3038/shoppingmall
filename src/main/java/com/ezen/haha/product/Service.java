@@ -44,15 +44,6 @@ public interface Service {
 
 	int jaegocheck(int snum, String ssize, String color, int guestbuysu);
 
-	void updateproductmainimage(int newsnum, String sname, String stype, int su, int price, String ssize, String color,
-			String image, String intro, int best, int snum);
-
-	void updateproductsideimage1(String sideimage1, int snum);
-
-	void updateproductsideimage2(String sideimage2, int snum);
-
-	void updateproductsideimage3(String sideimage3, int snum);
-
 	String countfind();
 
 	void productreviewsave(int snum, String sname, String id, String btitle, String bcontent, String fname, int productrank, String image);
@@ -78,8 +69,6 @@ public interface Service {
 	int totalKeyValue(String searchKey, String searchValue);
 
 	ArrayList<ProductDTO> searchOutKeyValue(String searchKey, String searchValue, int start, int end);
-
-	String selectFile(int snum);
 
 	void productinsert(int snum, String sname, String stype, String stype_sub, int price, int ssize, int msize,
 			int lsize, int xlsize, String color, String fname, int best2, int best, int i);
@@ -164,8 +153,8 @@ public interface Service {
 
 	void productReviewDelete(int bnum);
 
-
-
+	void productupdate(String sname, String stype, String stype_sub, int price, int ssize, int msize, int lsize,
+			int xlsize, String fname, String intro, int best, int recommend, int snum);
 
 
 

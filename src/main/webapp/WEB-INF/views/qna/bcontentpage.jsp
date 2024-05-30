@@ -13,8 +13,6 @@
     height: 650px;
     margin-top: 10%;
 }
-
-
 th{
    text-align: center;
    background-color: #31363F;
@@ -43,44 +41,43 @@ pre {
       <table class="table">
          <c:forEach items="${list}" var="aa">
         <tr>
-         <th>제목</th>
-         <td>${aa.btitle}</td>
+        	<th>제목</th>
+         	<td>${aa.btitle}</td>
         </tr>
         <tr>
-         <th>작성일</th>
-         <td>${aa.bdate}</td>
+         	<th>작성일</th>
+         	<td>${aa.bdate}</td>
         </tr>
         <tr>
-         <th>작성자</th>
-         <td>
-         ${aa.bid}
-         <input type="hidden" name="bnum" value="${aa.bnum}">
-         </td>
+         	<th>작성자</th>
+         	<td>
+	        	 ${aa.bid}
+	        	<input type="hidden" name="bnum" value="${aa.bnum}">
+         	</td>
         </tr>
         <tr>
-       <td colspan="4" class="text-left" valign="top" height="300">
-           <img alt="" id="bpicture" src="${pageContext.request.contextPath}/resources/qnaimg/${aa.bpicture}" style="max-width: 100%; height: auto;">
-           <div>
-               <pre style="white-space: pre-wrap;border:none;background-color: white;">${aa.bcontent}</pre>    
-           </div>
-       </td>
-      </tr>
-        <tr>
+     		<td colspan="4" class="text-left" valign="top" height="300">
+           		<img alt="" id="bpicture" src="${pageContext.request.contextPath}/resources/qnaimg/${aa.bpicture}" style="max-width: 100%; height: auto;">
+	           	<div>
+	               <pre style="white-space: pre-wrap;border:none;background-color: white;">${aa.bcontent}</pre>    
+	           	</div>
+       		</td>
+       </tr>
+       <tr>
           <td colspan="4" class="text-right">
-          <c:choose>
-          <c:when test="${id eq 'admin' or id eq aa.bid}">
-            <a href="nmodify?bnum=${aa.bnum}" class="btn btn-xs btn-info">수정</a>
-            <a href="#" class="btn btn-xs btn-warning" id="delbnt">삭제</a>
-            </c:when>
-            </c:choose>
-            <a href="notice" class="btn btn-xs btn-success">목록</a>
+	          <c:choose>
+		          <c:when test="${id eq 'admin' or id eq aa.bid}">
+		            <a href="nmodify?bnum=${aa.bnum}" class="btn btn-xs btn-info">수정</a>
+		            <a href="#" class="btn btn-xs btn-warning" id="delbnt">삭제</a>
+		          </c:when>
+	          </c:choose>
+	          <a href="notice" class="btn btn-xs btn-success">목록</a>
           </td>
-        </tr>
-        </c:forEach>
-      </table>
-     </div>
-   </div>
-   
+       </tr>
+       </c:forEach>
+     </table>
+    </div>
+  </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){

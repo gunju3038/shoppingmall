@@ -65,12 +65,7 @@ h2 {
     margin-bottom: 10px;
     margin-top: 3%;
 }
-
-
 </style>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-</script>
 <meta charset="UTF-8">
 <title>상품 리뷰</title>
 </head>

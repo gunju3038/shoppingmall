@@ -9,6 +9,21 @@
 
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+body {
+	width: 100%;
+	margin: 0;
+	overflow-x: hidden;
+	font-family: "Noto Sans KR", sans-serif;
+}
+a{
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: none;
+}
+p{
+	margin: 0;
+}
 .amdinline{ 
 	position: fixed;
 	left:300px;
@@ -26,7 +41,6 @@
 	padding-top: 25px;
 	padding-bottom: 10px;
 	text-align: center;
-	
 }
 .admintd{
 	padding-bottom: 5px;
@@ -38,32 +52,13 @@
     color: #3B5249;
     transition: color 0.3s ease, text-decoration 0.3s ease;
 }
-
 .admintd a:hover {
     text-decoration: underline;
     color: #1D2D50;
 }
-
 .bottomline{
 	padding-bottom: 3px;
 	border-bottom: 1px solid black;
-}
-
-
-body {
-	width: 100%;
-	margin: 0;
-	overflow-x: hidden;
-	font-family: "Noto Sans KR", sans-serif;
-}
-a{
-	text-decoration: none;
-}
-a:hover{
-	text-decoration: none;
-}
-p{
-	margin: 0;
 }
 .header_inner{ 
 	width: calc(100%-120px);
@@ -75,7 +70,6 @@ p{
 	position: relative;
 	z-index: 100;
 }
-
 .header_logo{
 	position: relative;
 	float: left;
@@ -91,7 +85,6 @@ p{
 	background: url("resources/image/img_logo.png") no-repeat;
 	vertical-align: middle;
 }
-
 .header_util{ 
 	float: right;
 	
@@ -106,7 +99,6 @@ p{
 .header_util span a{
 	color: #fff;
 }
-
 .header_gnb{
 	position: absolute;
 	display: flex;
@@ -128,7 +120,6 @@ p{
 	padding: 17px 10px;
 	font-size: 17px;
 	font-weight: 600;
-
 }
 .depth2{
 	position: absolute;
@@ -140,19 +131,16 @@ p{
     opacity: 0; /* 초기에 투명하게 설정 */
     pointer-events: none; /* 해당 요소에 마우스 이벤트 비활성화 */
 } 
-
 .gnb_category:hover .depth2 {
     opacity: 1; /* 마우스를 올릴 때 투명도를 1로 변경하여 보이도록 함 */
     pointer-events: auto; /* 마우스 이벤트 활성화 */
     
 }
-
 .depth2 a{
 	color: #000;
 	font-size: 14px;
 	font-weight: 400;
 }
-
 .gray{
     position: fixed;
     top: 0;
@@ -165,10 +153,6 @@ p{
     opacity: 0; /* 초기에 투명하게 설정 */
     display: none;
 }
-
-
-
-
 </style>
 </head>
 <body>
@@ -229,45 +213,40 @@ p{
 				<a href="product_subList?stype_sub=점퍼" class="depth2_list">점퍼</a>
 			</div>
 		</div>
-		
-		
 	</div>
 </div>
 <div class="gray"></div>
 <div class="amdinline"></div>
-
-<table align="left"; class="admintable">
-	<tr>
-		<th class="adminth">상품 주문 현황</th>
-	</tr>
-	<tr>
-		<td class="admintd"><a href="payoutview">전체 주문 목록 보기</a></td>
-	</tr>
-	<tr>
-		<td class="admintd"><a href="adminrefundview">환불 목록 보기</a></td>
-	</tr>
-	
-	<tr>
-		<th class="adminth">상품 관리 현황</th>
-	</tr>
-	<tr>
-		<td class="admintd"><a href="productinput">상품 입력</a></td>
-	</tr>
-	<tr>
-		<td class="admintd"><a href="productout">상품 목록</a></td>
-	</tr>
-	<tr>
-		<td class="admintd"><a href="productReviewList">리뷰 목록</a></td>
-	</tr>
-	<tr>
-		<th class="adminth">회원 가입 현황</th>
-	</tr>
-	<tr>
-		<td class="admintd"><a href="memberviewall">회원 목록</a></td>
-	</tr>
-</table>
-
-
+	<table align="left"; class="admintable">
+		<tr>
+			<th class="adminth">상품 주문 현황</th>
+		</tr>
+		<tr>
+			<td class="admintd"><a href="payoutview">전체 주문 목록 보기</a></td>
+		</tr>
+		<tr>
+			<td class="admintd"><a href="adminrefundview">환불 목록 보기</a></td>
+		</tr>
+		
+		<tr>
+			<th class="adminth">상품 관리 현황</th>
+		</tr>
+		<tr>
+			<td class="admintd"><a href="productinput">상품 입력</a></td>
+		</tr>
+		<tr>
+			<td class="admintd"><a href="productout">상품 목록</a></td>
+		</tr>
+		<tr>
+			<td class="admintd"><a href="productReviewList">리뷰 목록</a></td>
+		</tr>
+		<tr>
+			<th class="adminth">회원 가입 현황</th>
+		</tr>
+		<tr>
+			<td class="admintd"><a href="memberviewall">회원 목록</a></td>
+		</tr>
+	</table>
 <script>
     // JavaScript로 hover 이벤트 처리
     var gnbCategories = document.querySelectorAll('.gnb_category');

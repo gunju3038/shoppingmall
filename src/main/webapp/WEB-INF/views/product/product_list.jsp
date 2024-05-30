@@ -96,10 +96,8 @@ a{
 	justify-content: space-between;
 }
 </style>
-
 </head>
 <body>
-
 <div class="product_list">
 	<div class="box">
 		<h2>${stype}</h2>
