@@ -351,19 +351,23 @@ public class MembershipController {
 	
 	// 마이페이지 메뉴의 회원 탈퇴 화면 보기
 	@RequestMapping(value = "/membershipdeleteview")
-	public String membershipdeleteview(HttpServletRequest request, Model mo) {
-		HttpSession hs = request.getSession();
-		String id = (String) hs.getAttribute("id");
-		
-		if(id.equals("admin"))
-		{
-			String userid = request.getParameter("id");
-			Service ss = sqlSession.getMapper(Service.class);
-			ArrayList<MembershipDTO> list = ss.membershipsearch(userid); // 쿼리문 재활용
-			mo.addAttribute("list", list);
-			
-			return "membershipdeleteview";
-		}
+   public String membershipdeleteview(HttpServletRequest request, Model mo) {
+      HttpSession hs = request.getSession();
+      String id = (String) hs.getAttribute("id");
+      
+      if(id.equals("admin"))
+      {
+         String userid = request.getParameter("id");
+         if(userid==null)
+         {
+            userid = "admin";
+         }
+         Service ss = sqlSession.getMapper(Service.class);
+         ArrayList<MembershipDTO> list = ss.membershipsearch(userid); // 쿼리문 재활용
+         mo.addAttribute("list", list);
+         
+         return "membershipdeleteview";
+      }
 		else 
 		{
 			Service ss = sqlSession.getMapper(Service.class);
