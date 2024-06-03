@@ -44,22 +44,11 @@ public interface Service {
 
 	int jaegocheck(int snum, String ssize, String color, int guestbuysu);
 
-	void updateproductmainimage(int newsnum, String sname, String stype, int su, int price, String ssize, String color,
-			String image, String intro, int best, int snum);
-
-	void updateproductsideimage1(String sideimage1, int snum);
-
-	void updateproductsideimage2(String sideimage2, int snum);
-
-	void updateproductsideimage3(String sideimage3, int snum);
-
 	String countfind();
 
 	void productreviewsave(int snum, String sname, String id, String btitle, String bcontent, String fname, int productrank, String image);
 
 	ArrayList<ProductreviewDTO> productreviewout(int snum);
-
-	ArrayList<PayDTO> productbuysearch(String id, int snum);
 
 	String stockcheck(int snum, String ssize);
 
@@ -81,10 +70,8 @@ public interface Service {
 
 	ArrayList<ProductDTO> searchOutKeyValue(String searchKey, String searchValue, int start, int end);
 
-	String selectFile(int snum);
-
 	void productinsert(int snum, String sname, String stype, String stype_sub, int price, int ssize, int msize,
-			int lsize, int xlsize, String color, String fname, int best2, int best, String infoname, int i);
+			int lsize, int xlsize, String color, String fname, int best2, int best, int i);
 
 	int duplicateCheck(String id, int snum, String size);
 
@@ -119,6 +106,8 @@ public interface Service {
 	ArrayList<ProductDTO> bestsearchoutlowest(int start, int end);
 
 	ArrayList<ProductDTO> bestsearchouthighest(int start, int end);
+	
+	
 
 	ArrayList<MembershipDTO> payinfodata(String stringSnum);
 
@@ -135,6 +124,38 @@ public interface Service {
 	ArrayList<ProductDTO> bestViewNum();
 
 	ArrayList<ProductreviewDTO> bestReview();
+
+	ProductreviewDTO takeReview(int bnum);
+
+	void visualinsert(int snum);
+
+	int totalSubSearch(String stype_sub);
+
+	ArrayList<ProductDTO> subsearchout(String stype_sub, int start, int end);
+
+	ArrayList<ProductDTO> subsearchoutlowest(String stype_sub, int start, int end);
+
+	ArrayList<ProductDTO> subsearchouthighest(String stype_sub, int start, int end);
+
+	ProductDTO selectReview(int i);
+
+	String getImage(int snum);
+
+	String getSname(int snum);
+
+	ArrayList<ProductreviewDTO> checkReview(String id, int snum);
+
+	String deleteFile(String id, int snum);
+
+	int selectBnum(String id, int snum);
+
+	void productreviewupdate(int bnum, String btitle, String bcontent, String fname, int productrank);
+
+	void productReviewDelete(int bnum);
+
+	void productupdate(String sname, String stype, String stype_sub, int price, int ssize, int msize, int lsize,
+			int xlsize, String fname, String intro, int best, int recommend, int snum);
+
 
 
 }

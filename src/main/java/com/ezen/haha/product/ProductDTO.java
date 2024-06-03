@@ -1,8 +1,9 @@
 package com.ezen.haha.product;
 
 public class ProductDTO {
-   int snum, price, totprice, best, ssize, msize, lsize, xlsize,viewnum ;
-   String sname, stype, stype_sub, color, image, intro,recommend;
+   int snum, price, totprice, best, ssize, msize, lsize, xlsize,viewnum,count;
+   String sname, stype, stype_sub, color, image, intro,recommend,info;
+   double productrank;
    
 
 public ProductDTO() {}
@@ -136,5 +137,30 @@ public int getViewnum() {
 public void setViewnum(int viewnum) {
 	this.viewnum = viewnum;
 }
-   
+
+public String getInfo() {
+	return info;
+}
+
+public void setInfo(String info) {
+	this.info = info;
+}
+
+public int getCount() {
+	return count;
+}
+
+public void setCount(int count) {
+	this.count = count;
+}
+
+public double getProductrank() {
+	return productrank;
+}
+
+public void setProductrank(double productrank) {
+	this.productrank = productrank;
+}
+
+
 }

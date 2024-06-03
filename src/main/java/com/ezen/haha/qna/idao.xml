@@ -6,8 +6,8 @@
  	
  	<!-- 고객센터 글쓰기(공지사항) -->
  	<insert id="noticeinsert">
- 		insert into qna(bnum,bid,btype,btitle,bcontent,bpicture,bdate,bcode)
- 		values (bnum_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},sysdate,#{param6})
+ 		insert into qna(bnum,bid,btype,btitle,bcontent,bpicture,bdate)
+ 		values (bnum_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},sysdate)
  	</insert>
  	
  	<!-- 고객센터 출력(공지사항) -->
@@ -15,7 +15,7 @@
  		select * from (
  		select rownum rn,A.* from(
  		select bnum,bid,btype,btitle,to_char(bdate, 'YY.MM.DD')bdate
- 		from qna where bcode = 'notice' order by bnum desc)A)
+ 		from qna order by bnum desc)A)
  		where rn between #{param1} AND #{param2}
  	</select>
  	
@@ -60,10 +60,73 @@
  		select * from (
  		select rownum rn,A.* from(
  		select bnum,bid,btype,btitle,to_char(bdate, 'YY.MM.DD')bdate
- 		from qna where bcode = 'notice' and btitle like '%'||#{param1}||'%'
+ 		from qna where btitle like '%'||#{param1}||'%'
  		 order by bnum desc)A)
  		where rn between #{param2} AND #{param3}
  	</select>
+	
+	<!-- FAQ 글쓰기 -->
+ 	<insert id="faqinsert">
+ 		insert into faq(bnum,bid,btype,btitle,bcontent,bpicture,bdate)
+ 		values (bnum_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},sysdate)
+ 	</insert>
+ 	
+ 	<!-- faq페이징처리에서 전체레코드수 구하기 -->
+	<select id="total_faq" resultType="int">
+	   select count(*) from faq
+	</select>
+ 	
+ 	<!-- faq 출력 -->
+ 	<select id="faqout" resultType="com.ezen.haha.qna.QnaDTO">
+ 		select * from (
+ 		select rownum rn,A.* from(
+ 		select bnum,bid,btype,btitle,to_char(bdate, 'YY.MM.DD')bdate,bcontent,bpicture
+ 		from faq order by bnum desc)A)
+ 		where rn between #{param1} AND #{param2}
+ 	</select>
+ 	
+	<!-- faq검색시 페이징처리에서 전체레코드수 구하기 -->
+	<select id="faqserchpageing" resultType="int">
+	    select count(*) from faq
+	    where (
+	        <choose>
+	            <when test="param1 == 'btitle'">
+	                btitle like '%'||#{param2}||'%'
+	            </when>
+	            <when test="param1 == 'bcontent'">
+	                bcontent like '%'||#{param2}||'%'
+	            </when>
+	            <otherwise>
+	                (btitle like '%'||#{param2}||'%' or bcontent like '%'||#{param2}||'%')
+	            </otherwise>
+	        </choose>
+	    )
+	</select>
+
+	<!-- faq검색 -->
+	<select id="faqserch" resultType="com.ezen.haha.qna.QnaDTO">
+	    select * from (
+	        select rownum rn, A.* from (
+	            select bnum, bid, btype, btitle, to_char(bdate, 'YY.MM.DD') bdate, bcontent, bpicture
+	            from faq
+	            where (
+	                <choose>
+	                    <when test="param1 == 'btitle'">
+	                        btitle like '%'||#{param2}||'%'
+	                    </when>
+	                    <when test="param1 == 'bcontent'">
+	                        bcontent like '%'||#{param2}||'%'
+	                    </when>
+	                    <otherwise>
+	                        (btitle like '%'||#{param2}||'%' or bcontent like '%'||#{param2}||'%')
+	                    </otherwise>
+	                </choose>
+	            )
+	            order by bnum desc
+	        ) A
+	    )
+	    where rn between #{param3} AND #{param4}
+	</select>
 	
 	<!-- qna 글쓰기 DB에 저장 -->
 	<insert id="qnainsert">
@@ -142,13 +205,62 @@
  		 order by bnum desc)A)
  		where rn between #{param2} AND #{param3}
  	</select>
+	
+	<!-- qna 게시글 수정 -->
+	<update id="qnastateupdate">
+    	update qnaboard set qnastate=1 where bid=#{param2} and bnum=#{param3}
+	</update>
+	
+	<!-- 나의 qna 상태   -->
+	<select id="myqnastate" resultType="map">
+		select qnastate, count(*)
+	    from qnaboard
+	    where bid = #{param1, jdbcType=VARCHAR}
+	    group by qnastate
+	</select>
+	
+	<!-- qnamain 게시판 검색 시 페이징 처리에 필요한 카운트  -->
+	<select id="qnamaintotal" resultType="int">
+	   select count(*) from qnaboard where bid=#{param1}
+	</select>
+	
+	<select id="qnabnumsearch" resultType="int">
+		select bnum from qnaboard where bid = #{param1}
+	</select>
+	
+	<!-- qna 게시판 답변전 출력 -->
+ 	<select id="qnamainsearch" resultType="com.ezen.haha.qna.QnaDTO">
+ 		<![CDATA[
+     	select * from (
+ 		select bnum,bid,btype,btitle,to_char(bdate, 'YY.MM.DD')bdate,groups,step,indent,secret
+ 		from qnaboard where bid = #{param1} and qnastate=0
+ 		order by bnum desc)
+ 		where rownum <= 5
+       ]]>
+ 	</select>
  	
- 	<!-- 마이페이지 문의내역 출력 -->
+ 	<!-- qna 게시판 답변완료 bnum가져오기 -->
+ 	<select id="numberget" resultType="int">
+		select bnum from qnaboard where bid = #{param1}
+	</select>
+ 	
+ 	<!-- qna 게시판 답변완료 출력 -->
+ 	<select id="qnamainsuccess" resultType="com.ezen.haha.qna.QnaDTO">
+    select bnum, bid, btype, btitle, to_char(bdate, 'YY.MM.DD') bdate, groups, step, indent, secret
+    from qnaboard 
+    where ((bid = #{param1} and qnastate=1) or bid = '관리자') and bnum IN
+    <foreach item="item" index="index" collection="param2" open="(" separator="," close=")">
+        #{item}
+    </foreach>
+    order by bnum desc
+	</select>
+	
+	<!-- 마이페이지 문의내역 출력 -->
 	<select id="qnalist" resultType="com.ezen.haha.qna.QnaDTO">
 		select bnum,btype,btitle,bdate,
 		case when qnastate = 1 then '답변완료'
 			when qnastate = 0 then '확인 중' end as qnastate
 		 from qnaboard where bid=#{param1} 
 	</select>
- 	
+	
 </mapper>

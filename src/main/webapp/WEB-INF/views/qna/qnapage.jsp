@@ -59,7 +59,6 @@ form {
   display: inline-block;
   margin-top: 10px;
   margin-left: 100px;
-  padding: 0 5px;
 }
 .search_area input{
   height: 30px;
@@ -105,7 +104,7 @@ form {
                         <td>
                         	<c:forEach var="i" begin="1" end="${aa.indent }"> <!-- 댓글 쓴만큼 들여쓰기(indent)를 하므로 반복 기준점으로 잡아줄 수 있다. -->
 							<!-- &emsp; --> <!-- &emsp = 한칸 띄우기 기능, 밑의 이모티콘을 출력하는 걸로 대체 -->
-							☞
+							<span style="color: #7743DB;">☞(답변완료)</span>
 							</c:forEach>
                         	${aa.btype}
                         </td>

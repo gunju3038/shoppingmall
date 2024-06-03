@@ -5,7 +5,6 @@
 <html>
 <head>
 <style type="text/css">
-
 .container {
     width: 600px;
     height: auto;
@@ -114,7 +113,6 @@ h2 {
 	<form action="noticemodify" method="post" enctype="multipart/form-data" id="form">
 	<input type="hidden" class="form-control" name="bnum" id="bnum" value="${aa.bnum}">
 	<input type="hidden" class="form-control" name="bid" value="${membership.id}">
-	<input type="hidden" class="form-control" name="bcode" value="notice">
 	<div class="inputform">
 	    <label for="selectbtype">공지유형</label>
 	    <select id="selectbtype" name="btype">
@@ -202,28 +200,28 @@ h2 {
 	      
 	    }, false)
 	  
-	attZone.addEventListener('drop', function(e){
-	    e.preventDefault();
-	    e.stopPropagation();
-	    var dt = e.dataTransfer;
-	    var files = dt.files;
-	    
-	    var allFiles = new DataTransfer();
-	    for (var i = 0; i < btnAtt.files.length; i++) {
-	        allFiles.items.add(btnAtt.files[i]);
-	    }
-	    for (var i = 0; i < files.length; i++) {
-	        allFiles.items.add(files[i]);
-	    }
-	    
-	    // 새로운 FileList를 파일 선택 요소에 설정
-	    btnAtt.files = allFiles.files;
-	    
-	    
-	    for(f of files){
-	        imageLoader(f);
-	    }
-	}, false);
+		attZone.addEventListener('drop', function(e){
+		    e.preventDefault();
+		    e.stopPropagation();
+		    var dt = e.dataTransfer;
+		    var files = dt.files;
+		    
+		    var allFiles = new DataTransfer();
+		    for (var i = 0; i < btnAtt.files.length; i++) {
+		        allFiles.items.add(btnAtt.files[i]);
+		    }
+		    for (var i = 0; i < files.length; i++) {
+		        allFiles.items.add(files[i]);
+		    }
+		    
+		    // 새로운 FileList를 파일 선택 요소에 설정
+		    btnAtt.files = allFiles.files;
+		    
+		    
+		    for(f of files){
+		        imageLoader(f);
+		    }
+		}, false);
     
 	    /*첨부된 이미리즐을 배열에 넣고 미리보기 */
 	    imageLoader = function(file){

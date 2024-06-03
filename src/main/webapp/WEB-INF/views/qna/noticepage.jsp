@@ -10,15 +10,15 @@
 /* Google web font CDN*/
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap');
 * {
-	margin: 0; 
-	padding: 0; 
-	box-sizing: border-box; 		
-	font-family: 'Noto Sans KR', sans-serif;
+   margin: 0; 
+   padding: 0; 
+   box-sizing: border-box;       
+   font-family: 'Noto Sans KR', sans-serif;
 }
 
 .pagetitle {
-	text-align: center;
-	margin-top: 50px;
+   text-align: center;
+   margin-top: 50px;
 }
 .intbtn {
     border-radius: 5px;
@@ -32,12 +32,13 @@
     margin-top: -30px;
 }
 .intbtn:hover {
-	background: #000000;
+   background: #000000;
 }
 
 th,td {
   width: 25%;
   height: 50px;
+  
 }
 
 th.tc, td.tc {
@@ -65,7 +66,6 @@ form {
   width: 150px;
   margin-right: 10px;
   display: inline-block;
-  padding: 0 5px;
 }
 .search_area button{
   width: auto;
@@ -73,10 +73,12 @@ form {
   padding: 0px 10px;
   color: #fff;
   background-color: #6b6b83;
-  border: none;
 }
 .search_area button:hover {
-	background: #000000;
+   background: #000000;
+}
+a:link, a:visited {
+	color: #333;
 }
 </style>
 <meta charset="UTF-8">
@@ -86,7 +88,6 @@ form {
 <title>Insert title here</title>
 </head>
 <body>
-
 <div class="container">
     <h2 class="pagetitle">공지사항</h2>
 <div class="row">
@@ -110,32 +111,29 @@ form {
                     </tr>
                 </c:forEach>
             </tbody>
-            <!-- 페이징처리 -->
-	<tr style="border-left: none;border-right: none;border-bottom: none">
-	   <td colspan="7" style="text-align: center;">
-	   
-	   <c:if test="${paging.startPage!=1 }"> <!-- 현재 페이지가 1페이지가 아니라면 -->
-	      <a href="page?nowPage=${paging.startPage-1 }&cntPerPage=${paging.cntPerPage}">◀</a> <!--"page?nowPage=${paging.startPage-1 } = 시작 페이지에서 -1 빼서 넘김 -->
-	      
-	   </c:if>   
-	   
-	      <c:forEach begin="${paging.startPage }" end="${paging.endPage}" var="p"> 
-	         <c:choose>
-	            <c:when test="${p == paging.nowPage }"> <!-- 현재 페이지를 빨갛게 표시 -->
-	               <b><span style="color: blue;">${p}</span></b>
-	            </c:when>   
-	            <c:when test="${p != paging.nowPage }"> <!-- 현재 페이지가 아니면 페이지 정보를 넘김 -->
-	               <a href="page?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
-	            </c:when>   
-	         </c:choose>
-	      </c:forEach>
-	     
-	      <c:if test="${paging.endPage != paging.lastPage}">
-	      <a href="page?nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage }">▶</a>
-	   </c:if>
-	   
-	   </td>
-	</tr>
+<!-- 페이징처리 -->
+   <tr style="border-left: none;border-right: none;border-bottom: none">
+      <td colspan="7" style="text-align: center;">
+      
+      <c:if test="${paging.startPage!=1 }"> <!-- 현재 페이지가 1페이지가 아니라면 -->
+         <a href="notice?nowPage=${paging.startPage-1 }&cntPerPage=${paging.cntPerPage}">◀</a> <!--"page?nowPage=${paging.startPage-1 } = 시작 페이지에서 -1 빼서 넘김 -->
+      </c:if>   
+         <c:forEach begin="${paging.startPage }" end="${paging.endPage}" var="p"> 
+            <c:choose>
+               <c:when test="${p == paging.nowPage }"> <!-- 현재 페이지를 빨갛게 표시 -->
+                  <b><span style="color: blue;">${p}</span></b>
+               </c:when>   
+               <c:when test="${p != paging.nowPage }"> <!-- 현재 페이지가 아니면 페이지 정보를 넘김 -->
+                  <a href="notice?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+               </c:when>   
+            </c:choose>
+         </c:forEach>
+        
+         <c:if test="${paging.endPage != paging.lastPage}">
+         <a href="notice?nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage }">▶</a>
+      </c:if>
+      </td>
+   </tr>
 <!-- 페이징처리 -->
         </table>
         <form action="searchgogo" method="post">
@@ -146,7 +144,11 @@ form {
         </div>
     </div>  
 </form>
-	<div class="btninput"><button onclick="location.href='./noticeinput'" class="intbtn">글쓰기</button></div>
+<c:choose>
+   <c:when test="${id eq 'admin'}">
+      <div class="btninput"><button onclick="location.href='./noticeinput'" class="intbtn">글쓰기</button></div>
+    </c:when>
+</c:choose>
     </div>
   </div>
 </div>

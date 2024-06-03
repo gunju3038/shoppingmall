@@ -7,7 +7,7 @@
 <style type="text/css">
 .container {
     margin: 0;
-    top: 20%;
+    top: 40%;
     left: 50%;
     position: absolute;
     transform: translateX(-50%);
@@ -79,6 +79,7 @@ td {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    margin-right: 15px;
 }
 
 .btn1,

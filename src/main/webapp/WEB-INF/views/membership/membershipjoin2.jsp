@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -29,7 +29,7 @@ a{
 }
 
 .member{
-  	width: 500px;
+  	width: 400px;
 	height: 700px;
   	margin: auto;
   	margin-top: 30px;
@@ -128,7 +128,7 @@ input[type="password"]
 }
 .member input[type=button]{ 
 	border-radius: 5px;
-	background-color: #333; 
+	background-color: #16222A; 
  	color: #fff;
  	border: 1px solid;
  }
@@ -167,7 +167,8 @@ $(document).ready(function(){
             data: {"id": id},
             success: function(result) {
                 if(result == 0){
-                    alert("사용 가능한 ID입니다.");    
+                    alert("사용 가능한 ID입니다.");   
+                    $("#id").data("checked", true);
                 } else {
                     alert("이미 사용 중인 ID입니다.");
                 }
@@ -183,8 +184,10 @@ $(document).ready(function(){
             event.preventDefault(); // 기본 동작 방지
 
             var id = $("#id").val();
+            var idchecked = $("#id").data("checked");
             var pw = $("#pw").val();
-            var pwCheck = $('#pw_check').val();
+            var pwvalid = pwcheck1($("#pw").val());
+            var pwcheck = $('#pw_check').val();
             var name = $("#name").val();
             var tel1 = $("#tel1").val();
             var tel2 = $("#tel2").val();
@@ -208,9 +211,11 @@ $(document).ready(function(){
             }
             if (address1 === "" || address2 === "") {
             	alert('주소를 정확히 모두 입력해주세요');
+            	return false;
             }
             if (email1 === "" || email2 === "") {
             	alert('이메일 입력 혹은 선택을 해주세요');
+            	return false;
             }
 
             // ID 중복 확인
@@ -219,9 +224,19 @@ $(document).ready(function(){
                 alert("ID가 이미 사용 중입니다. 다른 ID를 선택해주세요.");
                 return false;
             }
-
+            
+            if (!idchecked) {
+                alert("ID 중복 확인을 해주세요.");
+                return false;
+            }
+            
+            if (!pwvalid) {
+                alert('비밀번호형식이 올바르지 않습니다.');
+                return false;
+            }
+            
             // 비밀번호 확인
-            if (pw !== pwCheck) {
+            if (pw !== pwcheck) {
                 alert('비밀번호가 일치하지 않습니다.');
                 return false;
             }
@@ -229,14 +244,30 @@ $(document).ready(function(){
             $('form').submit();
         });
 
+        
+     // 비밀번호 유효성 검사
+        $('#pw').on('input', function() {
+            var pw = $(this).val();
+            if (!pwcheck1(pw)) {
+                $('#pw_error1').text('비밀번호는 영문자, 숫자, 특수문자를 모두 포함하여 8자 이상이어야 합니다.').css('color', 'red');
+            } else {
+                $('#pw_error1').html('&#10003;').css('color', 'green');
+                
+            }
+        });
+        function pwcheck1(pw) {
+            var regex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            return regex.test(pw);
+        }
+        
         $('#pw_check').on('input', function() {
             var pw = $('#pw').val();
             var pwCheck = $(this).val();
 
             if (pw !== pwCheck) {
-                $('#pw_error').text('비밀번호가 일치하지 않습니다.');
+                $('#pw_error').text('비밀번호가 일치하지 않습니다.').css('color', 'red');
             } else {
-                $('#pw_error').text('비밀번호가 일치합니다.');
+                $('#pw_error').html('&#10003;').css('color', 'green');
             }
         });
 
@@ -262,8 +293,9 @@ $(document).ready(function(){
             return isDuplicated;
         }
     });
-
-		//이메일 선택
+    
+    
+    $(document).ready(function(){
         $('#selectemail').change(function() {
             var selectedValue = $(this).val();
             var emailInput = $('input[name="email2"]');
@@ -274,11 +306,20 @@ $(document).ready(function(){
                 emailInput.prop("disabled", true).val(selectedValue);
             }
 
-            var email1 = $('input[name="email1"]').val();
-            var selected_email = emailInput.val();
-            var email = email1 + "@" + selected_email;
-            $('input[name="email"]').val(email);
+            updateEmail();
         });
+
+        $('input[name="email1"], input[name="email2"]').on('input', function() {
+            updateEmail();
+        });
+
+        function updateEmail() {
+            var email1 = $('input[name="email1"]').val();
+            var email2 = $('input[name="email2"]').val();
+            var email = email1 + "@" + email2;
+            $('input[name="email"]').val(email);
+        }
+    });
 
 
         function update_tel() {
@@ -363,6 +404,7 @@ function sample6_execDaumPostcode() {
 	<div class="field">
     <b>비밀번호</b>
 	<input type="password" id="pw" name="pw">
+	<span id="pw_error1" class="error-message1"></span>
 	</div>
 	<div class="field">
     <b>비밀번호 재확인</b>
@@ -416,8 +458,8 @@ function sample6_execDaumPostcode() {
 	<b>주소</b>
 		<input type="text" name="postcode" class="form-input3" id="sample6_postcode" placeholder="우편번호">
 		<input type="button" class="form-button2" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-		<input type="text" name="address1" class="form-input" id="sample6_address" style="width: 305px;" placeholder="주소" ><br>
-		<input type="text" name="address2" class="form-input" id="sample6_detailAddress" style="width: 305px;" placeholder="상세주소">
+		<input type="text" name="address1" class="form-input" id="sample6_address" placeholder="주소"><br>
+		<input type="text" name="address2" class="form-input" id="sample6_detailAddress" placeholder="상세주소">
 	</div>
 	 <button type="submit" class="submitgo" id="go">가입하기</button>
 </div>

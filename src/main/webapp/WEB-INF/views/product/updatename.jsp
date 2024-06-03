@@ -10,9 +10,7 @@ function submitUpdatedname() {
     var updatedName = document.getElementById('newname').value;
 
 	var updatedNameData = {
-            
 			updatedName: updatedName
-            
         };
         
     // 수정된 이름을 부모 창으로 전달

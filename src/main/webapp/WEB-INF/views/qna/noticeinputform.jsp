@@ -5,7 +5,6 @@
 <html>
 <head>
 <style type="text/css">
-
 .container {
     width: 600px;
     height: auto;
@@ -107,7 +106,6 @@ h2 {
 	<h2 class="notice">공지사항 글쓰기</h2>
 	<form action="noticesave" method="post" enctype="multipart/form-data" id="form">
 	<input type="hidden" class="form-control" name="bid" value="${membership.id}">
-	<input type="hidden" class="form-control" name="bcode" value="notice">
 	<div class="inputform">
 	    <label for="selectbtype">공지유형</label>
 	    <select id="selectbtype" name="btype">
@@ -187,28 +185,28 @@ h2 {
 	      
 	    }, false)
 	  
-	attZone.addEventListener('drop', function(e){
-	    e.preventDefault();
-	    e.stopPropagation();
-	    var dt = e.dataTransfer;
-	    var files = dt.files;
-	    
-	    var allFiles = new DataTransfer();
-	    for (var i = 0; i < btnAtt.files.length; i++) {
-	        allFiles.items.add(btnAtt.files[i]);
-	    }
-	    for (var i = 0; i < files.length; i++) {
-	        allFiles.items.add(files[i]);
-	    }
-	    
-	    // 새로운 FileList를 파일 선택 요소에 설정
-	    btnAtt.files = allFiles.files;
-	    
-	    
-	    for(f of files){
-	        imageLoader(f);
-	    }
-	}, false);
+		attZone.addEventListener('drop', function(e){
+		    e.preventDefault();
+		    e.stopPropagation();
+		    var dt = e.dataTransfer;
+		    var files = dt.files;
+		    
+		    var allFiles = new DataTransfer();
+		    for (var i = 0; i < btnAtt.files.length; i++) {
+		        allFiles.items.add(btnAtt.files[i]);
+		    }
+		    for (var i = 0; i < files.length; i++) {
+		        allFiles.items.add(files[i]);
+		    }
+		    
+		    // 새로운 FileList를 파일 선택 요소에 설정
+		    btnAtt.files = allFiles.files;
+		    
+		    
+		    for(f of files){
+		        imageLoader(f);
+		    }
+		}, false);
     
 	    /*첨부된 이미리즐을 배열에 넣고 미리보기 */
 	    imageLoader = function(file){
@@ -259,29 +257,29 @@ h2 {
 	  }
 	)('att_zone', 'btnAtt')
 	
-$(document).ready(function(){
-	$("#btnSave").click(function(event){
-		event.preventDefault();
-			
-		var btype = $("#selectbtype option:selected").val();
-		var btitle = $("#btitle").val();
-		var bcontent = $("#bcontent").val();
-			
-		if (btype === "") {
-			alert('공지유형을 선택 해주세요.');
-			return false;
-		}
-		if (btitle === "") {
-			alert('제목 입력은 필수 입니다.');
-			return false;
-		}
-		if (bcontent === "") {
-			alert('내용 입력은 필수 입니다.');
-			return false;
-		}
-		$("#form").submit();	
+	$(document).ready(function(){
+		$("#btnSave").click(function(event){
+			event.preventDefault();
+				
+			var btype = $("#selectbtype option:selected").val();
+			var btitle = $("#btitle").val();
+			var bcontent = $("#bcontent").val();
+				
+			if (btype === "") {
+				alert('공지유형을 선택 해주세요.');
+				return false;
+			}
+			if (btitle === "") {
+				alert('제목 입력은 필수 입니다.');
+				return false;
+			}
+			if (bcontent === "") {
+				alert('내용 입력은 필수 입니다.');
+				return false;
+			}
+			$("#form").submit();	
+		});
 	});
-});
 	$(document).on('click', '#btnList', function(e){		
 		e.preventDefault();				
 		location.href="./notice";

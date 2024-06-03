@@ -44,7 +44,7 @@
  	
  	<!-- 마이페이지에서 주문/배송 보기 화면으로 -->
  	<select id="guestpayoutview" resultType="com.ezen.haha.pay.PayDTO">
- 		select tid, orderid, sname, paynum, totprice, payendtime, 
+ 		select tid, orderid, sname, paynum, totprice, payendtime, snum,
         case when paystate = 1 then '결재완료'
             when paystate = 0 then '환불완료'
         end as paystate from payinfo 
@@ -62,18 +62,29 @@
  	
  	<!-- 관리자페이지에서 회원 목록 보기 화면으로 -->
  	<select id="memberviewall" resultType="com.ezen.haha.membership.MembershipDTO">
- 		select * from member
+ 		select id,pw,name,tel,email,pid,address,
+ 		case when rank = 1 then '패밀리'
+            when rank = 2 then '실버'
+            when rank = 3 then '골드'
+            when rank = 4 then 'VIP' end as stringrank
+ 		from member
  	</select>
  	
  	<!-- 마이페이지에서 한달 기간의 주문목록 보기 -->
  	<select id="payoutviewmonth" resultType="com.ezen.haha.pay.PayDTO">
- 		select tid, orderid, sname, paynum, totprice, payendtime, 
-        case when paystate = 1 then '결재완료'
-            when paystate = 0 then '환불완료'
-        end as paystate
-		from payinfo 
-		where id = #{param1}
-		and payendtime >= to_date(add_months(sysdate, -1))
+ 		<![CDATA[
+ 		select orderid, sname, paynum, totprice, payendtime, paystate, snum
+		from (
+		    select orderid, sname, paynum, totprice, payendtime, snum,
+		            case when paystate = 1 THEN '결재완료'
+		                 when paystate = 0 THEN '환불완료'
+		            end as paystate,
+		            row_number() over (order by payendtime desc) as rn
+		    from payinfo
+		    where id = #{param1} and payendtime >= to_date(add_months(sysdate, -1))
+		)
+		where rn <= 5
+		]]>
  	</select>
  	
  	<!-- 마이페이지 환불 목록 보기 -->
@@ -85,7 +96,7 @@
  	</select>
  	<!-- 관리자페이지 환불 목록 보기 -->
  	<select id="adminrefundview" resultType="com.ezen.haha.pay.PayDTO">
- 		select tid, orderid, sname, paynum, totprice, payendtime, 
+ 		select tid, orderid, sname, paynum, totprice, payendtime, payment, 
         case when paystate = 1 then '결재완료'
             when paystate = 0 then '환불완료'
         end as paystate from payinfo where paystate=0
@@ -112,17 +123,40 @@
  	<delete id="addressDelete">
  		delete from addresslist where addressnum=#{param1}
  	</delete>
-	<select id="mileageview" resultType="com.ezen.haha.membership.MembershipDTO">
- 		select * from member where id=#{param1}
+	<select id="mileageview" resultType="com.ezen.haha.pay.PayDTO">
+ 		select tid, orderid, sname, paynum, totprice, payendtime, snum,
+        case when paystate = 1 then '결재완료'
+            when paystate = 0 then '환불완료'
+        end as paystate, savepoint, usepoint, nowpoint 
+        from payinfo 
+        where id=#{param1} and paystate=1
  	</select>
 	
 	<!-- 마이페이지 베스트 상품 화면 출력(랜덤 5개 출력) -->
 	<select id="bestproductout" resultType="com.ezen.haha.product.ProductDTO">
 		<![CDATA[
-		select * from (
-	    select * from product where best=1
-	    order by dbms_random.random )
+		select * 
+		from (
+	    	select p.*,
+	    	pr.avg_productrank as productrank,
+           	pr.reveiw_count as count
+	    	from product p 
+	    	left join (
+	    		select snum, avg(productrank) as avg_productrank,
+	    			   count(*) as reveiw_count
+	    		from productreview
+	    		group by snum
+	    	) pr on p.snum = pr.snum 
+	    	where best=1
+	    	order by dbms_random.random )
 	    where rownum <= 5
 	    ]]>
+	    
+	</select>
+	
+	<!-- 시각화 전에 필요한 데이터(상품 결재한 유저 id의 주민번호) 가져오기 -->
+	<select id="payinfodata" resultType="com.ezen.haha.membership.MembershipDTO">
+		select pid from member where id IN (
+    		select id from payinfo where snum = #{param1} )
 	</select>
 </mapper>

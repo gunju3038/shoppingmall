@@ -28,7 +28,11 @@ h5{
   width: 100%;
   font-size: 14px;
 }
-
+.adminoutth {
+  padding: 15px 0px;
+  border-bottom: 1px solid lightgrey;
+  text-align: center;
+}
 .adminouttd {
   padding: 15px 0px;
   border-bottom: 1px solid lightgrey;
@@ -81,9 +85,8 @@ h5{
 	<select name="search_key" style="height: 26px;">
 		<option value="전체">전체</option>
 		<option value="상의">상의</option>
-		<option value="바지">바지</option>
+		<option value="하의">하의</option>
 		<option value="아우터">아우터</option>
-		<option value="모자">모자</option>
 	</select>	
 	<input type="text" name="search_value" >
 	<label for="product_search" style="border: 1px solid; width: 40px; height: 26px;"><h5>검색</h5></label> 
@@ -93,18 +96,17 @@ h5{
         <div class="cart_list">    	
         	<table class="admintouttable" >
             	<tr>
-				    <td class="adminouttd">이미지</td>
-				    <td class="adminouttd">분류</td>
-				    <td class="adminouttd">상품명</td>
-				    <td class="adminouttd">사이즈</td>
-				    <td class="adminouttd">재고</td>
-				    <td class="adminouttd">상품금액</td>
-				    <td  class="adminouttd" style="width: 150px;">비고</td>
+				    <th class="adminouttd">이미지</th>
+				    <th class="adminouttd">분류</th>
+				    <th class="adminouttd">상품명</th>
+				    <th class="adminouttd">사이즈 별 재고</th>
+				    <th class="adminouttd">상품금액</th>
+				    <th  class="adminouttd" style="width: 150px;">비고</th>
 				</tr>
  				<c:forEach items="${list }" var="aa">
  				 <tr class="cart_list_detail"> 
  				    <td class="adminouttd">						    
- 				    	<c:set var="imageArray" value="${fn:split(aa.image, ', ')}" />
+ 				    	<c:set var="imageArray" value="${fn:split(aa.image, ',')}" />
 						<c:forEach items="${imageArray}" var="imageName" varStatus="loop">
 		   					<c:if test="${loop.index == 0}">
 		       					<img alt="" src="./image/${imageName}" width="100px" height="100px">
@@ -113,8 +115,13 @@ h5{
 					</td> 
 					<td class="adminouttd">${aa.stype}</td>
  				    <td class="adminouttd">${aa.sname}</td> 
- 				    <td class="adminouttd">${aa.ssize}</td> 
-				    <td class="adminouttd">${aa.su} </td> 
+ 				    
+				    <td class="adminouttd">
+ 				    	<p>S : ${aa.ssize}</p>
+ 				    	<p>M : ${aa.msize}</p>
+ 				    	<p>L : ${aa.lsize}</p>
+ 				    	<p>XL : ${aa.xlsize}</p>	
+ 				    </td> 
 					<td class="adminouttd"><f:formatNumber value="${aa.price }" pattern="#,###원"/> </td>
 				    <td class="adminouttd">
 						<button type="button" class="cart_delete" onclick="modifyProduct(${aa.snum})">수정</button>
@@ -156,7 +163,7 @@ function deleteProduct(snum) {
 	}
 }
 function modifyProduct(snum) {
-    window.location.href = "modifyProduct?snum=" + snum; 
+    window.location.href = "updateproductview?snum=" + snum; 
 }
 </script>
 </body>

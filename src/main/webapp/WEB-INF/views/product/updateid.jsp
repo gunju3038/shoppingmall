@@ -41,9 +41,7 @@ function submitUpdatedId() {
     var updatedId = document.getElementById('id').value;
     
 	var updatedIdData = {
-            
 			updatedId: updatedId
-            
         };
         
     // 수정된 ID를 부모 창으로 전달
@@ -56,9 +54,7 @@ function submitUpdatedId() {
 <body>
 <div class="member">
 <b><수정할 ID를 입력해주세요></b>
-
 <div class="field">
-
 <input type="text" id="id" placeholder="ID">
 <input type="button" value="ID 중복검사" id="id_check">
 <input type="button" value="ID 수정" onclick="submitUpdatedId()">

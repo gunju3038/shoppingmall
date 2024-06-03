@@ -45,7 +45,7 @@ th{
 </head>
 <body>
 <div class="order_list">
-	<h2>주문 목록</h2>
+	<h2>환불 목록</h2>
 <table align="center" class="ordertable">
 
 	<tr>

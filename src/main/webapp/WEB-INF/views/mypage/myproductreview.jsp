@@ -18,7 +18,7 @@ h2{
     position: absolute;
 }
 .ordertable {
-    width: 50%;
+    width: 55%;
     margin-top:20px;
     border-collapse: collapse;
     text-align: center;
@@ -50,18 +50,48 @@ h2{
 			<th>제목</th>
 			<th>작성일</th>
 			<th>평가</th>
+			<th>비고</th>
 		</tr>
 	<c:forEach items="${list }" var="bb">	
 		<tr>
-			<td><a href="reviewproductview?snum=${bb.snum }&sname=${bb.sname}">${bb.image }</a></td>
+			<td><a href="reviewproductview?snum=${bb.snum }&sname=${bb.sname}"><img src="./image/${bb.image }" width="60px" height="60px"></a></td>
 			<td><a href="reviewproductview?snum=${bb.snum }&sname=${bb.sname}">${bb.sname }</a></td>
 			<td>${bb.btitle }</td>
-			<td>${bb.bdate }</td>
+			<td>${bb.bdate.substring(0,10) }</td>
 			<td>${bb.productrank } / 5</td>
+			<td>
+				<button type="button" onclick="location.href='productreviewinput?snum=${bb.snum}'">리뷰수정</button>
+				<button type="button" onclick="reviewdelete('${bb.snum }')">리뷰삭제</button>
+			</td>
 			
 		</tr>
 	</c:forEach>	
 		
 	</table>
+	
+	<script type="text/javascript">
+		function reviewdelete(snum) {
+			if(confirm("정말로 삭제하시겠습니까?")){
+				$.ajax({
+					type: "get",
+		            async: true,
+		            url: "productReviewDelete",
+		            data: {"snum": snum},
+		            success: function(result) {
+		            	alert("삭제완료");
+		                location.href = '/haha/myproductreview';
+		            },
+		            error: function () {
+		                alert("에러");
+		            }
+		        });	
+			}
+			else{
+				alert("삭제 취소")
+				
+			}
+				
+		}
+	</script>
 </body>
 </html>

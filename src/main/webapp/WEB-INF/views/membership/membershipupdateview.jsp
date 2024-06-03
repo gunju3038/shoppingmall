@@ -11,17 +11,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap');
 
 *{
-    box-sizing: border-box; /*전체에 박스사이징*/
-    outline: none; /*focus 했을때 테두리 나오게 */
-}
-
-body{
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size:14px;
-    background-color: #f5f6f7;
-    line-height: 1.5em;
-    color : #222;
-    margin: 0px;
+    box-sizing: border-box; 
+    outline: none;
 }
 
 a{
@@ -31,7 +22,7 @@ a{
 
 .member{
   	width: 400px;
-	height: 700px;
+	height: 650px;
   	margin: auto;
   	margin-top: 30px;
   	margin-bottom: 20px;
@@ -76,27 +67,6 @@ a{
 
 .field.address input[type="text"]{
 	margin-bottom: 5px;
-}
-
-.member-footer {
-    text-align: center;
-    font-size: 12px;
-    margin-top: 20px;
-}
-
-.member-footer div a:hover{
-    text-decoration: underline;
-    color:#2db400;
-}
-
-.member-footer div a:after{
-    content:'|';
-    font-size: 10px;
-    color:#bbb;
-    margin-right: 5px;
-    margin-left: 7px;
-    display: inline-block;
-    transform: translateY(-1px);
 }
 
 .submitgo{
@@ -146,9 +116,14 @@ input[type="password"]
 .submitgo:hover {
   background: #000000;
 }
+
 .buttonmove{
-	padding-top : 30px;
 	padding-left: 70px;
+	margin-top: 50px;
+}
+
+.buttonmove button + button {
+    margin-left: 30px;
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -340,7 +315,7 @@ function openPidUpdateWindow() {
         if (event.data.type === 'pidUpdate') {
         	
 	        var newPid = event.data.data;
-	        console.log(newPid);
+	        
 	        document.getElementById('pid').value = newPid.updatedPid;
 	        
 	        updateWindow.close();
@@ -362,10 +337,7 @@ function openPidUpdateWindow() {
 	<div class="member">
 	<c:forEach items="${list }" var="aa">	
     <!-- 필드 id, 비밀번호, 비밀번호 재확인 -->
-   	<h2 style="text-align: center;">회원정보수정</h2>
-   
     <div class="field">
-   
     <b>아이디</b>
     <input type="text" name="id" id="id" class="placehold-text" value=${aa.id } readonly>
     <input type="button" value="ID 수정하기" onclick="openIdUpdateWindow()">
@@ -416,16 +388,7 @@ function openPidUpdateWindow() {
 	</div>
 </div>
 	
-	<!-- 푸터 -->
-        <div class="member-footer">
-            <div>
-                <a href="#none">이용약관</a>
-                <a href="#none">개인정보처리방침</a>
-                <a href="#none">책임의 한계와 법적고지</a>
-                <a href="#none">회원정보 고객센터</a>
-            </div>
-            <span><a href="#none">Snack Closet.</a></span>
-         </div>
+	
 </form>
 </body>
 </html>

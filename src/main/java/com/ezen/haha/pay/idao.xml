@@ -4,18 +4,20 @@
 
 <mapper namespace="com.ezen.haha.pay.Service">
 	<!-- 상품 결재 완료 후 관련 데이터 DB 저장(payinfo) -->
-	 <update id="payinsert">
-      update payinfo set tid = #{param1}, id = #{param3}, paytype = #{param4}, sname = #{param5},
-                     paynum = #{param6}, totprice = #{param7}, payendtime = TO_DATE(#{param8}, 'YYYY-MM-DD"T"HH24:MI:SS')
-                     , snum = #{param9},
-                     address = #{param10}, name = #{param11}, tel = #{param12}, email = #{param13},
-                     drequest = #{param14}, paystate = #{param15}, payment = #{param16}
+	<update id="payinsert">
+ 		 update payinfo set tid = #{param1}, id = #{param3}, paytype = #{param4}, sname = #{param5},
+                     paynum = #{param6}, totprice = #{param7}, payendtime = TO_DATE(#{param8}, 'YYYY-MM-DD"T"HH24:MI:SS'), 
+                     snum = #{param9}, address = #{param10}, name = #{param11}, tel = #{param12}, email = #{param13},
+                     drequest = #{param14}, paystate = #{param15}, payment = #{param16},usecoupon = #{param17}, savepoint = #{param18}, 
+                     usepoint=#{param19}, nowpoint=0
                      where orderid = #{param2}
     </update> 	
  	
  	<insert id="bankinsert">
-		insert into payinfo(orderid,id,name,address,tel,email,payment,snum,sname,paynum,totprice,payendtime,paystate) 
-values(orderid_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8},#{param9},#{param10},TO_DATE(#{param11}, 'YYYY-MM-DD HH24:MI:SS'),#{param12})
+		insert into payinfo(orderid,id,name,address,tel,email,payment,snum,sname,paynum,totprice,payendtime,paystate,usecoupon,savepoint,usepoint) 
+				values(orderid_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},
+						#{param8},#{param9},#{param10},TO_DATE(#{param11}, 'YYYY-MM-DD HH24:MI:SS'),#{param12},
+						#{param13},#{param14},#{param15})
 
  	</insert>
  	
@@ -31,12 +33,12 @@ values(orderid_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},#{p
  	
  	<!-- 환불 확인 -->
  	<select id="paysearch" resultType="com.ezen.haha.pay.PayDTO">
- 		select tid,orderid,sname,paynum,totprice,payendtime
-        from payinfo where tid=#{param1}
+ 		select tid,orderid,sname,paynum,totprice,payendtime,payment
+        from payinfo where orderid=#{param1}
  	</select>
  	
  	<update id="updatepaylist">
- 		update payinfo set paystate=0 where tid=#{param1}
+ 		update payinfo set paystate=0 where orderid=#{param1}
  	</update>
  	<!-- 상품 결재 완료 후 재고 감소 업데이트 -->
  	<update id="productsuupdate">
@@ -69,4 +71,46 @@ values(orderid_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},#{p
  		insert into payinfo(orderid) values(orderid_seq.nextval)
  	</insert>
  	
+ 	
+ 	<update id="rankUpdate">
+		update member
+		set rank = 
+		    case 
+		        when #{param2} >= 1000000 then 4
+		        when #{param2} >= 500000 then 3
+		        when #{param2} >= 200000 then 2
+		        else 1
+		    end
+		 where id = #{param1}
+ 	</update>
+ 	<select id="totalPrice" resultType="Integer">
+		select sum(totprice) from payinfo where id = #{param1} and paystate = 1
+	</select>
+		<select id="selectUseCoupon" resultType="String">
+		select usecoupon from payinfo where orderid = #{param1}
+	</select>
+	<select id="selectSavePoint" resultType="Integer">
+		select savepoint from payinfo where orderid = #{param1}
+	</select>
+	<update id="couponRefund">
+		update coupon set ${param2} = ${param2}+1 where id = #{param1}
+	</update>
+	<update id="savePointRefund">
+		update member set point = point - #{param2} where id = #{param1}
+	</update>
+	<!-- 현재 마일리지 기록 -->
+	<update id="nowpointUpdate">
+		update payinfo set nowpoint=#{param1} where id=#{param2} and orderid=#{param3}
+	</update>
+	<select id="selectnowpoint" resultType="int">
+		select point from member where id=#{param1} 
+	</select>
+	<update id="banknowpointUpdate">
+		update payinfo set nowpoint=#{param1} where id=#{param2} and orderid=#{param3}
+	</update>
+	
+	<!-- 무통장입금 주문번호 찾기 -->
+	<select id="selectorderid" resultType="int">
+		select orderid from(select orderid from payinfo where id=#{param1} order by orderid desc) where rownum=1
+	</select>
 </mapper>

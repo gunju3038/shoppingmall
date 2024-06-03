@@ -8,7 +8,6 @@
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
-
 h2{
 	text-align: center;
 }
@@ -96,15 +95,12 @@ a{
     </c:if>
 
 </c:forEach>
-
-
 <script type="text/javascript">
 function setCoupon(useCoupon) {
 	window.opener.document.getElementById('useCoupon').value = useCoupon;
     window.opener.pointsPrice();
     window.close();
 }
-
 </script>
 </body>
 </html>

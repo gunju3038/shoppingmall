@@ -68,13 +68,20 @@ a{
 	text-align: center;
 	color: gray;
 }
-.admintd a{
-	text-decoration:none;
-	color: gray;
+.admintd a {
+    text-decoration: none;
+    color: #3B5249;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
 }
+
+.admintd a:hover {
+    text-decoration: underline;
+    color: #1D2D50;
+}
+
 a{
-	text-decoration:none;
-	
+	text-decoration: none;
+	color: black;
 }
 .bottomline{
 	padding-bottom: 3px;
@@ -95,7 +102,7 @@ h2{
     position: absolute;
 }
 .ordertable {
-    width: 40%;
+    width: 50%;
     margin-top:20px;
     border-collapse: collapse;
     text-align: center;
@@ -113,23 +120,18 @@ h2{
     color: #ffffff;
 }
 .product_list{
-	position: relative;
+	position: absolute;
  	margin-top: 3%;
-	width: 1920px; 
-	padding-left: 5%;
-	padding-right: 5%;	
+	left: 320px;
+	display: flex;
 }
 .product_list h3{
 	float: left;
-	margin-left: 47%;
+	margin-left: 42%;
 	margin-top:0;
 	margin-bottom: 30px;
 }
-.product_list p{
-	float: right;
-	margin-bottom: 10px;
-	margin-top: 15px;
-}
+
 .box{
 	overflow: auto;
 }
@@ -137,10 +139,11 @@ h2{
 	clear: both;
 }
 .product{ 
-	list-style:none;
-	width: 280px;
-	float: left;
-	margin-bottom: 30px;
+    list-style: none;
+    width: 20%;
+    float: left;
+    margin-bottom: 20px;
+    padding: 0 1.5% 0 0;
 	
 }
 .product img{
@@ -155,32 +158,8 @@ h2{
 	font-size: 14px;
 }
 
-.paging {
-    margin-top: 20px;
-    text-align: center;
-}
 
-.paging ul {
-    list-style: none;
-    padding: 0;
-}
 
-.paging ul li {
-    display: inline;
-    margin-right: 5px;
-}
-
-.paging ul li a {
-    text-decoration: none;
-}
-
-.paging ul li b {
-    color: red;
-}
-
-.selected {
-    font-weight: bold;
-}
 </style>
 <meta charset="UTF-8">
 <title>마이 페이지 메인</title>
@@ -188,74 +167,13 @@ h2{
 <body>
 <c:forEach items="${list }" var="aa">
 	<div>
-		<div class="gray"></div>
-		<div class="amdinline"></div>
-
-
-		<table width="200px" align="left" class="admintable">
-			<tr>
-				<th class="adminth"><a href="mypage">MYPAGE</a></th>
-			</tr>
-			
-			
-			<tr>
-				<th class="adminth">쇼핑정보</th>
-			</tr>
-			<tr>
-				<td class="admintd"><a href="guestpayoutview">주문/배송</a></td>
-			</tr>
-			<tr>
-				<td class="admintd"><a href="refundview">환불/교환/취소</a></td>
-			</tr>
-			<tr>
-				<td class="admintd"><a href="basketout">장바구니</a></td>
-			</tr>
-			
-			
-			<tr>
-				<th class="adminth">혜택정보</th>
-			</tr>
-			<tr>
-				<td class="admintd"><a href="couponview">쿠폰</a></td>
-			</tr>
-			<tr>
-				<td class="admintd"><a href="mileageview">마일리지</a></td>
-			</tr>
-			
-			
-			<tr>
-				<th class="adminth">참여 & 문의</th>
-			</tr>
-			<tr>
-				<td class="admintd"><a href="qnalist">문의 내역</a></td>
-			</tr>
-			<tr>
-				<td class="admintd"><a href="myproductreview">상품 리뷰</a></td>
-			</tr>
-			<tr>
-				<td class="admintd">이벤트 응모내역</td>
-			</tr>
-			
-				
-			<tr>
-				<th class="adminth">회원정보</th>
-			</tr>
-			<tr>
-				<td class="admintd"><a href="membershipupdateview">회원정보 수정</a></td>
-			</tr>
-			<tr>
-				<td class="admintd"><a href="mypageaddresslist">배송지 관리</a></td>
-			</tr>
-			<tr>
-				<td class="admintd"><a href="membershipdeleteview">회원 탈퇴</a></td>
-			</tr>
-		</table>
+		
 		
 		<div>
 			<table width="700px" align="center">
 				<tr>
 					<th>${aa.id}(${aa.membershipdto.name})님의 현재 회원 등급은 ${aa.membershipdto.stringrank } 입니다.</th>
-					<th><a href="rankgift">등급별 혜택</a></th>
+					<th class="admintd"><a href="rankgift">등급별 혜택</a></th>
 				</tr>
 				
 			</table>
@@ -266,18 +184,22 @@ h2{
 					<th>마일리지</th>
 				</tr>
 				<tr>
-					<td><a href="couponview">${aa.couponnum }</a></td>
-					<td><a href="mileageview">${aa.membershipdto.point }M</a></td>
+					<td class="admintd"><a href="couponview">${aa.couponnum }</a></td>
+					<td class="admintd">
+						<a href="mileageview"> 
+							<f:formatNumber value="${aa.membershipdto.point }" pattern="#,###M"/>
+						</a>
+					</td>
 				</tr>
 			</table>
 			
 			<table width="800px" align="center">
 				<tr align="center">
-					<th colspan="2" class="bottomline">최근 주문 상품(1달 이내)</th>
+					<th colspan="2" class="bottomline">최근 주문 상품 5개(1달 이내)</th>
 				</tr>
 			</table>
 		
-			<table width="800px" align="center" class="ordertable">
+			<table width="1000px" align="center" class="ordertable">
 			
 				<tr>
 				    <c:choose>
@@ -288,7 +210,7 @@ h2{
 				                    <th>상품명</th>
 				                    <th>구입수량</th>
 				                    <th>금액</th>
-				                    <th>결재시간</th>
+				                    <th>구매일</th>
 				                    <th>상태</th>
 				                    <th>비고</th>
 				                </tr>
@@ -298,11 +220,11 @@ h2{
 				                        <td>${bb.sname}</td>
 				                        <td>${bb.paynum}</td>
 				                        <td><f:formatNumber value="${bb.totprice}" pattern="#,###"/></td>
-				                        <td>${bb.payendtime}</td>
+				                        <td>${bb.payendtime.substring(0,10)}</td>
 				                        <td>${bb.paystate}</td>
-				                        <td style="width: 180px; text-align: center;">
-				                            <a href="paycancel?tid=${bb.tid}"><input type="button" value="환불하기"></a>
-				                            <input type="button" value="교환하기">
+				                        <td class="admintd" style="width: 180px; text-align: center;">
+				                        	<a href="productreviewinput?snum=${bb.snum }"><button type="button">리뷰쓰기</button></a>
+							          		<a href="paycancel?orderid=${bb.orderid }"><input type="button" value="환불하기"></a>
 				                        </td>
 				                    </tr>
 				                </c:forEach>
@@ -321,38 +243,41 @@ h2{
 			
 			<table width="400px" align="center">
 				<tr>
-					<th><a href="guestpayoutview">주문 배송 조회</a></th>
-					<th><a href="refundview">환불/교환/취소 조회</a></th>
+					<th class="admintd"><a href="guestpayoutview">주문 배송 조회</a></th>
+					<th class="admintd"><a href="refundview">환불/교환/취소 조회</a></th>
 				</tr>
 			
 			</table>
 		
-			<table width="400px" align="center">
-				<tr>
+			
+			
 					<div class="product_list">
 					<div class="box">
 						<h3>베스트 상품</h3>
 					<div class="clear"></div>
 				 		<c:forEach items="${list3 }" var="cc">
-							<ul class="product">
-								<li><a href="detailview?snum=${cc.snum}"> 
-									<c:set var="imageArray" value="${fn:split(cc.image, ', ')}" />
+							<div class="product">
+								<div><a href="detailview?snum=${cc.snum}"> 
+									<c:set var="imageArray" value="${fn:split(cc.image, ',')}" />
 										<c:forEach items="${imageArray}" var="imageName" varStatus="loop">
 						   					<c:if test="${loop.index == 0}">
-						       					<img alt="" src="./image/${imageName}" width="300px" height="360px">
+						       					<img alt="" src="./image/${imageName}">
 						   					</c:if>
 										</c:forEach>
-								</a></li>
-								<li class="name"><a href="detailview?snum=${cc.snum}">${cc.sname}</a></li>
-								<li class="price"><a href="detailview?snum=${cc.snum}"><f:formatNumber value="${cc.price }" pattern="#,###"/></a></li>
-								<li class="intro"><a href="detailview?snum=${cc.snum}">${cc.intro }</a></li>
-								<li class="review"><a href="detailview?snum=${cc.snum}">.리뷰갯수</a></li>
-							</ul>
+								</a></div>
+								<div class="name"><a href="detailview?snum=${cc.snum}">${cc.sname}</a></div>
+								<div class="price"><a href="detailview?snum=${cc.snum}"><f:formatNumber value="${cc.price }" pattern="#,###"/></a></div>
+								<c:if test="${cc.count!=0 }">
+									<div class="review">
+										<div><a href="detailview?snum=${cc.snum}"><img alt="" src="./image/reviewStar.png" style="width: 17px;" > ${Math.round(cc.productrank*10)/10. }</a></div>
+										<div><a href="detailview?snum=${cc.snum}">리뷰 수 : ${cc.count }</a></div>
+									</div>
+								</c:if>
+							</div>
 						</c:forEach>
 					</div>
 					</div>
-				</tr>
-			</table>
+
 		</div>
 	</div>	
 </c:forEach>

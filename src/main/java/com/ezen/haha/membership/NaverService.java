@@ -34,7 +34,7 @@ public class NaverService {
 
 			sb.append("&client_id=bZp1_Dnu3oky5iTcsVsO");
 			sb.append("&client_secret=i8htQISwp6");
-			sb.append("&redirect_uri=http://localhost:8667/haha/naverlogin");
+			sb.append("&redirect_uri=http://localhost:8686/haha/naverlogin");
 
 			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());

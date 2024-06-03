@@ -3,9 +3,13 @@ package com.ezen.haha.mypage;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,8 +41,10 @@ public class MypageController {
 
 	@Autowired
 	SqlSession sqlSession;
+	
+	// 파이썬 스크립트에 JSON 데이터 전달
+    String pythonScriptPath = "C:\\이젠디지탈12\\spring\\shoppingmall-master\\src\\main\\webapp\\resources\\python\\product_visual.py";
 
-	private static final Logger logger = LoggerFactory.getLogger(MypageController.class);
 
 	// 마이페이지 화면으로 가기
 	@RequestMapping(value = "/mypage")
@@ -118,10 +124,10 @@ public class MypageController {
 		HttpSession hs = request.getSession();
 		String id = (String) hs.getAttribute("id");
 
-		 Service ss = sqlSession.getMapper( Service.class);
+		Service ss = sqlSession.getMapper( Service.class);
 		ArrayList<PayDTO> list = ss.guestpayoutview(id);
 		mo.addAttribute("list", list);
-
+		
 		return "payout";
 	}
 	
@@ -178,7 +184,7 @@ public class MypageController {
 		ArrayList<MembershipDTO> list = ss.adminrefundview(id);
 		mo.addAttribute("list", list);
 
-		return "adminpayoutview";
+		return "adminrefundview";
 	}
 	
 	// 마이페이지 나의 상품 리뷰 보기
@@ -198,10 +204,11 @@ public class MypageController {
 	// 나의 상품 리뷰에서 리뷰한 상품 보기
 	@RequestMapping(value = "/reviewproductview")
 	public String reviewproductview(HttpServletRequest request, Model mo, HttpServletResponse response) throws IOException {
+		String stringSnum = request.getParameter("snum");
 		int snum = Integer.parseInt(request.getParameter("snum"));
 		String sname = request.getParameter("sname");
 		
-		 Service ss = sqlSession.getMapper( Service.class);
+		Service ss = sqlSession.getMapper( Service.class);
 		ArrayList<ProductDTO> list = ss.detailview(snum,sname);
 		mo.addAttribute("list", list);
 		
@@ -209,6 +216,73 @@ public class MypageController {
 		// 상품 리뷰 출력 추가
 		ArrayList<ProductreviewDTO> list1 = ss.productreviewout(snum,sname);
 		mo.addAttribute("list1", list1);
+		
+		// 시각화 과정
+		// 시각화 전에 필요한 데이터(상품을 결재한 유저 id의 주민번호) DB에서 가져오기
+		ArrayList<MembershipDTO> list2 = ss.payinfodata(stringSnum);
+		
+		List<String> ageList = new ArrayList<>();
+
+		for (MembershipDTO dto : list2) { 
+		    String pid = dto.getPid();
+
+		    // 나이 구분
+		    char genderData = pid.charAt(7);
+		    int birthdayData = Integer.parseInt(pid.substring(0,2));
+		    
+		    if(genderData == '1' || genderData == '2') {
+		        birthdayData += 1900;
+		    } else {
+		        birthdayData += 2000;
+		    }
+		    LocalDate ld = LocalDate.now();
+		    int nowyear = ld.getYear(); 
+		    int age = nowyear - birthdayData;
+		    
+		    // 나이를 리스트에 추가
+		    ageList.add(String.valueOf(age));
+		}
+
+		Map<String, Object> requestData = new HashMap<>();
+		requestData.put("ages", ageList);
+		requestData.put("snum", snum);
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		String jsonData;
+		
+		// 상품 설명 시각화 그래프 추가
+		
+		try {
+			    jsonData = objectMapper.writeValueAsString(requestData);
+	
+			    
+			    ProcessBuilder processBuilder = new ProcessBuilder("python", pythonScriptPath);
+			    processBuilder.redirectErrorStream(true);
+			    
+			    Process process = processBuilder.start();
+	
+			    PrintWriter writer = new PrintWriter(process.getOutputStream(), true);
+			    writer.println(jsonData);
+			    writer.flush();
+			    writer.close();
+	         
+	        try {
+				int result = process.waitFor();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        
+	        // 파이썬에서 만들어진 이미지 불러오기
+	        String image = "/resources/python_image/product_visual_" + snum + ".png";
+	        
+	        // 모델에 그래프 이미지 경로 추가
+	        mo.addAttribute("visual_image", image);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        // 시각화 과정 종료
 		
 		if(list==null || list.isEmpty() || list1==null || list1.isEmpty())
 		{

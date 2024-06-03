@@ -12,9 +12,7 @@ function submitUpdatedPid() {
     
 	console.log(updatedPid);
 	var updatedPidData = {
-            
 			updatedPid: updatedPid
-            
         };
         
     // 수정된 이름을 부모 창으로 전달
@@ -27,7 +25,6 @@ function submitUpdatedPid() {
 <body>
 <div class="member">
 <b><수정할 주민번호를 입력해주세요></b>
-
 <div class="field birth">
 	<b>주민번호</b>
 	<input type="text" name="pid1" maxlength="6" class="textbox1" id="pid1">

@@ -40,4 +40,6 @@ public interface Service {
 
 	ArrayList<ProductDTO> bestproductout();
 
+	ArrayList<MembershipDTO> payinfodata(String stringSnum);
+
 }

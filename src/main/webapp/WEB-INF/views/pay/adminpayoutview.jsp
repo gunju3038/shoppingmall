@@ -7,9 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>상품 구입 결과</title>
-
 <style type="text/css">
-
 h2{
   text-align:center;
   margin:0;
@@ -32,7 +30,6 @@ h2{
     border: 1px solid #dddddd;
     background-color: #ffffff;
 }
-
 .ordertable th {
     background-color: #333;
     color: #ffffff;
@@ -40,40 +37,37 @@ h2{
 th{
 	text-align: center;
 }
-
 </style>
 </head>
 <body>
 <div class="order_list">
 	<h2>주문 목록</h2>
-<table align="center" class="ordertable">
-
-	<tr>
-		<th>주문번호</th>
-		<th>상품명</th>
-		<th>구입수량</th>
-		<th>금액</th>
-		<th>결재시간</th>
-		<th>결재방법</th>
-		<th>상태</th>
-		<th>비고</th>
-	</tr>
-	<c:forEach items="${list }" var="aa">
-	<tr>
-		<td>${aa.orderid }</td>
-		<td>${aa.sname }</td>
-		<td>${aa.paynum }</td>
-		<td>${aa.totprice }</td>
-		<td>${aa.payendtime }</td>
-		<td>${aa.payment }</td>
-		<td>${aa.paystate }</td>
-		<td style="width: 180px; text-align: center;">
-			<a href="paycancel?tid=${aa.tid }"><input type="button" value="환불하기"></a>
-			<input type="button" value="교환하기">
-		</td>
-	</tr>
-</c:forEach>
-</table>
+	<table align="center" class="ordertable">
+		<tr>
+			<th>주문번호</th>
+			<th>상품명</th>
+			<th>구입수량</th>
+			<th>금액</th>
+			<th>결재시간</th>
+			<th>결재방법</th>
+			<th>상태</th>
+			<th>비고</th>
+		</tr>
+		<c:forEach items="${list }" var="aa">
+		<tr>
+			<td>${aa.orderid }</td>
+			<td>${aa.sname }</td>
+			<td>${aa.paynum }</td>
+			<td><f:formatNumber value="${aa.totprice }" pattern="#,###"></f:formatNumber></td>
+			<td>${aa.payendtime }</td>
+			<td>${aa.payment }</td>
+			<td>${aa.paystate }</td>
+			<td style="width: 180px; text-align: center;">
+				<a href="paycancel?tid=${aa.tid }"><input type="button" value="환불하기"></a>
+			</td>
+		</tr>
+	</c:forEach>
+	</table>
 </div>
 </body>
 </html>

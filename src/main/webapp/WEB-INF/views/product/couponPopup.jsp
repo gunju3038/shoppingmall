@@ -8,7 +8,6 @@
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
-
 h2{
 	text-align: center;
 }
@@ -16,7 +15,6 @@ a{
 	text-decoration: none;
 	color: black;
 }
-
 .couponlist{
 	margin: 5px;
 	padding: 10px;
@@ -44,15 +42,12 @@ a{
     background-color: #333;
     color: white;
 }
-
 .resetbtn_div {
         display: flex;
         justify-content: flex-end; /* 오른쪽 정렬 */
         margin: 0 5px 5px 0; /* 여백 조절 */
 }
 </style>
-
-
 </head>
 <body>
 <h2>쿠폰 목록</h2>
@@ -82,7 +77,6 @@ a{
             </div>
         </div>
     </c:if>
-    
     <c:if test="${aa.twentinum > 0}">
         <div class="couponlist">
             <div class="list_div">
@@ -94,10 +88,7 @@ a{
             </div>
         </div>
     </c:if>
-
 </c:forEach>
-
-
 <script type="text/javascript">
 function setCoupon(useCoupon) {
 	window.opener.document.getElementById('useCoupon').value = useCoupon;

@@ -34,7 +34,6 @@ p{
 	position: relative;
 	z-index: 100;
 }
-
 .header_logo{
 	position: relative;
 	float: left;
@@ -51,10 +50,8 @@ p{
 	background: url("resources/image/img_logo.png") no-repeat;
 	vertical-align: middle;
 }
-
 .header_util{ 
 	float: right;
-	
 }
 .header_util span{ 
 	display: inline-block;
@@ -66,7 +63,6 @@ p{
 .header_util span a{
 	color: #fff;
 }
-
 .header_gnb{
 	position: absolute;
 	display: flex;
@@ -91,7 +87,6 @@ p{
 	padding-right: 50px;
 	z-index: 1;
 }
-
 .header_gnb2 label{
 	background: url("./image/ico_search.png") no-repeat center;
 	display: inline-block;
@@ -101,7 +96,6 @@ p{
 	vertical-align: bottom;
 	cursor: pointer;
 }
-
 .gnb_category {
 	display: inline-block;
 }
@@ -111,7 +105,6 @@ p{
 	padding: 17px 10px;
 	font-size: 17px;
 	font-weight: 600;
-
 }
 .depth2{
 	position: absolute;
@@ -123,19 +116,16 @@ p{
     opacity: 0; /* 초기에 투명하게 설정 */
     pointer-events: none; /* 해당 요소에 마우스 이벤트 비활성화 */
 } 
-
 .gnb_category:hover .depth2 {
     opacity: 1; /* 마우스를 올릴 때 투명도를 1로 변경하여 보이도록 함 */
     pointer-events: auto; /* 마우스 이벤트 활성화 */
     
 }
-
 .depth2 a{
 	color: #000;
 	font-size: 14px;
 	font-weight: 400;
 }
-
 .gray{
     position: fixed;
     top: 0;
@@ -171,12 +161,16 @@ p{
 	background: url("./image/ico_top.png") center no-repeat;
 	background-size: 40px 40px;
 }
-
-
-
 </style>
 </head>
 <body>
+<%
+	HttpSession hs = request.getSession(); 
+	if(hs.getAttribute("loginstate")==null)
+	{
+		hs.setAttribute("loginstate", false);
+	}
+%>
 <div class="header_inner">
 	<div class="header_logo">
 		<a href="main"></a>
@@ -199,57 +193,39 @@ p{
 				</c:if>		
 			</c:otherwise>	
 		</c:choose>
-
 	</div>
 	<div class="header_gnb">
 		<div class="gnb_category">
-			<a href="">인기</a>
+			<a href="bestproductout">인기</a>
+		</div>
+		<div class="gnb_category">
+			<a href="recommendout">추천</a>
 		</div>
 		<div class="gnb_category">
 			<a href="product_list?stype=상의" class="gnb_categorylist">상의</a>
 			<div class="depth2">
-				<a href="" class="depth2_list">맨투맨</a>
-				<a href="" class="depth2_list">후드티</a>
-				<a href="" class="depth2_list">반소매 티셔츠</a>
-				<a href="" class="depth2_list">셔츠/블라우스</a>
+				<a href="product_subList?stype_sub=티셔츠" class="depth2_list">티셔츠</a>
+				<a href="product_subList?stype_sub=반팔티셔츠" class="depth2_list">반팔 티셔츠</a>
+				<a href="product_subList?stype_sub=니트" class="depth2_list">니트</a>
+				<a href="product_subList?stype_sub=셔츠" class="depth2_list">셔츠</a>
 			</div>
 		</div>
 		<div class="gnb_category">
-			<a href="">바지</a>
+			<a href="product_list?stype=하의">하의</a>
 			<div class="depth2">
-				<a href="" class="depth2_list">데님팬츠</a>
-				<a href="" class="depth2_list">쇼트팬츠/슬랙스</a>
-				<a href="" class="depth2_list">트레이닝/조거팬츠</a>
-				<a href="" class="depth2_list">숏팬츠</a>
+				<a href="product_subList?stype_sub=데님" class="depth2_list">데님</a>
+				<a href="product_subList?stype_sub=반바지" class="depth2_list">반바지</a>
+				<a href="product_subList?stype_sub=긴바지" class="depth2_list">긴바지</a>
+				<a href="product_subList?stype_sub=스포츠" class="depth2_list">스포츠</a>
 			</div>
 		</div>
 		<div class="gnb_category">
-			<a href="">아우터</a>
+			<a href="product_list?stype=아우터">아우터</a>
 			<div class="depth2">
-				<a href="" class="depth2_list">후드집업</a>
-				<a href="" class="depth2_list">카디건</a>
-				<a href="" class="depth2_list">코트</a>
-				<a href="" class="depth2_list">블루종</a>
-			</div>
-		</div>
-		
-		<div class="gnb_category">
-			<a href="">모자</a>
-			<div class="depth2">
-				<a href="" class="depth2_list">캡/야구모자</a>
-				<a href="" class="depth2_list">비니</a>
-				<a href="" class="depth2_list">헌팅캡/베레모</a>
-				<a href="" class="depth2_list">페도라</a>
-			</div>
-		</div>
-		
-		<div class="gnb_category">
-			<a href="">입력</a>
-			<div class="depth2">
-				<a href="productinput" class="depth2_list" >입력</a>
-				<a href="productout" class="depth2_list">출력</a>
-				<a href="bestproductout" class="depth2_list">베스트상품</a>
-				<a href="recommendout" class="depth2_list">추천상품</a>
+				<a href="product_subList?stype_sub=패딩" class="depth2_list">패딩</a>
+				<a href="product_subList?stype_sub=코트" class="depth2_list">코트</a>
+				<a href="product_subList?stype_sub=재킷" class="depth2_list">재킷</a>
+				<a href="product_subList?stype_sub=점퍼" class="depth2_list">점퍼</a>
 			</div>
 		</div>
 	</div>
@@ -264,9 +240,10 @@ p{
 	</form>
 </div>
 <div class="gray"></div>
-
-<div class="fix_btn">
-	<button type="button" onclick="location.href='roulette'" class="rouletteBtn"></button>
+<div class="fix_btn" id="fix_btn">
+    <c:if test="${loginstate == true }">
+		<button type="button" onclick="location.href='roulette'" class="rouletteBtn"></button>    
+    </c:if>
 	<button type="button" onclick="gotop()" class="topBtn"></button>
 </div>
 <script>
@@ -308,6 +285,23 @@ p{
             behavior: 'smooth'
         });
 	}
+    
+    window.addEventListener('scroll', function() {
+        var fixedDiv = document.getElementById('111');
+        var scrollHeight = document.documentElement.scrollHeight;
+        var clientHeight = document.documentElement.clientHeight;
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        var minHeight = 164; // 고정을 풀 최소 높이
+
+        if (scrollHeight - clientHeight - scrollTop <= minHeight) {
+            fixedDiv.style.position = 'relative';
+            
+        } else {
+            fixedDiv.style.position = 'fixed';
+            fixedDiv.style.bottom = '0px'; // 여기에 원래 설정한 값으로 조정하세요
+            fixedDiv.style.right = '0px'; // 여기에 원래 설정한 값으로 조정하세요
+        }
+    });    
 </script>
 </body>
 </html>

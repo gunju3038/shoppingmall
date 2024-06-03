@@ -21,7 +21,6 @@
 </style>
 </head>
 <body>
-
 <div class="bankDiv">
 	<p>결제가 완료되었습니다.</p>	
 </div>

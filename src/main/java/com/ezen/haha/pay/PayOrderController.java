@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezen.haha.product.BasketDTO;
 
@@ -25,9 +27,10 @@ public class PayOrderController {
 	// 환불 결정 화면으로 가기
     @RequestMapping(value = "/paycancel")
 	public String paycancel(HttpServletRequest request, Model mo) {
-    	String tid = request.getParameter("tid");
+    	String orderid = request.getParameter("orderid");
 		Service ss = sqlSession.getMapper(Service.class);
-		ArrayList<PayDTO> list = ss.paysearch(tid);
+		ArrayList<PayDTO> list = ss.paysearch(orderid);
+		
 		mo.addAttribute("list", list);
     	
 		return "paycancel";
@@ -73,9 +76,18 @@ public class PayOrderController {
     		usePoint = Integer.parseInt(point);     		
     	}
     	String useCoupon = request.getParameter("useCoupon");
-    	PayDTO dto = new PayDTO();
-    	ss.bankinsert(id,name,address,tel,email,payment,snum,sname,paynum,totprice,payEndTime,paystate,dto);
-    	
+    	String insertCoupon = "";
+    	if(useCoupon.equals("10000원 할인쿠폰")) {
+    		insertCoupon = "mannum";
+    	}
+    	else if(useCoupon.equals("10% 할인쿠폰")) {
+    		insertCoupon = "tennum";
+    	}
+    	else if(useCoupon.equals("20% 할인쿠폰")) {
+    		insertCoupon = "twentinum";
+    	}
+    	ss.bankinsert(id,name,address,tel,email,payment,snum,sname,paynum,totprice,payEndTime,paystate,insertCoupon,savePoint,usePoint);
+    	int orderid = ss.selectorderid(id);
     	String basketnum = request.getParameter("basketnum");
 
     	// 결재 완료 후 해당 상품 재고 감소 업데이트
@@ -99,7 +111,10 @@ public class PayOrderController {
     	com.ezen.haha.membership.Service mss = sqlSession.getMapper(com.ezen.haha.membership.Service.class);
     	mss.couponTotal(id);
   		ss.pointUpdate(id,usePoint,savePoint);
-  		System.out.println(payment);
+  		int nowpoint = ss.selectnowpoint(id);
+  		ss.banknowpointUpdate(nowpoint,id,orderid);
+  		int totalPrice = ss.totalPrice(id);
+  		ss.rankUpdate(id,totalPrice);
   		if(payment.equals("카카오페이")) {
         	return "zeroKakao";
         }
@@ -113,11 +128,41 @@ public class PayOrderController {
         }
         String account = accountNumber.toString();
         account =  account.substring(0, 3) + "-" + account.substring(3, 7) + "-" + account.substring(7);
-        System.out.println("acoount:"+account);
+        
         String bankChoice = request.getParameter("bankChoice");
         mo.addAttribute("account", account);
         mo.addAttribute("bankChoice", bankChoice);
     	
         return "bankaction";
 	}
+    
+ //   payCancel
+    @ResponseBody
+    @RequestMapping(value = "/bankCancel", method = RequestMethod.POST) 
+    public String bankCancel(HttpServletRequest request) {
+    	int orderid = Integer.parseInt(request.getParameter("orderid"));
+		HttpSession hs = request.getSession();
+		String id = (String) hs.getAttribute("id");
+    
+		String message = "환불이 완료되었습니다.";
+        
+        Service ss = sqlSession.getMapper(Service.class);
+        String useCoupon = ss.selectUseCoupon(orderid);
+        int savePoint = ss.selectSavePoint(orderid);
+        ss.updatepaylist(orderid);
+   
+        if(useCoupon != null) {
+        	ss.couponRefund(id,useCoupon);
+        }
+        ss.savePointRefund(id,savePoint);
+        int totalPrice = ss.totalPrice(id);
+  		ss.rankUpdate(id,totalPrice);
+  		
+    	com.ezen.haha.membership.Service mss = sqlSession.getMapper(com.ezen.haha.membership.Service.class);
+    	mss.couponTotal(id); // 보유쿠폰 수 갱신
+        
+    	return message;
+    }
+    
+    
 }

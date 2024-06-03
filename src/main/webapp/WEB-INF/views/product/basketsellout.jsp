@@ -10,7 +10,6 @@
 <title>Insert title here</title>
 <style type="text/css">
 body{  
-  
   padding: 0;
   margin: 0;
   width: 100%;
@@ -50,7 +49,6 @@ label{
     margin: 2px 0 2px 0;
     font-weight: 700;	
     vertical-align: middle;
-    
 }
 
 input::-webkit-outer-spin-button,
@@ -63,7 +61,7 @@ input::-webkit-inner-spin-button {
  	margin-top: 24px;
 	width: 100%; 
 	min-width:1650px;
-	position:absolute;
+	position:relative;
 	display:flex;
     justify-content: center;
 }
@@ -153,26 +151,23 @@ input::-webkit-inner-spin-button {
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-
 <form action="" method="post" id="paymentForm">
 <div class="product_sell">
   <div class="product_sellform">
       <h3>주문 / 결제</h3>
       <div class="input_group">
-          	  <button type="button" class="btn1" onclick="openAddressPopup()">배송지 목록</button>
+          <button type="button" class="btn1" onclick="openAddressPopup()">배송지 목록</button>
 	      <label for="">배송지</label>
 	      <input type="text" name="postcode" class="form-input3" id="postcode" placeholder="우편번호" required="required">
 		  <input type="button" class="btn1" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
 		  <input type="text" name="address1" class="form-input" id="address1" placeholder="주소" required="required"><br>
 		  <input type="text" name="address2" class="form-input" id="address2" placeholder="상세주소" required="required">
-      
       	  <input type="hidden" value="${rank }" id="rank">
       	  <label for="name">이름</label> 
       	  <input type="text" name="name" id="name" required="required">
       	  <label for="tel">연락처</label>
       	  <input type="text" name="tel" id="tel" required="required">
       </div>
-     
      <div class="input_group">
      	<label>주문시 요청사항</label>
 		<select name="request" class="request">
@@ -186,7 +181,6 @@ input::-webkit-inner-spin-button {
 	      <c:set var="guestbuysu" value="0"/>
 		  <c:set var="snum" value=""/>
           <c:set var="basketnum" value=""/>
-
 		  <c:choose>
 			  <c:when test="${fn:length(list) >= 2}">
 			      <c:set var="sname" value="${list[0].productdto.sname} 외 ${fn:length(list) - 1}건"/>
@@ -195,11 +189,10 @@ input::-webkit-inner-spin-button {
 			      <c:set var="sname" value="${list[0].productdto.sname}"/>
 			  </c:otherwise>
 		  </c:choose>
-			
 			<c:forEach items="${list}" var="aa">
 			    <div class="product_view">
 			        <div>
-			            <c:set var="imageArray" value="${fn:split(aa.productdto.image, ', ')}" />
+			            <c:set var="imageArray" value="${fn:split(aa.productdto.image, ',')}" />
 			            <c:forEach items="${imageArray}" var="imageName" varStatus="loop">
 			                <c:if test="${loop.index == 0}">
 			                    <img alt="" src="./image/${imageName}" width="70px" height="70px">
@@ -225,7 +218,6 @@ input::-webkit-inner-spin-button {
 			        </c:otherwise>
 			    </c:choose>
 			</c:forEach>
-	      
       </div>
       <div class="input_group">
 	      <label>쿠폰</label>
@@ -240,7 +232,6 @@ input::-webkit-inner-spin-button {
 	      	<button type="button" class="btn1" onclick="allPointsPrice()">전액 사용</button>
 	      </div>
       </div>
-      
   </div>
   <div class="product_sellform2">
   	 <div class="input_group">
@@ -249,9 +240,7 @@ input::-webkit-inner-spin-button {
 	      		<input type="text" value="${totprice }" id="totprice" name="totprice" readonly="readonly" >
 	      		<label>할인 금액</label>
 	      		<input type="text" value="0" id="saleprice" name="saleprice" readonly="readonly">
-	      		
 	      		<div id="detailSale"></div>
-	      		
 	      		<label>최종 금액</label>
 	      		<input type="text" value="${totprice }" id="price" name="price" readonly="readonly" >
 	      		<label>포인트 적립</label>
@@ -285,7 +274,6 @@ input::-webkit-inner-spin-button {
 </div>
 </form>
 <script type="text/javascript">
-
 document.addEventListener('DOMContentLoaded', function() {
     // 임의의 총 가격 값, 실제 사용 시에는 서버로부터 받아오거나 계산하여 설정
     var totPrice = document.getElementById('totprice').value;
@@ -295,7 +283,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     var  rankdiscount = rankDiscount(totPrice, rank);
     var  finalPrice = totPrice - rankdiscount;
-
+    
     // 입력 필드에 값을 설정
     document.getElementById('totprice').value = numberWithCommas(totPrice);
     document.getElementById('price').value = numberWithCommas(totPrice);
@@ -321,7 +309,7 @@ document.getElementById('point').addEventListener('focus', function() {
 });
 
 function rankDiscount(price, rank) {
-    const discounts = {1: 0.01, 2: 0.02, 3: 0.03, 4: 0.05};
+    const discounts = {1: 0.00, 2: 0.02, 3: 0.03, 4: 0.05};
     return price * discounts[rank];
 }
 
@@ -384,12 +372,11 @@ function allPointsPrice() {
 	var availablePoint = parseInt(document.getElementById('availablePoint').value.replace(/,/g, ''), 10);
 	var usedPoint = availablePoint; // 바로 숫자로 사용
     var totPrice = parseInt(document.getElementById('totprice').value.replace(/,/g, ''), 10);
-	console.log(salePrice);
 	
-	 var rankdiscount = rankDiscount(totPrice, rank);
-	 var coupondiscount = couponPrice();
-	 salePrice = coupondiscount
-	 salePrice += rankdiscount;
+    var rankdiscount = rankDiscount(totPrice, rank);
+	var coupondiscount = couponPrice();
+	salePrice = coupondiscount
+	salePrice += rankdiscount;
     // 최대 사용 가능 포인트 계산
     var maxUsablePoints = totPrice - salePrice;
     if (usedPoint > maxUsablePoints) {
@@ -403,6 +390,7 @@ function allPointsPrice() {
     // 할인 금액과 최종 금액 업데이트
     document.getElementById('saleprice').value = numberWithCommas(salePrice);
     document.getElementById('price').value = numberWithCommas(finalPrice);
+    
     if(rankdiscount>0){
 	    html += "<p>&nbsp;ㄴ 등급할인 -" + numberWithCommas(rankdiscount) + " </p>";
     }
@@ -422,7 +410,6 @@ function couponPrice() {
 
     if (couponValue.endsWith('% 할인쿠폰')) {
         var percentage = parseInt(couponValue);
-        console.log(percentage);
         discount = totPrice * (percentage / 100);
     } else if (couponValue.endsWith('원 할인쿠폰')) {
         discount = parseInt(couponValue);
@@ -441,10 +428,6 @@ function openCouponPopup() {
     var popup = window.open("couponPopup", "Coupon Popup", "width=550,height=500");
     popup.focus();
 }
-
-
-
-
 
 function kakaopay() {
 	var postcode = document.getElementById('postcode').value;
@@ -466,19 +449,6 @@ function kakaopay() {
 	     guestbuysu: $('#guestbuysu').val(),
 	     totprice: $('#price').val()
 	    };
-
-	console.log("address:", formData.address);
-	console.log("name:", formData.name);
-	console.log("tel:", formData.tel);
-	console.log("request:", formData.request);
-	console.log("basketnum:", formData.basketnum);
-	console.log("usepoint:", formData.usepoint);
-	console.log("savepoint:", formData.savepoint);
-	console.log("usecoupon:", formData.usecoupon);
-	console.log("snum:", formData.snum);
-	console.log("sname:", formData.sname);
-	console.log("guestbuysu:", formData.guestbuysu);
-	console.log("totprice:", formData.totprice);
 
     $.ajax({
         type: 'POST',

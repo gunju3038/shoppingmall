@@ -6,7 +6,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
 <style type="text/css">
 
 h2{
@@ -45,38 +44,37 @@ th{
 <body>
 <div class="order_list">
 	<h2>상세 리뷰</h2>
-<table align="center" class="ordertable">
+	<table align="center" class="ordertable">
 	<c:forEach items="${list }" var="aa">
-	<tr>
-		<th>상품명</th>
-		<td>${aa.sname }</td>
-	</tr>
-	<tr>
-		<th>작성자</th>
-		<td>${aa.id }</td>
-	</tr>
-	<tr>
-		<th>제목</th>
-		<td>${aa.id }</td>
-	</tr>
-	<tr>
-		<th>내용</th>
-		<td>${aa.id }</td>
-	</tr>
-	<tr>
-		<th>사진</th>
-		<td>
-			<img alt="" src="./image/${aa.bpicture}">
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<button type="button" onclick="bestIn(${aa.bnum})">베스트리뷰 등록</button>
-			<button type="button" onclick="bestOut(${aa.bnum})">베스트리뷰 등록해제</button>
-		</td>
-	</tr>
-	
-</c:forEach>
+		<tr>
+			<th>상품명</th>
+			<td>${aa.sname }</td>
+		</tr>
+		<tr>
+			<th>작성자</th>
+			<td>${aa.id }</td>
+		</tr>
+		<tr>
+			<th>제목</th>
+			<td>${aa.btitle }</td>
+		</tr>
+		<tr>
+			<th>내용</th>
+			<td>${aa.bcontent }</td>
+		</tr>
+		<tr>
+			<th>사진</th>
+			<td>
+				<img alt="" src="./image/${aa.bpicture}" width="400px" height="400px">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<button type="button" onclick="bestIn(${aa.bnum})">베스트리뷰 등록</button>
+				<button type="button" onclick="bestOut(${aa.bnum})">베스트리뷰 등록해제</button>
+			</td>
+		</tr>
+	</c:forEach>
 </table>
 </div>
 

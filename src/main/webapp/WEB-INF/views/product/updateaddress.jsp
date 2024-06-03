@@ -85,7 +85,6 @@ function sample6_execDaumPostcode() {
 <body>
 <div class="member">
 	<b><수정할 주소를 입력해주세요></b>
-	
 	<div class="field address">
 	<input type="text" id="sample6_postcode" placeholder="우편번호">
 	<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>

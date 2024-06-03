@@ -22,7 +22,6 @@ import com.ezen.haha.product.Service;
 @Controller
 public class HomeController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	@Autowired
 	SqlSession sqlSession; 
 	
@@ -47,16 +46,6 @@ public class HomeController {
 
 		return "main";
 	}
-	@RequestMapping(value = "/woman")
-	public String home3() {
-		
-		return "main";
-	}
-	@RequestMapping(value = "/kids")
-	public String home4() {
-		
-		return "kids2";
-	}
-	
+
 	
 }

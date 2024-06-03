@@ -14,6 +14,12 @@
  		insert into member values(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},1,0)
  	</insert>
  	
+ 	<!-- 쿠폰 넣어주기 -->
+ 	<insert id="couponinsert">
+ 		insert into coupon(id,couponnum,twentinum,mannum,tennum)
+ 		values (#{param1},0,0,0,0)
+ 	</insert>
+ 	
  	<!-- 로그인 -->
  	<select id="logingo" resultType="com.ezen.haha.membership.MembershipDTO">
  		select id,pw from member where id=#{param1} and pw=#{param2}
@@ -52,7 +58,7 @@
  	
  	<!-- naverlogin -->
  	<select id="naverlogin" resultType="com.ezen.haha.membership.MembershipDTO">
- 		select * from member where name=#{param1}
+ 		select * from member where email=#{param1}
  	</select>
  	
  	<!-- 회원정보 수정 화면 출력을 위한 select -->
@@ -77,5 +83,13 @@
  		update coupon set couponnum = mannum + twentinum + tennum where id = #{param1}
  	</update>
  	
+ 	<!-- 시각화 DB 상품 추가 -->
+ 	<insert id="visualinsert">
+ 		insert into visual values(#{param1}, 0)
+ 	</insert>
  	
+ 	<!-- 비밀번호 찾기 -->
+ 	<select id="pwgetme" resultType="com.ezen.haha.membership.MembershipDTO">
+ 		select id,pw,name,email from member where id=#{param1} and name=#{param2} and email=#{param3}
+ 	</select>
 </mapper>

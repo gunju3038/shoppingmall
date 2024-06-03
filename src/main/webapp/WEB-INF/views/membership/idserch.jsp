@@ -30,12 +30,10 @@ a{
     color: #222;
 }
 
-/*member sign in*/
 .member{
     width: 400px;
-    /* border: 1px solid #000; */
     margin: auto;
-    margin-top: 30px;
+    margin-top: 150px;
     margin-bottom: 20px;
 	border: 1px solid #ccc;
 	border-radius: 10px; 
@@ -68,7 +66,7 @@ a{
 .member-footer {
     text-align: center;
     font-size: 12px;
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 .member-footer div a:hover{
@@ -82,18 +80,16 @@ a{
     color:#bbb;
     margin-right: 5px;
     margin-left: 7px;
-    /*살짝 내려가 있기 때문에 위로 올려주기 위해 transform 사용하기*/
     display: inline-block;
     transform: translateY(-1px);
 }
 
-/* 입력 필드의 너비 조절 */
 .textbox1{
     width: 100px; 
 }
 
 @media (max-width:768px) {
-    .member{
+.member{
         width: 100%;
     }
     

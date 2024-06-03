@@ -7,44 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-
-
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
-.amdinline{ 
-	position: fixed;
-	left:300px;
-	top: 0;
-	height: 100vh;
-	border-right: 2px solid #eeeeee;
-}
-.admintable{
-	border: none;
-	z-index: 999;
-	position: relative;
-  	width: 300px;
-}
-.adminth{
-	padding-top: 25px;
-	padding-bottom: 10px;
-	text-align: center;
-	
-}
-.admintd{
-	padding-bottom: 5px;
-	text-align: center;
-	color: gray;
-}
-.admintd a{
-	text-decoration:none;
-	color: gray;
-}
-.bottomline{
-	padding-bottom: 3px;
-	border-bottom: 1px solid black;
-}
-
-
 body {
 	width: 100%;
 	margin: 0;
@@ -60,6 +24,42 @@ a:hover{
 p{
 	margin: 0;
 }
+.amdinline{ 
+	position: fixed;
+	left:300px;
+	top: 0;
+	height: 70vh;
+	border-right: 2px solid #eeeeee;
+}
+.admintable{
+	border: none;
+	z-index: 999;
+	position: relative;
+  	width: 300px;
+}
+.adminth{
+	padding-top: 25px;
+	padding-bottom: 10px;
+	text-align: center;
+}
+.admintd{
+	padding-bottom: 5px;
+	text-align: center;
+	color: gray;
+}
+.admintd a {
+    text-decoration: none;
+    color: #3B5249;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+.admintd a:hover {
+    text-decoration: underline;
+    color: #1D2D50;
+}
+.bottomline{
+	padding-bottom: 3px;
+	border-bottom: 1px solid black;
+}
 .header_inner{ 
 	width: calc(100%-120px);
 	min-width: 1280px;
@@ -70,7 +70,6 @@ p{
 	position: relative;
 	z-index: 100;
 }
-
 .header_logo{
 	position: relative;
 	float: left;
@@ -86,7 +85,6 @@ p{
 	background: url("resources/image/img_logo.png") no-repeat;
 	vertical-align: middle;
 }
-
 .header_util{ 
 	float: right;
 	
@@ -101,7 +99,6 @@ p{
 .header_util span a{
 	color: #fff;
 }
-
 .header_gnb{
 	position: absolute;
 	display: flex;
@@ -123,7 +120,6 @@ p{
 	padding: 17px 10px;
 	font-size: 17px;
 	font-weight: 600;
-
 }
 .depth2{
 	position: absolute;
@@ -135,19 +131,16 @@ p{
     opacity: 0; /* 초기에 투명하게 설정 */
     pointer-events: none; /* 해당 요소에 마우스 이벤트 비활성화 */
 } 
-
 .gnb_category:hover .depth2 {
     opacity: 1; /* 마우스를 올릴 때 투명도를 1로 변경하여 보이도록 함 */
     pointer-events: auto; /* 마우스 이벤트 활성화 */
     
 }
-
 .depth2 a{
 	color: #000;
 	font-size: 14px;
 	font-weight: 400;
 }
-
 .gray{
     position: fixed;
     top: 0;
@@ -160,10 +153,6 @@ p{
     opacity: 0; /* 초기에 투명하게 설정 */
     display: none;
 }
-
-
-
-
 </style>
 </head>
 <body>
@@ -192,102 +181,72 @@ p{
 	</div>
 	<div class="header_gnb">
 		<div class="gnb_category">
-			<a href="">인기</a>
+			<a href="bestproductout">인기</a>
+		</div>
+		<div class="gnb_category">
+			<a href="recommendout">추천</a>
 		</div>
 		<div class="gnb_category">
 			<a href="product_list?stype=상의" class="gnb_categorylist">상의</a>
 			<div class="depth2">
-				<a href="" class="depth2_list">맨투맨</a>
-				<a href="" class="depth2_list">후드티</a>
-				<a href="" class="depth2_list">반소매 티셔츠</a>
-				<a href="" class="depth2_list">셔츠/블라우스</a>
+				<a href="product_subList?stype_sub=티셔츠" class="depth2_list">티셔츠</a>
+				<a href="product_subList?stype_sub=반팔티셔츠" class="depth2_list">반팔 티셔츠</a>
+				<a href="product_subList?stype_sub=니트" class="depth2_list">니트</a>
+				<a href="product_subList?stype_sub=셔츠" class="depth2_list">셔츠</a>
 			</div>
 		</div>
 		<div class="gnb_category">
-			<a href="">바지</a>
+			<a href="product_list?stype=하의">하의</a>
 			<div class="depth2">
-				<a href="" class="depth2_list">데님팬츠</a>
-				<a href="" class="depth2_list">쇼트팬츠/슬랙스</a>
-				<a href="" class="depth2_list">트레이닝/조거팬츠</a>
-				<a href="" class="depth2_list">숏팬츠</a>
+				<a href="product_subList?stype_sub=데님" class="depth2_list">데님</a>
+				<a href="product_subList?stype_sub=반바지" class="depth2_list">반바지</a>
+				<a href="product_subList?stype_sub=긴바지" class="depth2_list">긴바지</a>
+				<a href="product_subList?stype_sub=스포츠" class="depth2_list">스포츠</a>
 			</div>
 		</div>
 		<div class="gnb_category">
-			<a href="">아우터</a>
+			<a href="product_list?stype=아우터">아우터</a>
 			<div class="depth2">
-				<a href="" class="depth2_list">후드집업</a>
-				<a href="" class="depth2_list">카디건</a>
-				<a href="" class="depth2_list">코트</a>
-				<a href="" class="depth2_list">블루종</a>
-			</div>
-		</div>
-		<div class="gnb_category">
-			<a href="">신발</a>
-			<div class="depth2">
-				<a href="" class="depth2_list">구두</a>
-				<a href="" class="depth2_list">스니커즈</a>
-				<a href="" class="depth2_list">슬리퍼</a>
-				<a href="" class="depth2_list">샌들</a>
-			</div>
-		</div>
-		<div class="gnb_category">
-			<a href="">모자</a>
-			<div class="depth2">
-				<a href="" class="depth2_list">캡/야구모자</a>
-				<a href="" class="depth2_list">비니</a>
-				<a href="" class="depth2_list">헌팅캡/베레모</a>
-				<a href="" class="depth2_list">페도라</a>
-			</div>
-		</div>
-		
-		<div class="gnb_category">
-			<a href="">입력</a>
-			<div class="depth2">
-				<a href="productinput" class="depth2_list" >입력</a>
-				<a href="productout" class="depth2_list">출력</a>
-				<a href="bestproductout" class="depth2_list">베스트상품</a>
-				<a href="recommendout" class="depth2_list">추천상품</a>
+				<a href="product_subList?stype_sub=패딩" class="depth2_list">패딩</a>
+				<a href="product_subList?stype_sub=코트" class="depth2_list">코트</a>
+				<a href="product_subList?stype_sub=재킷" class="depth2_list">재킷</a>
+				<a href="product_subList?stype_sub=점퍼" class="depth2_list">점퍼</a>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="gray"></div>
 <div class="amdinline"></div>
-
-<table align="left"; class="admintable">
-	<tr>
-		<th class="adminth">상품 주문 현황</th>
-	</tr>
-	<tr>
-		<td class="admintd"><a href="payoutview">전체 주문 목록 보기</a></td>
-	</tr>
-	<tr>
-		<td class="admintd"><a href="adminrefundview">환불 목록 보기</a></td>
-	</tr>
-	<tr>
-		<td class="admintd">교환 목록 보기</td>
-	</tr>
-	<tr>
-		<th class="adminth">상품 관리 현황</th>
-	</tr>
-	<tr>
-		<td class="admintd"><a href="productinput">상품 입력</a></td>
-	</tr>
-	<tr>
-		<td class="admintd"><a href="productout">상품 목록</a></td>
-	</tr>
-	<tr>
-		<td class="admintd"><a href="productReviewList">리뷰 목록</a></td>
-	</tr>
-	<tr>
-		<th class="adminth">회원 가입 현황</th>
-	</tr>
-	<tr>
-		<td class="admintd"><a href="memberviewall">회원 목록</a></td>
-	</tr>
-</table>
-
-
+	<table align="left"; class="admintable">
+		<tr>
+			<th class="adminth">상품 주문 현황</th>
+		</tr>
+		<tr>
+			<td class="admintd"><a href="payoutview">전체 주문 목록 보기</a></td>
+		</tr>
+		<tr>
+			<td class="admintd"><a href="adminrefundview">환불 목록 보기</a></td>
+		</tr>
+		
+		<tr>
+			<th class="adminth">상품 관리 현황</th>
+		</tr>
+		<tr>
+			<td class="admintd"><a href="productinput">상품 입력</a></td>
+		</tr>
+		<tr>
+			<td class="admintd"><a href="productout">상품 목록</a></td>
+		</tr>
+		<tr>
+			<td class="admintd"><a href="productReviewList">리뷰 목록</a></td>
+		</tr>
+		<tr>
+			<th class="adminth">회원 가입 현황</th>
+		</tr>
+		<tr>
+			<td class="admintd"><a href="memberviewall">회원 목록</a></td>
+		</tr>
+	</table>
 <script>
     // JavaScript로 hover 이벤트 처리
     var gnbCategories = document.querySelectorAll('.gnb_category');

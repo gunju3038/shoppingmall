@@ -34,7 +34,7 @@ a{
 .member{
     width: 400px;
     margin: auto;
-    margin-top: 30px;
+    margin-top: 150px;
     margin-bottom: 20px;
 	border: 1px solid #ccc;
 	border-radius: 10px; 
@@ -66,7 +66,7 @@ a{
 .member-footer {
     text-align: center;
     font-size: 12px;
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 .member-footer div a:hover{

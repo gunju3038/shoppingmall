@@ -27,6 +27,8 @@ public class PayDTO {
 	String paystate; // 결재 상태, 1 = 결재완료 / 0 = 환불완료
 	String payment;
 	
+	int nowpoint;
+	
 	public PayDTO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -225,7 +227,13 @@ public class PayDTO {
 	public void setPayment(String payment) {
 		this.payment = payment;
 	}
-	
+	public int getNowpoint() {
+		return nowpoint;
+	}
+	public void setNowpoint(int nowpoint) {
+		this.nowpoint = nowpoint;
+	}
+
 	
 }
 

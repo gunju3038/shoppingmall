@@ -2,13 +2,14 @@ package com.ezen.haha.qna;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.ezen.haha.mypage.AddressListDTO;
 import com.ezen.haha.mypage.CouponDTO;
 
 public interface Service {
 
-	void noticeinsert(String bid, String btype, String btitle, String bcontent, String fname, String bcode);
+	void noticeinsert(String bid, String btype, String btitle, String bcontent, String fname);
 
 	ArrayList<QnaDTO> noticeout(int start, int end);
 
@@ -27,6 +28,16 @@ public interface Service {
 	ArrayList<QnaDTO> noticeserch(String keyword, int start, int end);
 
 	int totalserch(String keyword);
+	
+	void faqinsert(String bid, String btype, String btitle, String bcontent, String fname);
+
+	ArrayList<QnaDTO> faqout(int start, int end);
+
+	int total_faq();
+
+	int faqserchpageing(String stype, String keyword);
+
+	ArrayList<QnaDTO> faqserch(String stype, String keyword, int start, int end);
 
 	void qnainsert(String bid, String btype, String btitle, String bcontent, String fname, int secret);
 	
@@ -38,7 +49,7 @@ public interface Service {
 
 	void stepup(int groups, int step);
 
-	void qnacommentsave(int bnum, String btype, String bid, String btitle, String bcontent, int groups, int step, int indent);
+	void qnacommentsave(int bnum, String bid, String btype, String btitle, String bcontent, int groups, int step, int indent);
 
 	int qnatotal();
 
@@ -56,6 +67,18 @@ public interface Service {
 
 	int bnumsearch(String keyword);
 
+	void qnastateupdate(int qnastate, String user, int bnum);
+
+	int qnabnumsearch(String id);
+	
+	List<Map<String, Object>> myqnastate(String id);
+
+	List<QnaDTO> qnamainsearch(String id);
+
+	List<QnaDTO> qnamainsuccess(String id, List<Integer> bnum);
+
+	List<Integer> numberget(String id);
+	
 	ArrayList<QnaDTO> qnalist(String bid);
 
 }

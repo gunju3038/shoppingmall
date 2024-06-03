@@ -15,21 +15,23 @@ a{
 }
 .product_list{
 	position: relative;
- 	margin-top: 3%;
-	width: 1920px; 
-	padding-left: 5%;
-	padding-right: 5%;	
+    margin-top: 30px;
+    max-width: 1920px;
+    min-width: 1380px;
+    padding-left: 80px;
+    padding-right: 80px;
 }
-.product_list h3{
+.product_list h2{
 	float: left;
 	margin-left: 47%;
 	margin-top:0;
 	margin-bottom: 30px;
+	letter-spacing:0.25em;
+	font-weight: bold;
 }
 .product_list p{
 	float: right;
-	margin-bottom: 10px;
-	margin-top: 15px;
+	margin: 15px 1.5% 10px 0;
 }
 .box{
 	overflow: auto;
@@ -37,20 +39,22 @@ a{
 .clear{ 
 	clear: both;
 }
-.product{ 
-	list-style:none;
-	width: 340px;
-	float: left;
-	margin-bottom: 30px;
-	
+
+.product { 
+    list-style: none;
+    width: 20%;
+    float: left;
+    margin-bottom: 20px;
+    padding: 0 1.5% 0 0;
 }
+
 .product img{
 	width: 100%;
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 }
 .product .name{
 	font-weight: bold;
-	font-size: 18px;
+	font-size: 16px;
 }
 .product .price{
 	font-size: 14px;
@@ -59,6 +63,7 @@ a{
 .paging {
     margin-top: 20px;
     text-align: center;
+    font-size: 18px;
 }
 
 .paging ul {
@@ -82,37 +87,49 @@ a{
 .selected {
     font-weight: bold;
 }
+.product_wrap{
+	display: flex;
+	flex-wrap: wrap;
+}
+.review{ 
+	display: flex;
+	justify-content: space-between;
+}
 </style>
-
 </head>
 <body>
-
 <div class="product_list">
 	<div class="box">
-		<h3>${stype}</h3>
+		<h2>${stype}</h2>
 		<p>
 			<a href="product_list?sort=latest&stype=${stype}" class="${sort == 'latest' ? 'selected' : ''}">최신등록순</a> |
             <a href="product_list?sort=highest&stype=${stype}" class="${sort == 'highest' ? 'selected' : ''}">높은가격순</a> |
             <a href="product_list?sort=lowest&stype=${stype}" class="${sort == 'lowest' ? 'selected' : ''}">낮은가격순</a> 
 		</p>
 		<div class="clear"></div>
- 		<c:forEach items="${list }" var="aa">
-			<ul class="product">
-				<li><a href="detailview?snum=${aa.snum}"> 
-					<c:set var="imageArray" value="${fn:split(aa.image, ', ')}" />
+		<div class="product_wrap">
+ 		<c:forEach items="${list }" var="aa" >
+			<div class="product">
+				<div><a href="detailview?snum=${aa.snum}"> 
+					<c:set var="imageArray" value="${fn:split(aa.image, ',')}" />
 						<c:forEach items="${imageArray}" var="imageName" varStatus="loop">
 		   					<c:if test="${loop.index == 0}">
-		       					<img alt="" src="./image/${imageName}" width="300px" height="360px">
+		       					<img alt="" src="./image/${imageName}">
 		   					</c:if>
 						</c:forEach>
-				</a></li>
-				<li class="name"><a href="detailview?snum=${aa.snum}">${aa.sname}</a></li>
-				<li class="price"><a href="detailview?snum=${aa.snum}"><f:formatNumber value="${aa.price }" pattern="#,###"/></a></li>
-				<li class="intro"><a href="detailview?snum=${aa.snum}">${aa.intro }</a></li>
-				<li class="review"><a href="detailview?snum=${aa.snum}">.리뷰갯수</a></li>
-			</ul>
+				</a></div>
+				<div class="name"><a href="detailview?snum=${aa.snum}">${aa.sname}</a></div>
+				<div class="price"><a href="detailview?snum=${aa.snum}"><f:formatNumber value="${aa.price }" pattern="#,###"/></a></div>
+
+				<c:if test="${aa.count!=0 }">
+					<div class="review">
+						<div><a href="detailview?snum=${aa.snum}"><img alt="" src="./image/reviewStar.png" style="width: 17px;" > ${Math.round(aa.productrank*10)/10. }</a></div>
+						<div><a href="detailview?snum=${aa.snum}">리뷰 수 : ${aa.count }</a></div>
+					</div>
+				</c:if>
+			</div>
 		</c:forEach>
-		
+		</div>
 	</div>
 	
 	<div class="paging">
